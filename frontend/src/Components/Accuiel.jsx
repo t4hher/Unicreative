@@ -77,5 +77,55 @@ export default function Accueil(){
             </div>
                 <img src="/publicite.png" alt="publicite" className="imagePub"/>
         </div>
+        <div className="services">
+            <div className="header">
+                <h1>Explorez Nos Solutions <br/>Digitales et d'Impression</h1>
+                <div className="description">
+                    <p>De la création de votre identité visuelle au développement de vos plateformes web et mobiles, nous transformons vos idées en solutions numériques concrètes.</p>
+                    <button>Consulter</button>
+                </div>
+            </div>
+            <div class="body">
+        
+                <div class="bigImg">
+                    <div class="title-overlay">
+                        <h3>Création Site Web</h3>
+                    </div>
+                    <img src="/services/web.jpg" alt="Web Design"/>
+                </div>
+
+                <div class="smallImg">
+                    
+                    <div class="sImg">
+                        <div class="title-overlay">
+                            <h3>Conception Graphique</h3>
+                        </div>
+                        <img src="/services/card.jpg" alt="Design"/>
+                    </div>
+
+                    <div class="sImg">
+                        <div class="title-overlay">
+                            <h3>Impression Numérique / Offset</h3>
+                        </div>
+                        <img src="/services/voiture.png" alt="Mobile App"/>
+                    </div>
+
+                    <div class="sImg">
+                        <div class="title-overlay">
+                            <h3>Création des Applications</h3>
+                        </div>
+                        <img src="/services/app.jpg" alt="Shop"/>
+                    </div>
+
+                    <div class="sImg">
+                        <div class="title-overlay">
+                            <h3>Conception 3D</h3>
+                        </div>
+                        <img src="/services/3ddesign.jpg" alt="Ads"/>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 }
