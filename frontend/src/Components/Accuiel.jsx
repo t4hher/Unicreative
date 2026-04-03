@@ -7,6 +7,23 @@ export default function Accueil(){
                 <button className="bannerButton">Voir plus</button>
             </div>
         </div>
+        <div className="Apropos">
+            <div className="paragraph">
+                <h1>Qui sommes nous ?</h1>
+                <p className="aproposparagraph">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Inventore hic esse obcaecati doloremque repellendus recusandae
+                debitis tempore praesentium ad omnis
+                distinctio illum atque ut consequatur fugit, voluptates itaque! Debitis, ut!
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis,
+                in. Sit, iusto rerum qui magni, blanditiis quidem accusamus voluptatem nihil
+                sapiente assumenda, optio totam vel eos veniam laboriosam temporibus
+                consectetur.
+                </p>
+                <button className="btnplus">Voire Plus</button>
+            </div>
+                <img src="/nous.png" alt="publicite" className="imagePub"/>
+        </div>
         <div className="valeurs">
             <h1>Nos Valeurs</h1>
             <div className="content container">
@@ -60,36 +77,26 @@ export default function Accueil(){
                 <img src="/Clients/Client_19.png" alt="Client19" />
             </div>
         </div>
-        <div className="Apropos">
-            <div className="paragraph">
-                <h1>Qui sommes nous ?</h1>
-                <p className="aproposparagraph">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Inventore hic esse obcaecati doloremque repellendus recusandae
-                debitis tempore praesentium ad omnis
-                distinctio illum atque ut consequatur fugit, voluptates itaque! Debitis, ut!
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis,
-                in. Sit, iusto rerum qui magni, blanditiis quidem accusamus voluptatem nihil
-                sapiente assumenda, optio totam vel eos veniam laboriosam temporibus
-                consectetur.
-                </p>
-                <button className="btnplus">Voire Plus</button>
-            </div>
-                <img src="/publicite.png" alt="publicite" className="imagePub"/>
-        </div>
+        
         <div className="services">
-            <div className="header">
-                <h1>Explorez Nos Solutions <br/>Digitales et d'Impression</h1>
-                <div className="description">
-                    <p>De la création de votre identité visuelle au développement de vos plateformes web et mobiles, nous transformons vos idées en solutions numériques concrètes.</p>
-                    <button>Consulter</button>
+            <div class="header">
+                <div class="titre">
+                    <h1>Explorez nos Solutions<br /> Digitales et d'Impression</h1>
+                </div>
+                <div class="description">
+                    <p>
+                    De la création de votre identité visuelle au développement de vos plateformes web et mobiles, 
+                    nous transformons vos idées en solutions numériques concrètes.
+                    </p>
+                    <a href="#" class="button">View Catalog</a>
                 </div>
             </div>
             <div class="body">
         
                 <div class="bigImg">
                     <div class="title-overlay">
-                        <h3>Création Site Web</h3>
+                        <h4>Création Site Web</h4>
+                        <a href=""><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></a>
                     </div>
                     <img src="/services/web.jpg" alt="Web Design"/>
                 </div>
@@ -98,33 +105,54 @@ export default function Accueil(){
                     
                     <div class="sImg">
                         <div class="title-overlay">
-                            <h3>Conception Graphique</h3>
+                            <h4>Conception Graphique</h4>
+                            <a href=""><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></a>
                         </div>
                         <img src="/services/card.jpg" alt="Design"/>
                     </div>
 
                     <div class="sImg">
                         <div class="title-overlay">
-                            <h3>Impression Numérique / Offset</h3>
+                            <h4>Impression Numérique / Offset</h4>
+                            <a href=""><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></a>
                         </div>
                         <img src="/services/voiture.png" alt="Mobile App"/>
                     </div>
 
                     <div class="sImg">
                         <div class="title-overlay">
-                            <h3>Création des Applications</h3>
+                            <h4>Création des Applications</h4>
+                            <a href=""><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></a>
                         </div>
                         <img src="/services/app.jpg" alt="Shop"/>
                     </div>
 
                     <div class="sImg">
                         <div class="title-overlay">
-                            <h3>Conception 3D</h3>
+                            <h4>Conception 3D</h4>
+                            <a href=""><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></a>
                         </div>
                         <img src="/services/3ddesign.jpg" alt="Ads"/>
                     </div>
 
                 </div>
+            </div>
+        </div>
+        <div className="infos">
+            <div className="info">
+                <img src="https://img.icons8.com/?size=100&id=2436&format=png&color=d21d16" alt="" />
+                <h3>Localisation</h3>
+                <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit excepturi non ab ullam, recusandae magni accusamus esse odit neque sunt.</div>
+            </div>
+            <div className="info">
+                <img src="https://img.icons8.com/?size=100&id=63&format=png&color=d21d16" alt="" />
+                <h3>E-mail</h3>
+                <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit excepturi non ab ullam, recusandae magni accusamus esse odit neque sunt.</div>
+            </div>
+            <div className="info">
+                <img src="https://img.icons8.com/?size=100&id=9659&format=png&color=d21d16" alt="" />
+                <h3>Téléphone</h3>
+                <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit excepturi non ab ullam, recusandae magni accusamus esse odit neque sunt.</div>
             </div>
         </div>
     </div>
