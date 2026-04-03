@@ -50,5 +50,32 @@ export default function Accueil(){
                 </div>
             </div>
         </div>
+        <div className="clients">
+            <h1 className="clienttitre">Ils nous font confiance</h1>
+            <div className="clientimg">
+                <img src="/Clients/Client_11.png" alt="client11" />
+                <img src="/Clients/Client_2.png" alt="Client2" />
+                <img src="/Clients/Client_17.png" alt="Client17" />
+                <img src="/Clients/Client_4.png" alt="Client4" />
+                <img src="/Clients/Client_19.png" alt="Client19" />
+            </div>
+        </div>
+        <div className="Apropos">
+            <div className="paragraph">
+                <h1>Qui sommes nous ?</h1>
+                <p className="aproposparagraph">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Inventore hic esse obcaecati doloremque repellendus recusandae
+                debitis tempore praesentium ad omnis
+                distinctio illum atque ut consequatur fugit, voluptates itaque! Debitis, ut!
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis,
+                in. Sit, iusto rerum qui magni, blanditiis quidem accusamus voluptatem nihil
+                sapiente assumenda, optio totam vel eos veniam laboriosam temporibus
+                consectetur.
+                </p>
+                <button className="btnplus">Voire Plus</button>
+            </div>
+                <img src="/publicite.png" alt="publicite" className="imagePub"/>
+        </div>
     </div>
 }
