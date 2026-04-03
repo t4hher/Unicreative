@@ -407,6 +407,7 @@ width: 30%;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  width: 300px;
 }
 .info h3{
   font-weight: 800;
@@ -416,4 +417,5 @@ width: 30%;
   font-weight: 200;
   opacity: 0.8;
   text-align: center;
+  max-width: 300px;
 }

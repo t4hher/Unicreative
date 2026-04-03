@@ -142,17 +142,17 @@ export default function Accueil(){
             <div className="info">
                 <img src="https://img.icons8.com/?size=100&id=2436&format=png&color=d21d16" alt="" />
                 <h3>Localisation</h3>
-                <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit excepturi non ab ullam, recusandae magni accusamus esse odit neque sunt.</div>
+                <div>Bureaux Ibn Yassin à côté de l, Institut francais, Ave Lalla Hasnae, Fès 30050.</div>
             </div>
             <div className="info">
                 <img src="https://img.icons8.com/?size=100&id=63&format=png&color=d21d16" alt="" />
                 <h3>E-mail</h3>
-                <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit excepturi non ab ullam, recusandae magni accusamus esse odit neque sunt.</div>
+                <div>unicreative@example.com</div>
             </div>
             <div className="info">
                 <img src="https://img.icons8.com/?size=100&id=9659&format=png&color=d21d16" alt="" />
                 <h3>Téléphone</h3>
-                <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit excepturi non ab ullam, recusandae magni accusamus esse odit neque sunt.</div>
+                <div>0535653985</div>
             </div>
         </div>
     </div>
