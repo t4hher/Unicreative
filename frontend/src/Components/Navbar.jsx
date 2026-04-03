@@ -2,7 +2,7 @@ export default function Navabar(){
     return <div>
         <nav class="navbar">
             <div class="logo">
-                <img src="/sLogo.png" alt="Accueil"/>
+                <img src="/LOGO.png" alt="Accueil"/>
             </div>
 
             <ul class="nav-links">

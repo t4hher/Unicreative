@@ -1,0 +1,30 @@
+export default function Footer(){
+    return(
+        <div className="footer">
+            <div className="contact">
+                <img src="/wLOGO.png"/>
+                <div className="icons">
+                    <a href="#">
+                        <img className="icon" src="https://img.icons8.com/?size=100&id=1CJh8Xrdz1R2&format=png&color=ffffff"/>
+                    </a>
+                    <a href="#">
+                        <img className="icon" src="https://img.icons8.com/?size=100&id=97E7Dm8qCE2w&format=png&color=ffffff"/>
+                    </a>
+                    <a href="#">
+                        <img className="icon" src="https://img.icons8.com/?size=100&id=BRElTmOLC6Bh&format=png&color=ffffff"/>
+                    </a>
+                    <a href="#">
+                        <img className="icon" src="https://img.icons8.com/?size=100&id=Aq10GU126KJX&format=png&color=ffffff"/>
+                    </a>
+                </div >
+            </div>
+            <div className="links">
+                <a href="" className="link">A Propos</a>
+                <a href="" className="link">Nos service</a>
+                <a href="" className="link">Nos Réalisation</a>
+                <a href="" className="link">Carriére</a>
+            </div>
+
+        </div>
+    )
+}

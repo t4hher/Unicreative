@@ -13,7 +13,6 @@ body{
     padding: 10px 40px;
     background: transparent;
   }
-  
   .logo {
     display: flex;
     align-items: center;
@@ -22,11 +21,11 @@ body{
     font-size: 1.2rem;
     color: #000;
   }
-  
+
   .logo img {
-    height: 60px; 
+    height: 30px;
   }
-  
+
 
   .nav-links {
     display: flex;
@@ -36,7 +35,6 @@ body{
     border-radius: 50px;
     margin: 0;
   }
-  
   .nav-links li a {
     text-decoration: none;
     color: #555;
@@ -47,7 +45,6 @@ body{
     transition: all 0.3s ease;
     border-radius: 50px;
   }
-  
 
   .nav-links li a.active {
     background-color: #d21d16;
@@ -62,7 +59,7 @@ body{
   
   .btn-contact {
     text-decoration: none;
-    background-color: #d21d16;
+    background-color: #2c265f;
     color: white;
     padding: 12px 28px;
     border-radius: 50px;
@@ -70,7 +67,6 @@ body{
     font-size: 0.95rem;
     transition: 0.3s ease;
   }
-  
   .btn-contact:hover {
     background-color: #d21d16;
   }
@@ -158,6 +154,7 @@ body{
 .valeur .titre{
     font-weight: bolder;
     font-size: 1.3rem;
+    color: #2c265f;
     margin: 10px;
 }
 .valeur .description{
@@ -204,4 +201,39 @@ body{
     font-size: 0.9rem;
     letter-spacing: 1px;
     font-weight: 200;
+}
+.footer{
+    width: 100%;
+    background-color: #2c265f;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 40px;
+
+}
+.contact{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.contact img{
+  height: 40px;
+}
+.contact .icons{
+  margin-top: 10px;
+  display: flex;
+  gap: 15px;
+}
+.icons .icon{
+  width: 30px;
+  height: auto;
+}
+.footer .links{
+  display: flex;
+  gap: 40px;
+}
+.links .link{
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
 }
