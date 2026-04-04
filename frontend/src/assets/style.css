@@ -317,7 +317,7 @@ width: 30%;
 
 .header .button {
   display: inline-block;
-  background-color: #d21d16; 
+  background-color: #d21d16;
   color: #fff;
   padding: 10px 20px;
   border-radius: 50px;
@@ -419,3 +419,45 @@ width: 30%;
   text-align: center;
   max-width: 300px;
 }
+.body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.login-container {
+    background: #ffffff;
+    padding: 40px;
+    width: 350px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.labellogin{
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.inputlogin{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.btnlogin{
+    width: 100%;
+    background-color: #007c89;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.btnlogin:hover{
+     background-color: #006b75;
+}
+
+
