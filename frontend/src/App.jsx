@@ -2,6 +2,8 @@ import { useState } from 'react'
 import Navabar from './Components/Navbar'
 import './assets/style.css'
 import Accueil from './Components/Accuiel'
+import Apropos from './Components/Apropos'
+import Login from './Components/Login'
 import Footer from './Components/Footer'
 
 function App() {
@@ -9,7 +11,7 @@ function App() {
 
   return (<div className=''>
     <Navabar/>
-        <Accueil/>
+        <Apropos/>
     <Footer/>
   </div>)
 }

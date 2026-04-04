@@ -9,7 +9,7 @@ export default function Accueil(){
         </div>
         <div className="Apropos">
             <div className="paragraph">
-                <h1>Qui sommes nous ?</h1>
+                <div className="header"><img src="/sLogo.png" alt=""/><h1>Qui sommes nous ?</h1></div>
                 <p className="aproposparagraph">
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                 Inventore hic esse obcaecati doloremque repellendus recusandae
@@ -88,7 +88,7 @@ export default function Accueil(){
                     De la création de votre identité visuelle au développement de vos plateformes web et mobiles, 
                     nous transformons vos idées en solutions numériques concrètes.
                     </p>
-                    <a href="#" class="button">View Catalog</a>
+                    <a href="#" class="button">Consulter</a>
                 </div>
             </div>
             <div class="body">
@@ -152,7 +152,7 @@ export default function Accueil(){
             <div className="info">
                 <img src="https://img.icons8.com/?size=100&id=9659&format=png&color=d21d16" alt="" />
                 <h3>Téléphone</h3>
-                <div>0535653985</div>
+                <div>05 . 35 . 65 . 39 . 85</div>
             </div>
         </div>
     </div>
