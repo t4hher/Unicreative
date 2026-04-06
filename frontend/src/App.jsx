@@ -5,7 +5,7 @@ import Accueil from './Components/Accuiel'
 import Apropos from './Components/Apropos'
 import Login from './Components/Login'
 import Footer from './Components/Footer'
-import Condidature from './Components/Condidature'
+import Candidature from './Components/Candidature'
 import Realisation from './Components/Realisation'
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
 
   return (<div className=''>
     <Navabar/>
-        <Realisation/>
+        <Accueil/>
     <Footer/>
   </div>)
 }

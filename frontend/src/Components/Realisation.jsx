@@ -2,11 +2,15 @@ export default function Realisation(){
     return(
         <div>
             <div className="realisation">
-                <h1 className="titrerealisation">Nos Réalisation</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur  reprehenderit accusamus?</p>
+                <div>
+                <h1 className="titrerealisation">Nos Réalisations</h1>
+                <p>Des solutions sur mesure pour des clients uniques. <b>Découvrez l'impact de nos projets Web et Print.</b></p>
+                </div>
+                <img src="/rIcone.svg" alt="" />
             </div>
-            <div className="lienesf">
-                <div className="lienfilteres">
+            <div className="filter">
+                <img src="https://img.icons8.com/?size=100&id=Y4iiHf14d1s-&format=png&color=555555" alt="" />
+                <div className="filterBtn">
                     <a href="#">Tous</a>
                     <a href="#">Filter1</a>
                     <a href="#">Filter2</a>

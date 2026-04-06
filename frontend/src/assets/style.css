@@ -620,10 +620,16 @@ width: 30%;
 
 }
 .card-img{
-    height: 180px;
+    height: 230px;
+    width: 100%;
 }
 .card{
-      width: 30%
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 10px;
+
 }
 .card-text{
     color: #555;
@@ -641,32 +647,46 @@ width: 30%;
 }
 .realisation{
     background-color: #d21d16;
+    display: flex;
+    justify-content: space-between;
     color: #ffffff;
     padding: 5%;
-    font-weight: 200;
 }
-.lienfilteres{
+.realisation img{
+  height: 100px;
+}
+.filter{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 40px;
+  margin-right: 40px;
+  gap: 10px;
+}
+.filter img{
+  height: 30px;
+}
+.filterBtn{
     display: flex;
-    gap: 20px;
-    padding: 20px 30px;
-    margin: 10px 10px; 
+    gap: 5px;
     max-width: auto;
     justify-content: end;
+    max-width: fit-content;
 }
-.lienfilteres a{
+.filterBtn a{
     text-decoration: none;
     color: #d21d16;
     padding: 9px 17px;
     border-radius: 50px;
     font-weight: 600;
     font-size: 0.8rem;
-    transition: 0.3s ease;
     border: #ccc 2px solid;
 
 }
 .imgrealisation{
     display: flex;
-    margin: 40px 8%;
+    justify-content: center;
+    margin: 20px 8%;
     gap: 30px;
     flex-wrap: wrap;
 }

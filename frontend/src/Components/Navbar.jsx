@@ -7,10 +7,10 @@ export default function Navabar(){
 
             <ul class="nav-links">
                 <li><a href="#" class="active">Accueil</a></li>
-                <li><a href="#">A Propos</a></li>
                 <li><a href="#">Nos Services</a></li>
                 <li><a href="#">Nos Réalisations</a></li>
-                <li><a href="#">Carriére</a></li>
+                <li><a href="#">Candidature</a></li>
+                <li><a href="#">A Propos</a></li>
             </ul>
 
             <div class="nav-cta">

@@ -19,10 +19,10 @@ export default function Footer(){
                 </div >
             </div>
             <div className="links">
+                <a href="" className="link">Nos services</a>
+                <a href="" className="link">Nos Réalisations</a>
+                <a href="" className="link">Candidature</a>
                 <a href="" className="link">A Propos</a>
-                <a href="" className="link">Nos service</a>
-                <a href="" className="link">Nos Réalisation</a>
-                <a href="" className="link">Carriére</a>
             </div>
 
         </div>
