@@ -607,3 +607,70 @@ width: 30%;
   text-align: right;
   font-weight: 200;
 }
+.titreCard{
+    text-align: center;
+    margin-bottom: 30px;
+}
+.cards{
+    display: flex;
+    gap:30px;
+    margin: 0px 7%;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+
+}
+.card-img{
+    height: 180px;
+}
+.card{
+      width: 30%
+}
+.card-text{
+    color: #555;
+}
+.btn-postuler{
+    background-color: #d21d16;
+    text-decoration: none;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: 0.3s ease;
+    margin: 50px 0px;
+}
+.realisation{
+    background-color: #d21d16;
+    color: #ffffff;
+    padding: 5%;
+    font-weight: 200;
+}
+.lienfilteres{
+    display: flex;
+    gap: 20px;
+    padding: 20px 30px;
+    margin: 10px 10px; 
+    max-width: auto;
+    justify-content: end;
+}
+.lienfilteres a{
+    text-decoration: none;
+    color: #d21d16;
+    padding: 9px 17px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    transition: 0.3s ease;
+    border: #ccc 2px solid;
+
+}
+.imgrealisation{
+    display: flex;
+    margin: 40px 8%;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+.imgrealisation img{
+    width: 30%;
+    border-radius: 50px;
+}
