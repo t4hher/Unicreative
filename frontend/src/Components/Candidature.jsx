@@ -1,7 +1,7 @@
         export default function Candidature() {
         return (
             <div className="about">
-                <div className="realisation">
+                <div className="sBanner">
                 <div>
                 <h1 className="titrerealisation">Candidature</h1>
                 <p>Votre talent est l'ingrédient qui manque à nos prochaines créations. <b>Rejoignez l'aventure Unicreative</b></p>

@@ -619,8 +619,15 @@ width: 30%;
     margin-bottom: 60px;
 
 }
+.service .cards{
+  margin: 20px 8%;
+}
 .card-img{
     height: 230px;
+    width: 100%;
+}
+.card-img img{
+  height: 230px;
     width: 100%;
 }
 .card{
@@ -645,14 +652,14 @@ width: 30%;
     transition: 0.3s ease;
     margin: 50px 0px;
 }
-.realisation{
+.sBanner{
     background-color: #d21d16;
     display: flex;
     justify-content: space-between;
     color: #ffffff;
     padding: 5%;
 }
-.realisation img{
+.sBanner img{
   height: 100px;
 }
 .filter{
@@ -663,8 +670,9 @@ width: 30%;
   margin-right: 40px;
   gap: 10px;
 }
-.filter img{
-  height: 30px;
+.filter span{
+  color: #555;
+  font-weight: 300;
 }
 .filterBtn{
     display: flex;
@@ -683,14 +691,85 @@ width: 30%;
     border: #ccc 2px solid;
 
 }
-.imgrealisation{
-    display: flex;
-    justify-content: center;
-    margin: 20px 8%;
-    gap: 30px;
-    flex-wrap: wrap;
+.filterBtn a.active{
+  color: #fff;
+  background: #d21d16;
+  border: none;
 }
-.imgrealisation img{
-    width: 30%;
-    border-radius: 50px;
+.imgrealisation {
+  display: flex;
+  justify-content: center;
+  margin: 20px 8%;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.img-wrapper {
+  position: relative;
+  width: 30%;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.img-wrapper img {
+  width: 100%;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff90;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.overlay span {
+  color: #d21d16;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 10px;
+}
+
+.img-wrapper:hover .overlay {
+  opacity: 1;
+}
+
+.img-wrapper:hover img {
+  transform: scale(1.1);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(0%) sepia(95%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
+}
+
+.sDetails{
+  margin: 40px 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sImg{
+  width: 75%;
+  height: fit-content;
+}
+.sImg .card-img{
+  height: 430px;
+}
+.sImg .card-img img{
+  height: 430px;
+}
+.sBody{
+  margin: 20px 0px;
+  text-align: left;
+  width: 100%;
 }

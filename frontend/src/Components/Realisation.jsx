@@ -1,37 +1,101 @@
 export default function Realisation(){
     return(
         <div>
-            <div className="realisation">
+            <div className="sBanner">
                 <div>
                 <h1 className="titrerealisation">Nos Réalisations</h1>
                 <p>Des solutions sur mesure pour des clients uniques. <b>Découvrez l'impact de nos projets Web et Print.</b></p>
                 </div>
                 <img src="/rIcone.svg" alt="" />
             </div>
+            <div className="split">
+                        <div className="horLine"></div>
+                        <img src="/sLogo.png" alt="" />
+                        <div className="horLine"></div>
+                    </div>
+                    <div className="titreCard"><h1>Parcourez le portfolio Unicreative.</h1></div>
             <div className="filter">
-                <img src="https://img.icons8.com/?size=100&id=Y4iiHf14d1s-&format=png&color=555555" alt="" />
+                <span>Filtrer Par Type: </span>
                 <div className="filterBtn">
-                    <a href="#">Tous</a>
-                    <a href="#">Filter1</a>
-                    <a href="#">Filter2</a>
-                    <a href="#">Filter3</a>
+                    <a href="#" className="active">Tous</a>
+                    <a href="#">Site Web</a>
+                    <a href="#">Logo</a>
+                    <a href="#">Print</a>
                 </div> 
             </div>
-            <div className="imgrealisation">
-                <img src="/Realisation/i14.jpg" alt="" />
-                <img src="/Realisation/i15.jpg" alt="" />
-                <img src="/Realisation/i16.jpg" alt="" />
-                <img src="/Realisation/i17.jpg" alt="" />
-                <img src="/Realisation/i18.jpg" alt="" />
-                <img src="/Realisation/i19.jpg" alt="" />
-                <img src="/Realisation/i20.jpg" alt="" />
-                <img src="/Realisation/i21.jpg" alt="" />
-                <img src="/Realisation/i22.jpg" alt="" />
-                <img src="/Realisation/i23.jpg" alt="" />
-                <img src="/Realisation/i24.jpg" alt="" />
-                <img src="/Realisation/i25.jpg" alt="" />
-                <img src="/Realisation/i26.jpg" alt="" />
-                <img src="/Realisation/i27.jpg" alt="" />
+            <div class="imgrealisation">
+                <div class="img-wrapper">
+                    <img src="/Realisation/s1.jpg" alt="Projet Unicreative" />
+                    <div class="overlay">
+                        <span>Voir le Projet</span>
+                    </div>
+                </div>
+                <div class="img-wrapper">
+                    <img src="/Realisation/p1.jpg" alt="Projet Unicreative" />
+                    <div class="overlay">
+                        <span>Voir le Projet</span>
+                    </div>
+                </div>
+                <div class="img-wrapper">
+                    <img src="/Realisation/l1.jpg" alt="Projet Unicreative" />
+                    <div class="overlay">
+                        <span>Voir le Projet</span>
+                    </div>
+                </div>
+                <div class="img-wrapper">
+                    <img src="/Realisation/d1.jpg" alt="Projet Unicreative" />
+                    <div class="overlay">
+                        <span>Voir le Projet</span>
+                    </div>
+                </div>
+                <div class="img-wrapper">
+                    <img src="/Realisation/s2.jpg" alt="Projet Unicreative" />
+                    <div class="overlay">
+                        <span>Voir le Projet</span>
+                    </div>
+                </div>
+                <div class="img-wrapper">
+                    <img src="/Realisation/p2.jpg" alt="Projet Unicreative" />
+                    <div class="overlay">
+                        <span>Voir le Projet</span>
+                    </div>
+                </div>
+                <div class="img-wrapper">
+                    <img src="/Realisation/l2.jpg" alt="Projet Unicreative" />
+                    <div class="overlay">
+                        <span>Voir le Projet</span>
+                    </div>
+                </div>
+                <div class="img-wrapper">
+                    <img src="/Realisation/d2.jpg" alt="Projet Unicreative" />
+                    <div class="overlay">
+                        <span>Voir le Projet</span>
+                    </div>
+                </div>
+                <div class="img-wrapper">
+                    <img src="/Realisation/s3.jpg" alt="Projet Unicreative" />
+                    <div class="overlay">
+                        <span>Voir le Projet</span>
+                    </div>
+                </div>
+                <div class="img-wrapper">
+                    <img src="/Realisation/p3.jpg" alt="Projet Unicreative" />
+                    <div class="overlay">
+                        <span>Voir le Projet</span>
+                    </div>
+                </div>
+                <div class="img-wrapper">
+                    <img src="/Realisation/l3.jpg" alt="Projet Unicreative" />
+                    <div class="overlay">
+                        <span>Voir le Projet</span>
+                    </div>
+                </div>
+                <div class="img-wrapper">
+                    <img src="/Realisation/d3.jpg" alt="Projet Unicreative" />
+                    <div class="overlay">
+                        <span>Voir le Projet</span>
+                    </div>
+                </div>
             </div>
         </div>
     )
