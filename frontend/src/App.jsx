@@ -15,7 +15,7 @@ function App() {
 
   return (<div className=''>
     <Navabar/>
-        <ServiceDetails/>
+        <Accueil/>
     <Footer/>
   </div>)
 }

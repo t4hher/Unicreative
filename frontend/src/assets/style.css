@@ -773,3 +773,63 @@ width: 30%;
   text-align: left;
   width: 100%;
 }
+.nbr{
+  padding: 10px 18px;
+  margin: 0px 15px;
+  background: #d21d16;
+  color: #fff;
+  font-weight: 800;
+  border-radius: 50%;
+}
+.faq-container {
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+details {
+  border-bottom: 1px solid #555;
+  padding: 15px 0;
+  cursor: pointer;
+}
+summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.icon {
+  font-size: 1.5rem;
+  color: #d21d16;
+  transition: transform 0.3s ease;
+}
+
+
+details[open] .icon {
+  transform: rotate(45deg);
+  color: #333;
+}
+details[open] summary {
+  color: #d21d16;
+}
+
+.faq-content {
+  padding: 15px 0;
+  line-height: 1.6;
+  color: #444;
+  font-size: 1.05rem;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
