@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Navabar(){
     return <div>
         <nav class="navbar">
@@ -6,11 +8,11 @@ export default function Navabar(){
             </div>
 
             <ul class="nav-links">
-                <li><a href="#" class="active">Accueil</a></li>
-                <li><a href="#">Nos Services</a></li>
-                <li><a href="#">Nos Réalisations</a></li>
-                <li><a href="#">Candidature</a></li>
-                <li><a href="#">A Propos</a></li>
+                <li><Link to="/" class="active">Accueil</Link></li>
+                <li><Link to="/services">Nos Services</Link></li>
+                <li><Link to="/realisations">Nos Réalisations</Link></li>
+                <li><Link to="/candidature">Candidature</Link></li>
+                <li><Link to="/aPropos">A Propos</Link></li>
             </ul>
 
             <div class="nav-cta">

@@ -1,5 +1,5 @@
 import React from 'react'
-export default function Postes() {
+export default function Poste() {
   return (
     <div>
         <h1 className='Tposte'>Développeur front-end React</h1>

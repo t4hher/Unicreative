@@ -1,4 +1,4 @@
-export default function ServiceDetails(){
+export default function WebDetails(){
     return <div>
         <div className="sBanner">
                 <div>
@@ -72,6 +72,7 @@ export default function ServiceDetails(){
                     Nous vous donnerons des options, des outils et des informations pour faire les bons choix. Nous vous donnerons des recommandations, 
                     mais au final, chaque décision concernant votre site Web sera la vôtre.
                 </p>
+                <h2>FAQs</h2>
                 <div class="faq-container">
                     <details>
                         <summary>Combien Coûte Un Site Web ? <span class="icon">+</span></summary>

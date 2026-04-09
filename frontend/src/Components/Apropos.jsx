@@ -65,7 +65,7 @@ export default function Apropos(){
                     <div class="title-overlay">
                         <a href=""><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></a>
                     </div>
-                    <img src="/Realisation/i1.jpg" alt="Web Design"/>
+                    <img src="/Realisation/d1.jpg" alt="Web Design"/>
                 </div>
                 <div class="smallImg">
                     
@@ -74,35 +74,35 @@ export default function Apropos(){
                     
                             <a href=""><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></a>
                         </div>
-                        <img src="/Realisation/i12.jpg" alt="Design"/>
+                        <img src="/Realisation/l1.jpg" alt="Design"/>
                     </div>
                     <div class="sImg">
                         <div class="title-overlay">
                     
                             <a href=""><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></a>
                         </div>
-                        <img src="/Realisation/i3.jpg" alt="Mobile App"/>
+                        <img src="/Realisation/p1.jpg" alt="Mobile App"/>
                     </div>
                     <div class="sImg">
                         <div class="title-overlay">
                             
                             <a href=""><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></a>
                         </div>
-                        <img src="/Realisation/i4.jpg" alt="Shop"/>
+                        <img src="/Realisation/s1.jpg" alt="Shop"/>
                     </div>
                     <div class="sImg">
                         <div class="title-overlay">
                             
                             <a href=""><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></a>
                         </div>
-                        <img src="/Realisation/i5.jpg" alt="Ads"/>
+                        <img src="/Realisation/d2.jpg" alt="Ads"/>
                     </div>
                 </div>
                 <div class="bigImg">
                     <div class="title-overlay">
                         <a href=""><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></a>
                     </div>
-                    <img src="/Realisation/i6.jpg" alt="Web Design"/>
+                    <img src="/Realisation/l2.jpg" alt="Web Design"/>
                 </div>
                 <div class="smallImg">
                     
@@ -111,28 +111,28 @@ export default function Apropos(){
                     
                             <a href=""><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></a>
                         </div>
-                        <img src="/Realisation/i7.jpg" alt="Design"/>
+                        <img src="/Realisation/p2.jpg" alt="Design"/>
                     </div>
                     <div class="sImg">
                         <div class="title-overlay">
                     
                             <a href=""><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></a>
                         </div>
-                        <img src="/Realisation/i8.jpg" alt="Mobile App"/>
+                        <img src="/Realisation/s2.jpg" alt="Mobile App"/>
                     </div>
                     <div class="sImg">
                         <div class="title-overlay">
                             
                             <a href=""><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></a>
                         </div>
-                        <img src="/Realisation/i9.jpg" alt="Shop"/>
+                        <img src="/Realisation/d3.jpg" alt="Shop"/>
                     </div>
                     <div class="sImg">
                         <div class="title-overlay">
                             
                             <a href=""><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></a>
                         </div>
-                        <img src="/Realisation/i10.jpg" alt="Ads"/>
+                        <img src="/Realisation/l3.jpg" alt="Ads"/>
                     </div>
                 </div>
             </div>

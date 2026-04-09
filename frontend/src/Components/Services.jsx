@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Services(){
     return <div className="service">
         <div className="sBanner">
@@ -48,7 +50,7 @@ export default function Services(){
                         </p>
                          <p><strong>Catégorie: </strong>Digital</p>
                     </div>
-                    <a href="#" className="btn-postuler">Postuler</a>
+                    <Link to="/services/site-web" className="btn-postuler">Consulter</Link>
                 </div>
             </div>
             <div className="card">
@@ -77,7 +79,7 @@ export default function Services(){
                         </p>
                          <p><strong>Catégorie: </strong>Digital/Print</p>
                     </div>
-                    <a href="#" className="btn-postuler">Postuler</a>
+                    <Link to="/services/design" className="btn-postuler">Consulter</Link>
                 </div>
             </div>
             <div className="card">
@@ -106,7 +108,7 @@ export default function Services(){
                         </p>
                          <p><strong>Catégorie: </strong>Print</p>
                     </div>
-                    <a href="#" className="btn-postuler">Postuler</a>
+                    <Link to="/services/print" className="btn-postuler">Consulter</Link>
                 </div>
             </div>
             <div className="card">
@@ -135,7 +137,7 @@ export default function Services(){
                         </p>
                          <p><strong>Catégorie: </strong>Digital</p>
                     </div>
-                    <a href="#" className="btn-postuler">Postuler</a>
+                    <Link to="/services/application" className="btn-postuler">Consulter</Link>
                 </div>
             </div>
             <div className="card">
@@ -164,7 +166,7 @@ export default function Services(){
                         </p>
                          <p><strong>Catégorie: </strong>Digital</p>
                     </div>
-                    <a href="#" className="btn-postuler">Postuler</a>
+                    <Link to="/services/3d" className="btn-postuler">Consulter</Link>
                 </div>
             </div>
             <div className="card">
@@ -193,7 +195,7 @@ export default function Services(){
                         </p>
                          <p><strong>Catégorie: </strong>Print</p>
                     </div>
-                    <a href="#" className="btn-postuler">Postuler</a>
+                    <Link to="/services/event" className="btn-postuler">Consulter</Link>
                 </div>
             </div>
         </div>

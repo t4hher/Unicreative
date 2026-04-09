@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
         export default function Candidature() {
         return (
             <div className="about">
@@ -27,7 +29,7 @@
                                     </p>
                                      <p><strong>Type De Contrat:</strong>Stage(PFE)</p>
                                 </div>
-                                <a href="#" className="btn-postuler">Postuler</a>
+                                <Link to="/postuler" className="btn-postuler">Postuler</Link>
                             </div>
                         </div>
                         <div className="card">
@@ -40,7 +42,7 @@
                                     </p>
                                     <p><strong>Type De Contrat :</strong> Freelance</p>
                                 </div>
-                                <a href="#" className="btn-postuler">Postuler</a>
+                                <Link to="/postuler" className="btn-postuler">Postuler</Link>
                             </div>
                         </div>
                         <div className="card">
@@ -53,7 +55,7 @@
                                     </p>
                                     <p><strong>Type De Contrat :</strong>CDI</p>
                                  </div>
-                                <a href="#" className="btn-postuler">Postuler</a>
+                                <Link to="/postuler" className="btn-postuler">Postuler</Link>
                             </div>
                         </div>
                     </div>
