@@ -9,13 +9,14 @@ import Candidature from './Components/Candidature'
 import Realisation from './Components/Realisation'
 import Services from './Components/Services'
 import ServiceDetails from './Components/ServiceDetails'
+import Postes from './Postes'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (<div className=''>
     <Navabar/>
-        <Accueil/>
+        <Postes/>
     <Footer/>
   </div>)
 }
