@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function DesignDetails(){
     return <div>
         <div className="sBanner">
@@ -134,6 +136,7 @@ export default function DesignDetails(){
                     </details>
                 </div>
             </div>
+                        <div className="liendemandes"><Link className="liendemande" to={"/demande"}>Demander</Link></div>
         </div>
     </div>
 }

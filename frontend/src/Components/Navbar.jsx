@@ -16,7 +16,7 @@ export default function Navabar(){
             </ul>
 
             <div class="nav-cta">
-                <a href="#" class="btn-contact">Contact Us</a>
+                <Link to="/contact" class="btn-contact">Contact Us</Link>
             </div>
         </nav>
     </div>

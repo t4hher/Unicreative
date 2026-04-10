@@ -33,7 +33,7 @@ export default function Poste() {
                         <label for="titre" className='form-label'>Nom et prenom :</label>
                         <input type="text" class="form-control" id="titre"  name='titre'/>                </div>
                     <div class="form-group ">
-                        <label for="telephone" className='form-label'>Numére de Télephone:</label>
+                        <label for="telephone" className='form-label'>Numéro de Télephone:</label>
                         <input type="text" class="form-control" id="telephone" name='telephone'/>
                     </div>
                     <div class="form-group mb-2">

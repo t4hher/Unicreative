@@ -16,6 +16,8 @@ import PrintDetails from './Components/ServiceDetails/PrintDetails'
 import AppDetails from './Components/ServiceDetails/AppDetails'
 import D3dDetails from './Components/ServiceDetails/D3dDetails'
 import EventDetails from './Components/ServiceDetails/EventDetails'
+import Demande from './Components/Demande';
+import Contact from './Components/Contact';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,6 +31,9 @@ function App() {
           <Route path='/realisations' element={<Realisation/>}></Route>
           <Route path='/candidature' element={<Candidature/>}></Route>
           <Route path='/aPropos' element={<Apropos/>}></Route>
+          <Route path='/demande' element={<Demande/>}></Route>
+          <Route path='/login' element={<Login/>}></Route>
+          <Route path='/contact' element={<Contact/>}></Route>
 
           {/* Les details des services */}
 
@@ -38,7 +43,7 @@ function App() {
           <Route path='/services/application' element={<AppDetails/>}></Route>
           <Route path='/services/3d' element={<D3dDetails/>}></Route>
           <Route path='/services/event' element={<EventDetails/>}></Route>
-          
+
           {/* Les postes pour postuler */}
 
           <Route path='/postuler' element={<Poste/>}></Route>
