@@ -64,7 +64,7 @@ export default function Poste() {
                         <label for="lettre" className='form-label'>Entrer le CV :</label>
                         <input type="file" name="lettre" id="lettre"  className='form-control' />
                     </div>
-                    <button type="submit" class="button">Postuler</button>
+                    <button type="submit">Postuler</button>
                 </form>
             </div>
         </div>

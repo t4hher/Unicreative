@@ -18,37 +18,37 @@ import D3dDetails from './Components/ServiceDetails/D3dDetails'
 import EventDetails from './Components/ServiceDetails/EventDetails'
 import Demande from './Components/Demande';
 import Contact from './Components/Contact';
+import ClientLayout from './Components/ClientLayout';
+import AdminLayout from './Components/AdminLayout';
+import DashboardHome from './Components/DashboardHome';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (<div className=''>
     <BrowserRouter>
-    <Navabar/>
-        <Routes>
+      <Routes>
+        <Route element={<ClientLayout/>}>
           <Route path='/' element={<Accueil/>}></Route>
+          <Route path='/login' element={<Login/>}></Route>
           <Route path='/services' element={<Services/>}></Route>
           <Route path='/realisations' element={<Realisation/>}></Route>
           <Route path='/candidature' element={<Candidature/>}></Route>
           <Route path='/aPropos' element={<Apropos/>}></Route>
-          <Route path='/demande' element={<Demande/>}></Route>
-          <Route path='/login' element={<Login/>}></Route>
-          <Route path='/contact' element={<Contact/>}></Route>
-
-          {/* Les details des services */}
-
           <Route path='/services/site-web' element={<WebDetails/>}></Route>
           <Route path='/services/design' element={<DesignDetails/>}></Route>
           <Route path='/services/print' element={<PrintDetails/>}></Route>
           <Route path='/services/application' element={<AppDetails/>}></Route>
           <Route path='/services/3d' element={<D3dDetails/>}></Route>
           <Route path='/services/event' element={<EventDetails/>}></Route>
-
-          {/* Les postes pour postuler */}
-
           <Route path='/postuler' element={<Poste/>}></Route>
-        </Routes>
-    <Footer/>
+          <Route path='/demande' element={<Demande/>}></Route>
+          <Route path='/contact' element={<Contact/>}></Route>
+        </Route>
+        <Route path='/admin' element={<AdminLayout />}>
+          <Route index element={<DashboardHome/>}/>
+        </Route>
+      </Routes>
     </BrowserRouter>
   </div>)
 }

@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navabar(){
+    const location= useLocation();
+    const isActive = (path) => location.pathname === path;
     return <div>
         <nav class="navbar">
             <div class="logo">
@@ -8,11 +10,11 @@ export default function Navabar(){
             </div>
 
             <ul class="nav-links">
-                <li><Link to="/" class="active">Accueil</Link></li>
-                <li><Link to="/services">Nos Services</Link></li>
-                <li><Link to="/realisations">Nos Réalisations</Link></li>
-                <li><Link to="/candidature">Candidature</Link></li>
-                <li><Link to="/aPropos">A Propos</Link></li>
+                <li><Link to="/" className={isActive('/') ? 'active' : ''}>Accueil</Link></li>
+                <li><Link to="/services" className={isActive('/services') ? 'active' : ''}>Nos Services</Link></li>
+                <li><Link to="/realisations" className={isActive('/realisations') ? 'active' : ''}>Nos Réalisations</Link></li>
+                <li><Link to="/candidature" className={isActive('/candidature') ? 'active' : ''}>Candidature</Link></li>
+                <li><Link to="/aPropos" className={isActive('/aPropos') ? 'active' : ''}>A Propos</Link></li>
             </ul>
 
             <div class="nav-cta">
