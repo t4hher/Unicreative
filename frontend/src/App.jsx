@@ -20,7 +20,10 @@ import Demande from './Components/Demande';
 import Contact from './Components/Contact';
 import ClientLayout from './Components/ClientLayout';
 import AdminLayout from './Components/AdminLayout';
-import DashboardHome from './Components/DashboardHome';
+import AdminDashboard from './Components/AdminDashboard';
+import AdminServices from './Components/AdminServices';
+import AdminRealisation from './Components/AdminRealisation';
+import AdminOffre from './Components/AdminOffre';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -46,7 +49,10 @@ function App() {
           <Route path='/contact' element={<Contact/>}></Route>
         </Route>
         <Route path='/admin' element={<AdminLayout />}>
-          <Route index element={<DashboardHome/>}/>
+          <Route path='/admin/dashboard' element={<AdminDashboard/>}/>
+          <Route path='services' element={<AdminServices/>}/>
+          <Route path='realisations' element={<AdminRealisation/>}/>
+          <Route path='offres' element={<AdminOffre/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
