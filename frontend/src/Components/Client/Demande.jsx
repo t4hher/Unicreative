@@ -16,6 +16,13 @@ export default function Demande(){
                     <label for="telephone" className='form-labeld'>Numéro de Télephone:</label>
                     <input type="text" class="form-controld" id="telephone" name='telephone'/>
                 </div>
+                <div className="mb-3">
+                    <label for="service" className='form-labeld'>Service:</label>
+                    <select name="service"className="form-select">
+                        <option value="">Création des Site Web</option>
+                        <option value="">Conception Graphique</option>
+                    </select>
+                </div>
                 <div class="mb-3">
                     <label for="description" className="form-labeld">Description</label>
                     <textarea className="form-controld" id="description" rows="2"></textarea>

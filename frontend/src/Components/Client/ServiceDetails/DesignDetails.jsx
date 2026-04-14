@@ -136,7 +136,7 @@ export default function DesignDetails(){
                     </details>
                 </div>
             </div>
-                        <div className="liendemandes"><Link className="liendemande" to={"/demande"}>Demander</Link></div>
+                        <div className="liendemandes"><Link className="liendemande" to="/demande/service">Demander</Link></div>
         </div>
     </div>
 }

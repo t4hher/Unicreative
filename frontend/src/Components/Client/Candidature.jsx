@@ -29,7 +29,7 @@ import { Link } from "react-router-dom";
                                     </p>
                                      <p><strong>Type De Contrat:</strong>Stage(PFE)</p>
                                 </div>
-                                <Link to="/postuler" className="btn-postuler">Postuler</Link>
+                                <Link to="/postuler/candidature" className="btn-postuler">Postuler</Link>
                             </div>
                         </div>
                         <div className="card">
@@ -42,7 +42,7 @@ import { Link } from "react-router-dom";
                                     </p>
                                     <p><strong>Type De Contrat :</strong> Freelance</p>
                                 </div>
-                                <Link to="/postuler" className="btn-postuler">Postuler</Link>
+                                <Link to="/postuler/candidature" className="btn-postuler">Postuler</Link>
                             </div>
                         </div>
                         <div className="card">
@@ -55,7 +55,7 @@ import { Link } from "react-router-dom";
                                     </p>
                                     <p><strong>Type De Contrat :</strong>CDI</p>
                                  </div>
-                                <Link to="/postuler" className="btn-postuler">Postuler</Link>
+                                <Link to="/postuler/candidature" className="btn-postuler">Postuler</Link>
                             </div>
                         </div>
                     </div>

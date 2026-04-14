@@ -2,10 +2,6 @@ import React from 'react'
 export default function Poste() {
   return (
     <div>
-        <h1 className='Tposte'>Développeur front-end React</h1>
-                <div className='imgpostes'>
-                    <img className="imgposte" src="https://grupo-giga.com/wp-content/uploads/2024/10/business-coding-2.jpg" alt="Card image cap"/>
-                </div>
         <div className='postefor'>
             <div className='Pposte'>
                 <ul>

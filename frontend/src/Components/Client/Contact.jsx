@@ -4,21 +4,13 @@ export default function Contact(){
             <div>
                 <h1 className="titrerealisation">Contacter Nous</h1>
                 <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis
-                    amet est alias nemo, aliquam sapiente! Commodi mollitia quibusdam
+                Vous avez un projet en tête ou une question sur nos services ? Notre équipe est à votre écoute pour transformer vos 
+                idées en réalité.
                 </p>
             </div>
-            <img src="/browse.svg" alt="" />
+            <img src="/contact.svg" alt="" />
         </div>
-        <div className="fontcon">
-             <div className="split">
-            <div className="horLine"></div>
-            <img src="/sLogo.png" alt="" />
-            <div className="horLine"></div>
-        </div>
-            <div>
-            <h2 className="titlecon">Page de Contact</h2>
-        </div>
+        <h2 className="titlecon">Échangeons ensemble sur votre futur succès.</h2>
         <div className="formcon">
             <form action="" className="formc">
                 <div>
@@ -35,7 +27,6 @@ export default function Contact(){
                 </div>
                 <button type="submit" class="buttondem">Envoyer</button>
             </form>
-        </div>
         </div>
     </div>
 }
