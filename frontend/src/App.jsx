@@ -27,11 +27,13 @@ import AdminOffre from './Components/Admin/AdminOffre';
 import AdminDemande from './Components/Admin/AdminDemande';
 import AdminMessage from './Components/Admin/AdminMessage';
 import AdminCandi from './Components/Admin/AdminCandi';
+import { Provider } from 'react-redux';
+import { store } from './Store/Store'
 
 function App() {
   const [count, setCount] = useState(0)
 
-  return (<div className=''>
+  return (<Provider store={store}>
     <BrowserRouter>
       <Routes>
         <Route element={<ClientLayout/>}>
@@ -62,7 +64,7 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
-  </div>)
+  </Provider>)
 }
 
 export default App
