@@ -1169,7 +1169,7 @@ details[open] summary {
 
 .dash-body .grid{
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
   margin-top: 10px;
   height: 80vh;

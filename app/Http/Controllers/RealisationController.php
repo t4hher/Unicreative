@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Offre;
+use App\Models\Realisation;
 use Illuminate\Http\Request;
 
-class OffreController extends Controller
+class RealisationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Offre::all();
+        return Realisation::all();
     }
 
     /**
@@ -34,15 +34,15 @@ class OffreController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Offre $offre)
+    public function show(Realisation $realisation)
     {
-        return response()->json(['offre'=>$offre]);
+        return response()->json(['realisation'=>$realisation]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Offre $offre)
+    public function edit(Realisation $realisation)
     {
         //
     }
@@ -50,7 +50,7 @@ class OffreController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Offre $offre)
+    public function update(Request $request, Realisation $realisation)
     {
         //
     }
@@ -58,7 +58,7 @@ class OffreController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Offre $offre)
+    public function destroy(Realisation $realisation)
     {
         //
     }

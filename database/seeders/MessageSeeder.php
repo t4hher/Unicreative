@@ -11,7 +11,7 @@ class MessageSeeder extends Seeder
 
     public function run(): void
     {
-        DB::table("messages")->insert(
+        DB::table("messages")->insert([
             [
                 "nomComplet"=>"Ali Mohhamed",
                 "contactInfo"=>"0600000000",
@@ -20,10 +20,10 @@ class MessageSeeder extends Seeder
             ],
             [
                 "nomComplet"=>"amine mahrez",
-                "contactInfo"=>"amin@gmail.com",
+                "contactInfo"=>"amine@gmail.com",
                 "message"=>"bounjoure mes  siloijgcxsfrfjkjahak bhbvczbecnhfbncjsvshbnc",
                 "lue"=>false,
             ],
-        );
+        ]);
     }
 }

@@ -12,7 +12,7 @@ class DemandeController extends Controller
      */
     public function index()
     {
-        //
+        return Demande::all();
     }
 
     /**
@@ -36,7 +36,7 @@ class DemandeController extends Controller
      */
     public function show(Demande $demande)
     {
-        //
+        return response()->json(['demande'=>$demande]);
     }
 
     /**

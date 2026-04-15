@@ -12,7 +12,7 @@ class CandidatureController extends Controller
      */
     public function index()
     {
-        //
+        return Candidature::all();
     }
 
     /**
@@ -36,7 +36,7 @@ class CandidatureController extends Controller
      */
     public function show(Candidature $candidature)
     {
-        //
+        return response()->json(['candidature'=>$candidature]);
     }
 
     /**

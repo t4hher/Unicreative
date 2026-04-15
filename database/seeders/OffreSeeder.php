@@ -10,7 +10,7 @@ class OffreSeeder extends Seeder
 
     public function run(): void
     {
-        DB::table('offres')->insert(
+        DB::table('offres')->insert([
             [
                 "titre"=>"Développeur front-end React",
                 "description"=>"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia ea aliquid neque voluptas, culpa quos laborum iure nam repudiandae aspernatur?",
@@ -25,6 +25,6 @@ class OffreSeeder extends Seeder
                 "profil"=>"developpeur mobile",
                 "image"=>null,
             ],
-        );
+        ]);
     }
 }

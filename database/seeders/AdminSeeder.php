@@ -10,11 +10,11 @@ class AdminSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('admins')->insert(
+        DB::table('admins')->insert([
             [
                 "login"=>"mohamedjabli@gmail.com",
                 "password"=>"mahamed123"
             ],
-        );
+        ]);
     }
 }

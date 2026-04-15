@@ -1,6 +1,19 @@
 import { Link } from "react-router-dom";
+import { fetchMessages } from "../../Store/InteractionSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 export default function AdminMessage(){
+
+    const messages = useSelector((state) => state.interaction.messages || []);
+    const status = useSelector((state) => state.interaction.status)
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchMessages());
+    }, [dispatch]);
+    console.log(messages)
+
     return <div className="dash-container">
         <div className="dash-header">
             <h1>Messages</h1>
@@ -18,51 +31,13 @@ export default function AdminMessage(){
         </div>
         <div className="dash-body">
             <div className="grid">
-                <div className="box">
-                    <h4>Nom et Prénom</h4>
-                    <p>Contact Info</p>
-                    <span><b>Message: </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corporis <b>...</b></span>
-                </div>
-                <div className="box">
-                    <h4>Nom et Prénom</h4>
-                    <p>Contact Info</p>
-                    <span><b>Message: </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corporis <b>...</b></span>
-                </div>
-                <div className="box">
-                    <h4>Nom et Prénom</h4>
-                    <p>Contact Info</p>
-                    <span><b>Message: </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corporis <b>...</b></span>
-                </div>
-                <div className="box">
-                    <h4>Nom et Prénom</h4>
-                    <p>Contact Info</p>
-                    <span><b>Message: </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corporis <b>...</b></span>
-                </div>
-                <div className="box">
-                    <h4>Nom et Prénom</h4>
-                    <p>Contact Info</p>
-                    <span><b>Message: </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corporis <b>...</b></span>
-                </div>
-                <div className="box">
-                    <h4>Nom et Prénom</h4>
-                    <p>Contact Info</p>
-                    <span><b>Message: </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corporis <b>...</b></span>
-                </div>
-                <div className="box">
-                    <h4>Nom et Prénom</h4>
-                    <p>Contact Info</p>
-                    <span><b>Message: </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corporis <b>...</b></span>
-                </div>
-                <div className="box">
-                    <h4>Nom et Prénom</h4>
-                    <p>Contact Info</p>
-                    <span><b>Message: </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corporis <b>...</b></span>
-                </div>
-                <div className="box">
-                    <h4>Nom et Prénom</h4>
-                    <p>Contact Info</p>
-                    <span><b>Message: </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corporis <b>...</b></span>
-                </div>
+                {
+                    messages.map(message=><div className="box">
+                        <h4>{message.nomComplet}</h4>
+                        <p>{message.contactInfo}</p>
+                        <span><b>Message: </b> {message.message.length>30 ? message.message.substring(0, 30) + "..." : message.message}</span>
+                    </div>)
+                }
             </div>
         </div>
     </div>
