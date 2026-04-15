@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("titre");
             $table->enum("type", ["Digital", "Print"]);
-            $table->string("image");
+            $table->string("image")->nullable();
             $table->timestamps();
         });
     }

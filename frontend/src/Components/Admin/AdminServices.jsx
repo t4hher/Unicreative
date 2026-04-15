@@ -46,7 +46,7 @@ export default function AdminServices(){
                                 <td><b>{service.id}</b></td>
                                 <td>{service.intitule}</td>
                                 <td>{service.categorie}</td>
-                                <td>{service.description.length>20 ? offre.description.substring(0, 20) + "..." : service.description}</td>
+                                <td>{service.description.length>20 ? service.description.substring(0, 20) + "..." : service.description}</td>
                                 <td>
                                     <button className="btn btn-sm btn-success">Modifier</button>
                                     <button className="btn btn-sm btn-danger">Supprimer</button>

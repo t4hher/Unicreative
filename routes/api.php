@@ -18,3 +18,4 @@ Route::resource('services', ServiceController::class);
 Route::resource('realisations', RealisationController::class);
 Route::resource('offres', OffreController::class);
 Route::resource('messages', MessageController::class);
+Route::resource('demandes', AdminController::class);

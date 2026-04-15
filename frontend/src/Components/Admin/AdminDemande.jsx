@@ -1,6 +1,17 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { fetchDemandes } from "../../Store/ContentSlice";
 
 export default function AdminDemande(){
+
+    const demandes = useSelector((state) => state.content.demandes || []);
+    const status = useSelector((state) => state.content.status)
+    const dispatch = useDispatch();
+
+     useEffect(() => {
+            dispatch(fetchDemandes());
+        }, [dispatch]);
     return <div className="dash-container">
         <div className="dash-header">
             <h1>Demandes des services</h1>
@@ -18,51 +29,13 @@ export default function AdminDemande(){
         </div>
         <div className="dash-body">
             <div className="grid">
-                <div className="box">
-                    <h4>Nom et Prénom</h4>
-                    <p>Nom de service</p>
-                    <span><b>Description: </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corporis <b>...</b></span>
-                </div>
-                <div className="box">
-                    <h4>Nom et Prénom</h4>
-                    <p>Nom de service</p>
-                    <span><b>Description: </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corporis <b>...</b></span>
-                </div>
-                <div className="box">
-                    <h4>Nom et Prénom</h4>
-                    <p>Nom de service</p>
-                    <span><b>Description: </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corporis <b>...</b></span>
-                </div>
-                <div className="box">
-                    <h4>Nom et Prénom</h4>
-                    <p>Nom de service</p>
-                    <span><b>Description: </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corporis <b>...</b></span>
-                </div>
-                <div className="box">
-                    <h4>Nom et Prénom</h4>
-                    <p>Nom de service</p>
-                    <span><b>Description: </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corporis <b>...</b></span>
-                </div>
-                <div className="box">
-                    <h4>Nom et Prénom</h4>
-                    <p>Nom de service</p>
-                    <span><b>Description: </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corporis <b>...</b></span>
-                </div>
-                <div className="box">
-                    <h4>Nom et Prénom</h4>
-                    <p>Nom de service</p>
-                    <span><b>Description: </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corporis <b>...</b></span>
-                </div>
-                <div className="box">
-                    <h4>Nom et Prénom</h4>
-                    <p>Nom de service</p>
-                    <span><b>Description: </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corporis <b>...</b></span>
-                </div>
-                <div className="box">
-                    <h4>Nom et Prénom</h4>
-                    <p>Nom de service</p>
-                    <span><b>Description: </b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corporis <b>...</b></span>
-                </div>
+               {
+                    demandes.map((demande)=><div className="box" key={demande.id}>
+                        <h4>{demande.nomComplet}</h4>
+                        <p>{demande.serviceId}</p>
+                        <span><b>Description: </b>{demande.description}</span>
+                    </div>)
+                }
             </div>
         </div>
     </div>
