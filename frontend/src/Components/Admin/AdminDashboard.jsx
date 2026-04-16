@@ -84,7 +84,7 @@ export default function AdminDashboard(){
                                     <button className="btn btn-sm btn-danger">Supprimer</button>
                                 </td>
                             </tr>)
-                        : "Chargement ..."}
+                        : "<h1>Chargement ...</h1>"}
                     </tbody>
                 </table>
             </div>
@@ -114,7 +114,7 @@ export default function AdminDashboard(){
                                     </td>
                                 </tr>
                             )
-                        : "Chargement ..."}
+                        : "<h1>Chargement ...</h1>"}
                     </tbody>
                 </table>
             </div>

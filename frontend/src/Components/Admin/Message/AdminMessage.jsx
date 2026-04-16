@@ -1,21 +1,35 @@
 import { Link } from "react-router-dom";
 import { fetchMessages } from "../../../Store/InteractionSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function AdminMessage(){
 
-    const messages = useSelector((state) => state.interaction.messages || []);
+    const messagesData = useSelector((state) => state.interaction.messages || []);
     const status = useSelector((state) => state.interaction.status)
     const dispatch = useDispatch();
+
+    const [recherche, setRecherche] = useState("");
+    const [filter, setFilter] = useState("tous");
+
+    const messages = messagesData.filter(m =>{ 
+        let result=m.nomComplet.toUpperCase().includes(recherche.toUpperCase());
+        if(filter==="non-lues"){
+            return result && m.lue===0;
+        }else if(filter==="lues"){
+            return result && m.lue===1;
+        }
+        return result;
+    }
+    );
 
     useEffect(() => {
         dispatch(fetchMessages());
     }, [dispatch]);
-    console.log(messages)
+    console.log(messagesData)
 
     if (status === 'loading') {
-        return <div className="dash-container">Chargement ...</div>;
+        return <div className="dash-container"><h1>Chargement ...</h1></div>;
     }
 
     return <div className="dash-container">
@@ -23,13 +37,13 @@ export default function AdminMessage(){
             <h1>Messages</h1>
             <div className="adminFilter">
                 <div className="">
-                    <input type="text" className="form-control" placeholder="Chercher"/>
+                    <input type="text" value={recherche} className="form-control" placeholder="Chercher" onChange={(e)=>setRecherche(e.target.value)}/>
                 </div>
                 <span> | </span>
                 <div className="adminFilterBtn">
-                    <a href="#" className="active">Tous</a>
-                    <a href="#">Non Lues</a>
-                    <a href="#">Lues</a>
+                    <a href="#" className={filter==='tous' ? "active" : ""} onClick={(e=>{e.preventDefault(); setFilter("tous")})}>Tous</a>
+                    <a href="#" className={filter==='non-lues' ? "active" : ""} onClick={(e=>{e.preventDefault(); setFilter("non-lues")})}>Non Lues</a>
+                    <a href="#" className={filter==='lues' ? "active" : ""} onClick={(e=>{e.preventDefault(); setFilter("lues")})}>Lues</a>
                 </div> 
             </div>
         </div>
