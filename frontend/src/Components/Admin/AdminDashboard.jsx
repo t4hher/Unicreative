@@ -93,7 +93,7 @@ export default function AdminDashboard(){
                                     <button onClick={()=>DeleteReali(reali.id)} className="btn btn-sm btn-danger">Supprimer</button>
                                 </td>
                             </tr>)
-                        : "Chargement ..."}
+                        : "<h1>Chargement ...</h1>"}
                     </tbody>
                 </table>
             </div>
@@ -123,7 +123,7 @@ export default function AdminDashboard(){
                                     </td>
                                 </tr>
                             )
-                        : "Chargement ..."}
+                        : "<h1>Chargement ...</h1>"}
                     </tbody>
                 </table>
             </div>

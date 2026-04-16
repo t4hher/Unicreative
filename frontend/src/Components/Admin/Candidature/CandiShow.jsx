@@ -16,10 +16,11 @@ export default function CandiShow(){
     }, [dispatch, id]);
 
     if (status === 'loading') {
-        return <div className="dash-container">Chargement des détails...</div>;
+        return <div className="dash-container"><h1>Chargement des détails...</h1></div>;
     }
 
     const laCandi=candidature.candidature;
+    console.log(laCandi, candidature)
     return (
         <div className="dash-container">
             <div className="dash-header">
@@ -30,11 +31,10 @@ export default function CandiShow(){
             </div>
             <div className="dash-body container">
                 <div className="container">
-                    <p><b>Nom de service:</b> {laCandi?.serviceNom}</p>
-                    <p><b>Nom et Prénom:</b> {laCandi?.nomComplet}</p>
+                    <p><b>Nom de l'offre:</b> {laCandi?.titre}</p>
+                    <p><b>Nom et Prénom:</b> {laCandi?.nomcomplet}</p>
                     <p><b>Email:</b> {laCandi?.email}</p>
                     <p><b>Tel:</b> {laCandi?.tel}</p>
-                    <p><b>Description:</b> {laCandi?.description}</p>
                     <p><b>Etat: </b>
                         {laCandi?.lue === 0
                             ? <span className="badge text-bg-primary">Non-Lue</span>

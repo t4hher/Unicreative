@@ -16,10 +16,11 @@ export default function DemandeShow(){
     }, [dispatch, id]);
 
     if (status === 'loading') {
-        return <div className="dash-container">Chargement des détails...</div>;
+        return <div className="dash-container"><h1>Chargement des détails...</h1></div>;
     }
 
     const laDemande=demande.demande;
+    console.log(laDemande, demande)
     return (
         <div className="dash-container">
             <div className="dash-header">

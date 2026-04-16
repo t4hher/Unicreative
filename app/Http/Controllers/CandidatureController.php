@@ -41,6 +41,11 @@ class CandidatureController extends Controller
      */
     public function show(Candidature $candidature)
     {
+        $candidature=DB::table('candidatures')
+        ->join('offres', 'candidatures.offreId', '=', 'offres.id')
+        ->select('candidatures.*', 'offres.titre')
+        ->where('candidatures.id', $candidature->id)
+        ->first();
         return response()->json(['candidature'=>$candidature]);
     }
 

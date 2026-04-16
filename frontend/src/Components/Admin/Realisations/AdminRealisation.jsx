@@ -19,7 +19,7 @@ export default function AdminRealisation(){
     }
 
     if (status === 'loading') {
-        return <div className="dash-container">Chargement ...</div>;
+        return <div className="dash-container"><h1>Chargement ...</h1></div>;
     }
 
     return <div className="dash-container">
