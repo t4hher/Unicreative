@@ -6,7 +6,7 @@ import { useEffect } from "react";
 export default function CandiShow(){
     const { id } = useParams();
     const dispatch = useDispatch();
-    
+
     const { candidature, status } = useSelector((state) => state.interaction);
 
     useEffect(() => {
@@ -35,19 +35,19 @@ export default function CandiShow(){
                     <p><b>Email:</b> {laCandi?.email}</p>
                     <p><b>Tel:</b> {laCandi?.tel}</p>
                     <p><b>Description:</b> {laCandi?.description}</p>
-                    <p><b>Etat: </b> 
-                        {laCandi?.lue === 0 
-                            ? <span className="badge text-bg-primary">Non-Lue</span> 
+                    <p><b>Etat: </b>
+                        {laCandi?.lue === 0
+                            ? <span className="badge text-bg-primary">Non-Lue</span>
                             : <span className="badge text-bg-secondary">Lue</span>
                         }
                     </p>
                     <p>
-                       {laCandi?.lue === 0 
-                            ? <span className="btn btn-lg btn-primary">Marquer comme lue</span> 
+                       {laCandi?.lue === 0
+                            ? <span className="btn btn-lg btn-primary">Marquer comme lue</span>
                             : <span className="btn btn-lg btn-secondary">Marquer comme non-lue</span>
-                        } 
+                        }
                     </p>
-                    
+
                 </div>
             </div>
         </div>

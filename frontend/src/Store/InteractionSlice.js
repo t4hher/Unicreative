@@ -4,11 +4,11 @@ import axios from "axios";
 
 export const fetchMessages = createAsyncThunk("interaction/fetchMessages", async () => {
     const response = await axios.get('http://127.0.0.1:8000/api/messages');
-    return response.data;   
+    return response.data;
 });
 export const fetchMessageById =  createAsyncThunk("interaction/fetchMessageById", async (id)=> {
     const response = await axios.get(`http://127.0.0.1:8000/api/messages/${id}`)
-    return response.data; 
+    return response.data;
 });
 
 
@@ -16,22 +16,22 @@ export const fetchMessageById =  createAsyncThunk("interaction/fetchMessageById"
 
 export const fetchDemandes = createAsyncThunk("interaction/fetchDemandes", async () => {
     const response = await axios.get('http://127.0.0.1:8000/api/demandes');
-    return response.data;   
+    return response.data;
 });
 export const fetchDemandeById =  createAsyncThunk("interaction/fetchDemandeById", async (id)=> {
     const response = await axios.get(`http://127.0.0.1:8000/api/demandes/${id}`)
-    return response.data; 
+    return response.data;
 });
 
 
 
 export const fetchCandi = createAsyncThunk("interaction/fetchCandi", async () => {
     const response = await axios.get('http://127.0.0.1:8000/api/candidatures');
-    return response.data;   
+    return response.data;
 });
 export const fetchCandiById =  createAsyncThunk("interaction/fetchCandiById", async (id)=> {
     const response = await axios.get(`http://127.0.0.1:8000/api/candidatures/${id}`)
-    return response.data; 
+    return response.data;
 });
 
 const InteractionSlice=createSlice({
@@ -62,6 +62,7 @@ const InteractionSlice=createSlice({
             state.messages = []
             state.error = action.error.message
         })
+        
         .addCase(fetchMessageById.pending, (state) => {
             state.status = 'loading';
         })

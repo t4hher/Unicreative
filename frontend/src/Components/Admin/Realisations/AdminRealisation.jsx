@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { fetchReali } from "../../../Store/ContentSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -12,6 +12,11 @@ export default function AdminRealisation(){
     useEffect(() => {
         dispatch(fetchReali());
     }, [dispatch]);
+
+    function DeleteReali(id){
+        let Rea=realisations.find((r)=>r.id==id);
+        window.confirm(`voulez vous supprimer la realisation ${Rea.titre}`)
+    }
 
     if (status === 'loading') {
         return <div className="dash-container">Chargement ...</div>;
@@ -44,8 +49,8 @@ export default function AdminRealisation(){
                                 <td>{reali.type}</td>
                                 <td>{reali.image===null ? <img src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg" width={50}/> : <img src={`public/storage/photos/${reali.image}`} width={50}/>}</td>
                                 <td>
-                                    <button className="btn btn-sm btn-success m-1">Modifier</button>
-                                    <button className="btn btn-sm btn-danger">Supprimer</button>
+                                    <Link to={`edit/${reali.id}`} className="btn btn-sm btn-success m-1">Modifier</Link>
+                                    <button onClick={()=>DeleteReali(reali.id)} className="btn btn-sm btn-danger">Supprimer</button>
                                 </td>
                             </tr>)
                         }

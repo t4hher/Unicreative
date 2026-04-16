@@ -12,7 +12,12 @@ export default function AdminOffre(){
     useEffect(() => {
         dispatch(fetchOffres());
     }, [dispatch]);
-    console.log(offres)
+    console.log(offres);
+
+    function DeleteOffre(id){
+        let off=offres.find((o)=>o.id==id);
+        window.confirm(`voulez vous supprimer l'offre ${off.titre}`)
+    }
 
     if (status === 'loading') {
         return <div className="dash-container">Chargement ...</div>;
@@ -49,8 +54,8 @@ export default function AdminOffre(){
                                 <td>{offre.profil}</td>
                                 <td>{offre.image===null ? <img src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg" width={50}/> : <img src={`public/storage/photos/${offre.image}`} width={50}/>}</td>
                                 <td>
-                                    <button className="btn btn-sm btn-success m-1">Modifier</button>
-                                    <button className="btn btn-sm btn-danger">Supprimer</button>
+                                    <Link to={`edit/${offre.id}`} className="btn btn-sm btn-success m-1">Modifier</Link>
+                                    <button onClick={()=>DeleteOffre(offre.id)} className="btn btn-sm btn-danger">Supprimer</button>
                                 </td>
                             </tr>
                         )}

@@ -30,11 +30,14 @@ import AdminCandi from './Components/Admin//Candidature/AdminCandi';
 import { Provider } from 'react-redux';
 import { store } from './Store/Store'
 import ServiceAdd from './Components/Admin/Services/ServiceAdd';
+import ServiceEdit from './Components/Admin/Services/ServiceEdit';
 import RealisationAdd from './Components/Admin/Realisations/RealisationAdd';
 import OffreAdd from './Components/Admin/Offre/OffreAdd';
 import DemandeShow from './Components/Admin/Demande/DemandeShow';
 import MessageShow from './Components/Admin/Message/MessageShow';
 import CandiShow from './Components/Admin/Candidature/CandiShow';
+import RealiEdit from './Components/Admin/Realisations/RealiEdit';
+import OffreEdit from './Components/Admin/Offre/OffreEdit';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -73,6 +76,9 @@ function App() {
           <Route path='messages/show/:id' element={<MessageShow/>}/>
           <Route path='candidatures' element={<AdminCandi/>}/>
           <Route path='candidatures/show/:id' element={<CandiShow/>}/>
+          <Route path='services/edit/:id' element={<ServiceEdit/>}/>
+          <Route path='realisations/edit/:id' element={<RealiEdit/>}/>
+          <Route path='offres/edit/:id' element={<OffreEdit/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

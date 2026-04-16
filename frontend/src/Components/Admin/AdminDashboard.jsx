@@ -28,6 +28,15 @@ export default function AdminDashboard(){
     const countDemandes=demandes.filter(demande=>demande.lue===0).length;
     const countCandi=candidatures.filter(candi=>candi.lue===0).length;
 
+    function DeleteOffre(id){
+        let off=offres.find((o)=>o.id==id);
+        window.confirm(`voulez vous supprimer l'offre ${off.titre}`)
+    }
+    function DeleteReali(id){
+        let Rea=realisations.find((r)=>r.id==id);
+        window.confirm(`voulez vous supprimer la realisation ${Rea.titre}`)
+    }
+
     return <div className="dash-container">
         <div className="dash-header">
             <h1>Dashboard</h1>
@@ -80,8 +89,8 @@ export default function AdminDashboard(){
                                 <td>{reali.type}</td>
                                 <td>{reali.image===null ? <img src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg" width={50}/> : <img src={`public/storage/photos/${reali.image}`} width={50}/>}</td>
                                 <td>
-                                    <button className="btn btn-sm btn-success m-1">Modifier</button>
-                                    <button className="btn btn-sm btn-danger">Supprimer</button>
+                                    <Link to={`/admin/realisations/edit/${reali.id}`} className="btn btn-sm btn-success m-1">Modifier</Link>
+                                    <button onClick={()=>DeleteReali(reali.id)} className="btn btn-sm btn-danger">Supprimer</button>
                                 </td>
                             </tr>)
                         : "Chargement ..."}
@@ -109,8 +118,8 @@ export default function AdminDashboard(){
                                     <td>{offre.description.length>20 ? offre.description.substring(0, 20) + "..." : offre.description}</td>
                                     <td>{offre.image===null ? <img src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg" width={50}/> : <img src={`public/storage/photos/${offre.image}`} width={50}/>}</td>
                                     <td>
-                                        <button className="btn btn-sm btn-success m-1">Modifier</button>
-                                        <button className="btn btn-sm btn-danger">Supprimer</button>
+                                        <Link to={`/admin/offres/edit/${offre.id}`} className="btn btn-sm btn-success m-1">Modifier</Link>
+                                        <button onClick={()=>DeleteOffre(offre.id)} className="btn btn-sm btn-danger">Supprimer</button>
                                     </td>
                                 </tr>
                             )
