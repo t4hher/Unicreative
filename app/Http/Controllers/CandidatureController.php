@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Candidature;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CandidatureController extends Controller
 {
@@ -12,7 +13,11 @@ class CandidatureController extends Controller
      */
     public function index()
     {
-        return Candidature::all();
+        $candidatures=DB::table('candidatures')
+        ->join('offres', 'candidatures.offreId', '=', 'offres.id')
+        ->select('candidatures.*', 'offres.titre')
+        ->get();
+        return $candidatures;
     }
 
     /**

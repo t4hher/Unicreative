@@ -21,14 +21,20 @@ import Contact from './Components/Client/Contact';
 import ClientLayout from './Components/Client/ClientLayout';
 import AdminLayout from './Components/Admin/AdminLayout';
 import AdminDashboard from './Components/Admin/AdminDashboard';
-import AdminServices from './Components/Admin/AdminServices';
-import AdminRealisation from './Components/Admin/AdminRealisation';
-import AdminOffre from './Components/Admin/AdminOffre';
-import AdminDemande from './Components/Admin/AdminDemande';
-import AdminMessage from './Components/Admin/AdminMessage';
-import AdminCandi from './Components/Admin/AdminCandi';
+import AdminServices from './Components/Admin/Services/AdminServices';
+import AdminRealisation from './Components/Admin/Realisations/AdminRealisation';
+import AdminOffre from './Components/Admin/Offre/AdminOffre';
+import AdminDemande from './Components/Admin/Demande/AdminDemande';
+import AdminMessage from './Components/Admin/Message/AdminMessage';
+import AdminCandi from './Components/Admin//Candidature/AdminCandi';
 import { Provider } from 'react-redux';
 import { store } from './Store/Store'
+import ServiceAdd from './Components/Admin/Services/ServiceAdd';
+import RealisationAdd from './Components/Admin/Realisations/RealisationAdd';
+import OffreAdd from './Components/Admin/Offre/OffreAdd';
+import DemandeShow from './Components/Admin/Demande/DemandeShow';
+import MessageShow from './Components/Admin/Message/MessageShow';
+import CandiShow from './Components/Admin/Candidature/CandiShow';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -56,11 +62,17 @@ function App() {
         <Route path='/admin' element={<AdminLayout />}>
           <Route path='/admin/dashboard' element={<AdminDashboard/>}/>
           <Route path='services' element={<AdminServices/>}/>
+          <Route path='services/add' element={<ServiceAdd/>}/>
           <Route path='realisations' element={<AdminRealisation/>}/>
+          <Route path='realisations/add' element={<RealisationAdd/>}/>
           <Route path='offres' element={<AdminOffre/>}/>
+          <Route path='offres/add' element={<OffreAdd/>}/>
           <Route path='demandes' element={<AdminDemande/>}/>
+          <Route path='demandes/show/:id' element={<DemandeShow/>}/>
           <Route path='messages' element={<AdminMessage/>}/>
+          <Route path='messages/show/:id' element={<MessageShow/>}/>
           <Route path='candidatures' element={<AdminCandi/>}/>
+          <Route path='candidatures/show/:id' element={<CandiShow/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

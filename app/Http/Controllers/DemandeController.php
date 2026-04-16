@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Demande;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DemandeController extends Controller
 {
@@ -12,7 +13,11 @@ class DemandeController extends Controller
      */
     public function index()
     {
-        return Demande::all();
+        $demandes=DB::table('demandes')
+        ->join('services', 'demandes.serviceId', '=', 'services.id')
+        ->select('demandes.*', 'services.intitule')
+        ->get();
+        return $demandes;
     }
 
     /**
@@ -34,8 +39,14 @@ class DemandeController extends Controller
     /**
      * Display the specified resource.
      */
+    
     public function show(Demande $demande)
     {
+        $demande = DB::table('demandes')
+        ->join('services', 'demandes.serviceId', '=', 'services.id')
+        ->select('demandes.*', 'services.intitule as serviceNom')
+        ->where('demandes.id', $demande->id)
+        ->first();
         return response()->json(['demande'=>$demande]);
     }
 

@@ -1140,6 +1140,21 @@ details[open] summary {
 .nonlues a img{
   width: 1.5rem;
 }
+.details-header{
+  display: flex;
+  width: 100%;
+}
+.details-header a{
+  background: #d21d16;
+  border-radius: 50px;
+  padding: 10px;
+  width: fit-content;
+  height: fit-content;
+  margin-right: 15px;
+}
+.details-header a img{
+  width: 1.5rem;
+}
 .tableDash{
   background-color: #fff;
   border-radius: 25px;
@@ -1189,6 +1204,9 @@ details[open] summary {
   padding: 20px;
   margin: 10px;
   text-align: center;
+}
+.redShadow{
+  box-shadow: 0 0 15px #d21d16;
 }
 .grid .box h4{
   font-weight: 700;

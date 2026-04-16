@@ -10,12 +10,11 @@ export const fetchOffres = createAsyncThunk("content/fetchOffres", async () => {
     const response = await axios.get('http://127.0.0.1:8000/api/offres');
     return response.data;   
 });
-export const fetchDemandes = createAsyncThunk("content/fetchDemandes", async () => {
-    const response = await axios.get('http://127.0.0.1:8000/api/demandes');
+
+export const fetchReali = createAsyncThunk("content/fetchReali", async () => {
+    const response = await axios.get('http://127.0.0.1:8000/api/realisations');
     return response.data;   
 });
-
-
 
 const ContentSlice=createSlice({
     name:'content',
@@ -24,7 +23,6 @@ const ContentSlice=createSlice({
         services:[],
         realisations:[],
         offres:[],
-        demandes:[],
         error:'',
     },
     reducers:{},
@@ -62,20 +60,20 @@ const ContentSlice=createSlice({
 
 
 
-        .addCase(fetchDemandes.pending, (state) => {
+        
+        .addCase(fetchReali.pending, (state) => {
             state.status = 'loading';
         })
-        .addCase(fetchDemandes.fulfilled, (state, action) => {
+        .addCase(fetchReali.fulfilled, (state, action) => {
             state.status = 'success';
-            state.demandes = action.payload
+            state.realisations = action.payload
             state.error = ''
         })
-        .addCase(fetchDemandes.rejected, (state, action) => {
+        .addCase(fetchReali.rejected, (state, action) => {
             state.status = 'failed';
-            state.demandes = []
+            state.realisations = []
             state.error = action.error.message
         })
-
     }
 })
 export default ContentSlice.reducer;

@@ -2,9 +2,36 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 
-export const fetchMessages = createAsyncThunk("content/fetchMessages", async () => {
+export const fetchMessages = createAsyncThunk("interaction/fetchMessages", async () => {
     const response = await axios.get('http://127.0.0.1:8000/api/messages');
     return response.data;   
+});
+export const fetchMessageById =  createAsyncThunk("interaction/fetchMessageById", async (id)=> {
+    const response = await axios.get(`http://127.0.0.1:8000/api/messages/${id}`)
+    return response.data; 
+});
+
+
+
+
+export const fetchDemandes = createAsyncThunk("interaction/fetchDemandes", async () => {
+    const response = await axios.get('http://127.0.0.1:8000/api/demandes');
+    return response.data;   
+});
+export const fetchDemandeById =  createAsyncThunk("interaction/fetchDemandeById", async (id)=> {
+    const response = await axios.get(`http://127.0.0.1:8000/api/demandes/${id}`)
+    return response.data; 
+});
+
+
+
+export const fetchCandi = createAsyncThunk("interaction/fetchCandi", async () => {
+    const response = await axios.get('http://127.0.0.1:8000/api/candidatures');
+    return response.data;   
+});
+export const fetchCandiById =  createAsyncThunk("interaction/fetchCandiById", async (id)=> {
+    const response = await axios.get(`http://127.0.0.1:8000/api/candidatures/${id}`)
+    return response.data; 
 });
 
 const InteractionSlice=createSlice({
@@ -12,8 +39,11 @@ const InteractionSlice=createSlice({
     initialState:{
         status:'',
         messages:[],
+        message:{},
         demandes:[],
+        demande:{},
         candidatures:[],
+        candidature:{},
         error:'',
     },
     reducers:{},
@@ -30,6 +60,77 @@ const InteractionSlice=createSlice({
         .addCase(fetchMessages.rejected, (state, action) => {
             state.status = 'failed';
             state.messages = []
+            state.error = action.error.message
+        })
+        .addCase(fetchMessageById.pending, (state) => {
+            state.status = 'loading';
+        })
+        .addCase(fetchMessageById.fulfilled, (state, action) => {
+            state.status = 'success';
+            state.message = action.payload
+            state.error = ''
+        })
+        .addCase(fetchMessageById.rejected, (state, action) => {
+            state.status = 'failed';
+            state.message = {}
+            state.error = action.error.message
+        })
+
+
+
+        .addCase(fetchDemandes.pending, (state) => {
+            state.status = 'loading';
+        })
+        .addCase(fetchDemandes.fulfilled, (state, action) => {
+            state.status = 'success';
+            state.demandes = action.payload
+            state.error = ''
+        })
+        .addCase(fetchDemandes.rejected, (state, action) => {
+            state.status = 'failed';
+            state.demandes = []
+            state.error = action.error.message
+        })
+        .addCase(fetchDemandeById.pending, (state) => {
+            state.status = 'loading';
+        })
+        .addCase(fetchDemandeById.fulfilled, (state, action) => {
+            state.status = 'success';
+            state.demande = action.payload
+            state.error = ''
+        })
+        .addCase(fetchDemandeById.rejected, (state, action) => {
+            state.status = 'failed';
+            state.demande = {}
+            state.error = action.error.message
+        })
+
+
+
+        .addCase(fetchCandi.pending, (state) => {
+            state.status = 'loading';
+        })
+        .addCase(fetchCandi.fulfilled, (state, action) => {
+            state.status = 'success';
+            state.candidatures = action.payload
+            state.error = ''
+        })
+        .addCase(fetchCandi.rejected, (state, action) => {
+            state.status = 'failed';
+            state.candidatures = []
+            state.error = action.error.message
+        })
+        .addCase(fetchCandiById.pending, (state) => {
+            state.status = 'loading';
+        })
+        .addCase(fetchCandiById.fulfilled, (state, action) => {
+            state.status = 'success';
+            state.candidature = action.payload
+            state.error = ''
+        })
+        .addCase(fetchCandiById.rejected, (state, action) => {
+            state.status = 'failed';
+            state.candidature = {}
             state.error = action.error.message
         })
     }
