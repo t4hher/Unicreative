@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchServices } from "../../../Store/ContentSlice";
+import { deleteServiceById, fetchServices } from "../../../Store/ContentSlice";
 import { useEffect } from "react";
 
 export default function AdminServices(){
@@ -15,7 +15,11 @@ export default function AdminServices(){
 
     function DeleteSer(id){
         let Ser=services.find((s)=>s.id==id);
-        window.confirm(`voulez vous supprimer le service de ${Ser.intitule}`)
+        if(window.confirm(`voulez vous supprimer le service de ${Ser.intitule}`)){
+            dispatch(deleteServiceById(id));
+        }
+        
+        
     }
 
     if (status === 'loading') {
