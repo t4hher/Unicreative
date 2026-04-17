@@ -28,7 +28,23 @@ class RealisationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'titre'=>'required|min:5',
+            'type'=>'required|in:Digital,Print',
+            'image'=>'max:2048',
+        ]);
+
+        $data = $request->all();
+        if(isset($request->image)){
+            $request->image->store("realisations", "public");
+            $chemin = $request->image->store("realisations", "public");
+            $data["image"]=$chemin;
+            Realisation::create($data);
+        }
+        return response()->json([
+            'message' => "La réalisation ".$request->titre." est ajoutée avec succès",
+            'data'=>$data,
+        ], 200);
     }
 
     /**

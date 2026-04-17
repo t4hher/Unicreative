@@ -28,7 +28,7 @@ export default function RealiEdit(){
             </div>
         </div>
             <div className="dash-body">
-            <form className="container" action="" method="post" encType="">
+            <form className="container" action="" method="post" encType="multipart/form-data">
                 <div className="mb-2">
                     <label className="m-1">Titre</label>
                     <input type="text" name="intitule" value={leReali?.titre} className="form-control"/>
@@ -42,7 +42,7 @@ export default function RealiEdit(){
                 </div>
                 <div className="mb-3">
                     <label className="m-1">Image</label>
-                    <input type="file" name="image" className="form-control" value={leReali?.image}/>
+                    <input type="file" name="image" className="form-control"/>
                 </div>
                 <input type="submit" value="Modifier" className=" form-control btn btn-primary"/>
             </form>

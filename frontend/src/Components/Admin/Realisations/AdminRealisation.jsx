@@ -47,7 +47,7 @@ export default function AdminRealisation(){
                                 <td>{reali.id}</td>
                                 <td>{reali.titre}</td>
                                 <td>{reali.type}</td>
-                                <td>{reali.image===null ? <img src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg" width={50}/> : <img src={`public/storage/photos/${reali.image}`} width={50}/>}</td>
+                                <td>{reali.image===null ? <img src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg" width={50}/> : <img src={`http://127.0.0.1:8000/storage/${reali.image}`} width={50}/>}</td>
                                 <td>
                                     <Link to={`edit/${reali.id}`} className="btn btn-sm btn-success m-1">Modifier</Link>
                                     <button onClick={()=>DeleteReali(reali.id)} className="btn btn-sm btn-danger">Supprimer</button>

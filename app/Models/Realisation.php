@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Realisation extends Model
 {
-    protected $guarded=[];
+    protected $fillable = ['titre', 'type', 'image'];
 }

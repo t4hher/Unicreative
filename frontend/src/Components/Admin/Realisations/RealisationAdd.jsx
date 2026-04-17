@@ -1,6 +1,41 @@
-import { Link} from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate} from "react-router-dom";
+import { addReali } from "../../../Store/ContentSlice";
+import { useDispatch } from "react-redux";
 
 export default function RealisationAdd(){
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const [titre, setTitre] = useState('');
+    const [type, setType] = useState('Digital');
+    const [image, setImage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const handleImage = (e)=>{setImage(e.target.files[0]);}
+    
+    async function RealiAdd(e) {
+        e.preventDefault();
+        
+        const formData = new FormData();
+        formData.append('titre', titre);
+        formData.append('type', type);
+        formData.append('image', image); 
+    
+        try {
+            const response = await dispatch(addReali(formData));
+    
+            if (response.meta.requestStatus === "fulfilled") {
+                navigate('/admin/realisations'); 
+            } else {
+                setErrorMessage('Erreur lors de l\'ajout.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
     return <div className="dash-container">
         <div className="dash-header">
             <div className="details-header">
@@ -9,25 +44,21 @@ export default function RealisationAdd(){
             </div>
         </div>
         <div className="dash-body">
-            <form className="container" action="" method="post" encType="">
+            <form className="container" onSubmit={RealiAdd} action="" method="post" encType="multipart/form-data">
                 <div className="mb-2">
                     <label className="m-1">Titre</label>
-                    <input type="text" name="titre" className="form-control"/>
+                    <input type="text" onChange={(e)=>setTitre(e.target.value)} name="titre" className="form-control"/>
                 </div>
                 <div className="mb-2">
                     <label className="m-1">Type</label>
-                    <select name="categorie" className="form-select">
-                        <option value="Digtal">Digtal</option>
+                    <select onChange={(e)=>setType(e.target.value)} name="type" className="form-select">
+                        <option value="Digital">Digital</option>
                         <option value="Print">Print</option>
                     </select>
                 </div>
-                <div className="mb-2">
-                    <label className="m-1">Description</label>
-                    <textarea name="description" className="form-control"></textarea>
-                </div>
                 <div className="mb-3">
                     <label className="m-1">Image</label>
-                    <input type="file" name="image" className="form-control"/>
+                    <input type="file" onChange={handleImage} name="image" className="form-control"/>
                 </div>
                 <input type="submit" value="Ajouter" className=" form-control btn btn-primary"/>
             </form>

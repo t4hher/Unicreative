@@ -12,6 +12,7 @@ export const fetchServiceById =  createAsyncThunk("content/fetchServiceById", as
 
 
 
+
 export const fetchOffres = createAsyncThunk("content/fetchOffres", async () => {
     const response = await axios.get('http://127.0.0.1:8000/api/offres');
     return response.data;
@@ -29,6 +30,17 @@ export const fetchReali = createAsyncThunk("content/fetchReali", async () => {
 });
 export const fetchRealisationById =  createAsyncThunk("content/fetchRealisationById", async (id)=> {
     const response = await axios.get(`http://127.0.0.1:8000/api/realisations/${id}`)
+    return response.data;
+});
+export const addReali = createAsyncThunk("content/addReali", async(formData) => {
+    const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+    const response = await axios.post("http://127.0.0.1:8000/api/realisations", formData, {
+        headers: {
+            'X-CSRF-TOKEN': token,
+            'Content-Type': 'multipart/form-data',
+            'Accept': 'application/json',
+        }
+    });
     return response.data;
 });
 
@@ -134,6 +146,13 @@ const ContentSlice=createSlice({
             state.status='failed';
             state.realisation={};
             state.error=action.error.message;
+        })
+        .addCase(addReali.pending, (state) => {
+            state.status = 'loading';
+        })
+        .addCase(addReali.fulfilled, (state, action) => {
+            state.status = 'success';
+            state.realisations=[...state.realisations, action.payload.data]; 
         })
 
 
