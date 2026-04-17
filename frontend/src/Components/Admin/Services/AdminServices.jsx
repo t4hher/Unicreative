@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { deleteServiceById, fetchServices } from "../../../Store/ContentSlice";
 import { useEffect } from "react";
 
@@ -8,6 +8,7 @@ export default function AdminServices(){
     const services = useSelector((state) => state.content.services || []);
     const status = useSelector((state) => state.content.status)
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(fetchServices());
@@ -17,6 +18,7 @@ export default function AdminServices(){
         let Ser=services.find((s)=>s.id==id);
         if(window.confirm(`voulez vous supprimer le service de ${Ser.intitule}`)){
             dispatch(deleteServiceById(id));
+            navigate("/admin/services");
         }
         
         

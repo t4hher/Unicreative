@@ -1,5 +1,5 @@
-import { Link} from "react-router-dom";
-import { fetchReali } from "../../../Store/ContentSlice";
+import { Link, useNavigate} from "react-router-dom";
+import { deleteRealiById, fetchReali } from "../../../Store/ContentSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
@@ -8,6 +8,7 @@ export default function AdminRealisation(){
     const realisations = useSelector((state) => state.content.realisations || []);
     const status = useSelector((state) => state.content.status)
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(fetchReali());
@@ -15,7 +16,10 @@ export default function AdminRealisation(){
 
     function DeleteReali(id){
         let Rea=realisations.find((r)=>r.id==id);
-        window.confirm(`voulez vous supprimer la realisation ${Rea.titre}`)
+        if(window.confirm(`voulez vous supprimer la realisation ${Rea.titre}`)){
+            dispatch(deleteRealiById(id));
+            navigate("/admin/realisations");
+        }
     }
 
     if (status === 'loading') {

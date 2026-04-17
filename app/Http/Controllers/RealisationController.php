@@ -76,6 +76,10 @@ class RealisationController extends Controller
      */
     public function destroy(Realisation $realisation)
     {
-        //
+        $realisation->delete();
+        return response()->json([
+            "message"=>"Réalisation supprimer !!",
+            "id"=>$realisation->id,
+        ]);
     }
 }

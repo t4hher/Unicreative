@@ -47,6 +47,10 @@ export const addReali = createAsyncThunk("content/addReali", async(formData) => 
     });
     return response.data;
 });
+export const deleteRealiById =  createAsyncThunk("content/deleteRealiById", async (id)=> {
+    const response = await axios.delete(`http://127.0.0.1:8000/api/realisations/${id}`)
+    return response.data;
+});
 
 
 
@@ -171,6 +175,18 @@ const ContentSlice=createSlice({
         .addCase(addReali.fulfilled, (state, action) => {
             state.status = 'success';
             state.realisations=[...state.realisations, action.payload.data]; 
+        })
+        .addCase(deleteRealiById.pending,(state)=>{
+            state.status='loading';
+        })
+        .addCase(deleteRealiById.fulfilled,(state,action)=>{
+            state.status='success';
+            state.realisations=state.realisations.filter(service => service.id != action.payload.id);
+            state.error='';
+        })
+        .addCase(deleteRealiById.rejected,(state,action)=>{
+            state.status='failed';
+            state.error=action.error.message;
         })
 
 
