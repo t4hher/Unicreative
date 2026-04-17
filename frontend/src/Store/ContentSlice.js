@@ -9,6 +9,10 @@ export const fetchServiceById =  createAsyncThunk("content/fetchServiceById", as
     const response = await axios.get(`http://127.0.0.1:8000/api/services/${id}`)
     return response.data;
 });
+export const deleteServiceById =  createAsyncThunk("content/deleteServiceById", async (id)=> {
+    const response = await axios.delete(`http://127.0.0.1:8000/api/services/${id}`)
+    return response.data;
+});
 
 
 
@@ -75,6 +79,20 @@ const ContentSlice=createSlice({
             state.service={};
             state.error=action.error.message;
         })
+        .addCase(deleteServiceById.pending,(state)=>{
+                state.status='loading';
+        })
+        .addCase(deleteServiceById.fulfilled,(state,action)=>{
+            state.status='success';
+            state.service=state.service.filter(service => service.id !== action.payload.id);
+            state.error='';
+        })
+        .addCase(deleteServiceById.rejected,(state,action)=>{
+            state.status='failed';
+            state.service=[];
+            state.error=action.error.message;
+        })
+
 
 
 
