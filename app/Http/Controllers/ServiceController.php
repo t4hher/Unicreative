@@ -61,16 +61,10 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        // if($service->image){
-        //     $exist=Storage::disk('public')->exists("service/image/{$request->image}");
-        //     if($exist){
-        //         Storage::disk('public')->delete("service/image/{$request->image}");
-        //     }
-        // }
         $service->delete();
         return response()->json([
-            "message"=>"Service supprimer !!",
-            "data"=>$service->id,
+            "message"=>"service supprimer !!",
+            "id"=>$service->id,
         ]);
         
 

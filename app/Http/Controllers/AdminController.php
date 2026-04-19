@@ -60,6 +60,15 @@ class AdminController extends Controller
      */
     public function destroy(Admin $admin)
     {
-        //
+        $offre->delete();
+        return response()->json([
+            "message"=>"offre supprimer !!",
+            "id"=>$offre->id,
+        ]);
+         $realisation->delete();
+        return response()->json([
+            "message"=>"Réalisation supprimer !!",
+            "id"=>$realisation->id,
+        ]);
     }
 }

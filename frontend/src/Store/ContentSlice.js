@@ -25,6 +25,10 @@ export const fetchOffreById =  createAsyncThunk("content/fetchOffreById", async 
     const response = await axios.get(`http://127.0.0.1:8000/api/offres/${id}`)
     return response.data;
 });
+export const deleteOffreById =  createAsyncThunk("content/deleteOffreById", async (id)=> {
+    const response = await axios.delete(`http://127.0.0.1:8000/api/offres/${id}`)
+    return response.data;
+});
 
 
 
@@ -96,16 +100,15 @@ const ContentSlice=createSlice({
             state.error=action.error.message;
         })
         .addCase(deleteServiceById.pending,(state)=>{
-                state.status='loading';
+            state.status='loading';
         })
         .addCase(deleteServiceById.fulfilled,(state,action)=>{
             state.status='success';
-            state.service=state.service.filter(service => service.id !== action.payload.id);
+            state.services=state.services.filter(service => service.id != action.payload.id);
             state.error='';
         })
         .addCase(deleteServiceById.rejected,(state,action)=>{
             state.status='failed';
-            state.service=[];
             state.error=action.error.message;
         })
 
@@ -140,6 +143,19 @@ const ContentSlice=createSlice({
             state.offre={};
             state.error=action.error.message;
         })
+        .addCase(deleteOffreById.pending,(state)=>{
+            state.status='loading';
+        })
+        .addCase(deleteOffreById.fulfilled,(state,action)=>{
+            state.status='success';
+            state.offres=state.offres.filter(service => service.id != action.payload.id);
+            state.error='';
+        })
+        .addCase(deleteOffreById.rejected,(state,action)=>{
+            state.status='failed';
+            state.error=action.error.message;
+        })
+    
 
 
 
