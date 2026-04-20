@@ -87,13 +87,13 @@ export default function AdminDashboard(){
                                 <td>{reali.id}</td>
                                 <td>{reali.titre}</td>
                                 <td>{reali.type}</td>
-                                <td>{reali.image===null ? <img src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg" width={50}/> : <img src={`public/storage/photos/${reali.image}`} width={50}/>}</td>
+                                <td>{reali.image===null ? <img src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg" width={50}/> : <img src={`http://127.0.0.1:8000/storage/${reali.image}`} width={50}/>}</td>
                                 <td>
                                     <Link to={`/admin/realisations/edit/${reali.id}`} className="btn btn-sm btn-success m-1">Modifier</Link>
                                     <button onClick={()=>DeleteReali(reali.id)} className="btn btn-sm btn-danger">Supprimer</button>
                                 </td>
                             </tr>)
-                        : "<h1>Chargement ...</h1>"}
+                        : "Chargement ..."}
                     </tbody>
                 </table>
             </div>
@@ -116,14 +116,14 @@ export default function AdminDashboard(){
                                     <td><b>{offre.id}</b></td>
                                     <td>{offre.titre}</td>
                                     <td>{offre.description.length>20 ? offre.description.substring(0, 20) + "..." : offre.description}</td>
-                                    <td>{offre.image===null ? <img src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg" width={50}/> : <img src={`public/storage/photos/${offre.image}`} width={50}/>}</td>
+                                    <td>{offre.image===null ? <img src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg" width={50}/> : <img src={`http://127.0.0.1:8000/storage/${offre.image}`} width={70}/>}</td>
                                     <td>
                                         <Link to={`/admin/offres/edit/${offre.id}`} className="btn btn-sm btn-success m-1">Modifier</Link>
                                         <button onClick={()=>DeleteOffre(offre.id)} className="btn btn-sm btn-danger">Supprimer</button>
                                     </td>
                                 </tr>
                             )
-                        : "<h1>Chargement ...</h1>"}
+                        : "Chargement ..."}
                     </tbody>
                 </table>
             </div>

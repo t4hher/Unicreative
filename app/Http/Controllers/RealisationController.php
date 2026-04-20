@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Realisation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class RealisationController extends Controller
 {
@@ -39,8 +40,8 @@ class RealisationController extends Controller
             $request->image->store("realisations", "public");
             $chemin = $request->image->store("realisations", "public");
             $data["image"]=$chemin;
-            Realisation::create($data);
         }
+        Realisation::create($data);
         return response()->json([
             'message' => "La réalisation ".$request->titre." est ajoutée avec succès",
             'data'=>$data,
@@ -68,14 +69,37 @@ class RealisationController extends Controller
      */
     public function update(Request $request, Realisation $realisation)
     {
-        //
+        $request->validate([
+            'titre'=>'min:5',
+            'type'=>'in:Digital,Print',
+            'image'=>'nullable|image|max:2048',
+        ]);
+
+        $data = $request->all();
+        if($request->hasFile('image')){
+            if ($realisation->image && Storage::disk('public')->exists($realisation->image)) {
+                Storage::disk('public')->delete($realisation->image);
+            }
+            $chemin = $request->image->store("realisations", "public");
+            $data["image"]=$chemin;
+        } else {
+            unset($data['image']);
+        }
+        $realisation->update($data);
+        return response()->json([
+            'message' => "La réalisation ".$request->titre." est modifié avec succès",
+            'data'=>$realisation,
+        ], 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Realisation $realisation)
+    public function destroy(Request $request ,Realisation $realisation)
     {
+        if($realisation->image){
+            if (Storage::disk('public')->exists($realisation->image)) {Storage::disk('public')->delete($realisation->image);}
+        }
         $realisation->delete();
         return response()->json([
             "message"=>"Réalisation supprimer !!",

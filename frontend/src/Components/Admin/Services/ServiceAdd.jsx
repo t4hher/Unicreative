@@ -1,6 +1,43 @@
-import { Link} from "react-router-dom";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate} from "react-router-dom";
+import { addService } from "../../../Store/ContentSlice";
 
 export default function ServiceAdd(){
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const [intitule, setIntitule] = useState('');
+    const [categorie, setCategorie] = useState('Digital');
+    const [description, setDescription] = useState('');
+    const [image, setImage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const handleImage = (e)=>{setImage(e.target.files[0]);}
+
+    async function ServiceAdd(e) {
+        e.preventDefault();
+        
+        const formData = new FormData();
+        formData.append('intitule', intitule);
+        formData.append('categorie', categorie);
+        formData.append('description', description);
+        formData.append('image', image); 
+    
+        try {
+            const response = await dispatch(addService(formData));
+    
+            if (response.meta.requestStatus === "fulfilled") {
+                navigate('/admin/services'); 
+            } else {
+                setErrorMessage('Erreur lors de l\'ajout.');
+            }
+        } catch (error) {
+            alert('Error:', error);
+        }
+    }
+
     return <div className="dash-container">
         <div className="dash-header">
             <div className="details-header">
@@ -9,25 +46,25 @@ export default function ServiceAdd(){
             </div>
         </div>
         <div className="dash-body">
-            <form className="container" action="" method="post" encType="">
+            <form className="container" onSubmit={ServiceAdd} action="" method="post" encType="">
                 <div className="mb-2">
                     <label className="m-1">Intitulé</label>
-                    <input type="text" name="intitule" className="form-control"/>
+                    <input type="text" onChange={(e)=>setIntitule(e.target.value)} name="intitule" className="form-control"/>
                 </div>
                 <div className="mb-2">
                     <label className="m-1">Catégorie</label>
-                    <select name="categorie" className="form-select">
+                    <select name="categorie" onChange={(e)=>setCategorie(e.target.value)} className="form-select">
                         <option value="Digtal">Digtal</option>
                         <option value="Print">Print</option>
                     </select>
                 </div>
                 <div className="mb-2">
                     <label className="m-1">Description</label>
-                    <textarea name="description" className="form-control"></textarea>
+                    <textarea name="description" onChange={(e)=>setDescription(e.target.value)} className="form-control"></textarea>
                 </div>
                 <div className="mb-3">
                     <label className="m-1">Image</label>
-                    <input type="file" name="image" className="form-control"/>
+                    <input type="file" onChange={handleImage} name="image" className="form-control"/>
                 </div>
                 <input type="submit" value="Ajouter" className=" form-control btn btn-primary"/>
             </form>

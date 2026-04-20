@@ -1,6 +1,45 @@
-import { Link} from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
+import { addOffre } from "../../../Store/ContentSlice";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 export default function OffreAdd(){
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const [titre, setTitre] = useState('');
+    const [description, setDescription] = useState('');
+    const [type, setType] = useState('CDI');
+    const [profil, setProfil] = useState('');
+    const [image, setImage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const handleImage = (e)=>{setImage(e.target.files[0]);}
+    
+    async function OffreAdd(e) {
+        e.preventDefault();
+        
+        const formData = new FormData();
+        formData.append('titre', titre);
+        formData.append('description', description);
+        formData.append('typeContrat', type);
+        formData.append('profil', profil);
+        formData.append('image', image); 
+    
+        try {
+            const response = await dispatch(addOffre(formData));
+    
+            if (response.meta.requestStatus === "fulfilled") {
+                navigate('/admin/offres'); 
+            } else {
+                setErrorMessage('Erreur lors de l\'ajout.');
+            }
+        } catch (error) {
+            alert('Error:', error);
+        }
+    }
+
     return <div className="dash-container">
         <div className="dash-header">
         <div className="details-header">
@@ -9,32 +48,32 @@ export default function OffreAdd(){
             </div>
         </div>
         <div className="dash-body">
-            <form className="container" action="" method="post" encType="">
+            <form className="container" onSubmit={OffreAdd} action="" method="post" encType="">
                 <div className="mb-2">
                     <label className="m-1">Titre</label>
-                    <input type="text" name="titre" className="form-control"/>
+                    <input type="text" onChange={(e)=>setTitre(e.target.value)} name="titre" className="form-control"/>
                 </div>
                 <div className="mb-2">
                     <label className="m-1">Description</label>
-                    <textarea name="description" className="form-control"></textarea>
+                    <textarea onChange={(e)=>setDescription(e.target.value)} name="description" className="form-control"></textarea>
                 </div>
                 <div className="mb-2">
                     <label className="m-1">Type de Contrat</label>
-                    <select name="typeContrat" className="form-select">
-                        <option value="Print">CDI</option>
-                        <option value="Print">CDD</option>
-                        <option value="Print">ANAPEC</option>
-                        <option value="Print">Freelance</option>
-                        <option value="Digtal">Stage PFE</option>
+                    <select onChange={(e)=>setType(e.target.value)} name="typeContrat" className="form-select">
+                        <option value="CDI">CDI</option>
+                        <option value="CDD">CDD</option>
+                        <option value="ANAPEC">ANAPEC</option>
+                        <option value="Freelance">Freelance</option>
+                        <option value="Stage PFE">Stage PFE</option>
                     </select>
                 </div>
                 <div className="mb-2">
                     <label className="m-1">Profile</label>
-                    <input type="text" name="profil" className="form-control"/>
+                    <input type="text" onChange={(e)=>setProfil(e.target.value)} name="profil" className="form-control"/>
                 </div>
                 <div className="mb-3">
                     <label className="m-1">Image</label>
-                    <input type="file" name="image" className="form-control"/>
+                    <input type="file" onChange={handleImage} name="image" className="form-control"/>
                 </div>
                 <input type="submit" value="Ajouter" className=" form-control btn btn-primary"/>
             </form>

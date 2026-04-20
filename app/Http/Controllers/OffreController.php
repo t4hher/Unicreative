@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Offre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class OffreController extends Controller
 {
@@ -28,7 +29,25 @@ class OffreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'titre'=>'required|min:5',
+            'description'=>'required|min:5',
+            'typeContrat'=>'required|min:3',
+            'profil'=>'required|min:5',
+            'image'=>'max:2048',
+        ]);
+
+        $data = $request->all();
+        if(isset($request->image)){
+            $request->image->store("offres", "public");
+            $chemin = $request->image->store("offres", "public");
+            $data["image"]=$chemin;
+            Offre::create($data);
+        }
+        return response()->json([
+            'message' => "L'offre ".$request->titre." est ajoutée avec succès",
+            'data'=>$data,
+        ], 200);
     }
 
     /**
@@ -52,7 +71,29 @@ class OffreController extends Controller
      */
     public function update(Request $request, Offre $offre)
     {
-        //
+        $request->validate([
+            'titre'=>'min:5',
+            'description'=>'min:5',
+            'typeContrat'=>'min:3',
+            'profil'=>'min:5',
+            'image'=>'nullable|image|max:2048',
+        ]);
+
+        $data = $request->all();
+        if($request->hasFile('image')){
+            if ($offre->image && Storage::disk('public')->exists($offre->image)) {
+                Storage::disk('public')->delete($offre->image);
+            }
+            $chemin = $request->image->store("offres", "public");
+            $data["image"]=$chemin;
+        } else {
+            unset($data['image']);
+        }
+        $offre->update($data);
+        return response()->json([
+            'message' => "L'offre ".$request->titre." est modifié avec succès",
+            'data'=>$offre,
+        ], 200);
     }
 
     /**

@@ -32,7 +32,7 @@ export default function RealisationAdd(){
                 setErrorMessage('Erreur lors de l\'ajout.');
             }
         } catch (error) {
-            console.error('Error:', error);
+            alert('Error:', error);
         }
     }
 

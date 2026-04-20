@@ -13,6 +13,23 @@ export const deleteServiceById =  createAsyncThunk("content/deleteServiceById", 
     const response = await axios.delete(`http://127.0.0.1:8000/api/services/${id}`)
     return response.data;
 });
+export const addService = createAsyncThunk("content/addService", async(formData) => {
+    const response = await axios.post("http://127.0.0.1:8000/api/services", formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        }
+    });
+    return response.data;
+});
+export const editService = createAsyncThunk("content/editService", async ({ id, formData }) => {
+    formData.append("_method", "PUT"); 
+    const response = await axios.post(`http://127.0.0.1:8000/api/services/${id}`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        }
+    });
+    return response.data;
+});
 
 
 
@@ -23,6 +40,23 @@ export const fetchOffres = createAsyncThunk("content/fetchOffres", async () => {
 });
 export const fetchOffreById =  createAsyncThunk("content/fetchOffreById", async (id)=> {
     const response = await axios.get(`http://127.0.0.1:8000/api/offres/${id}`)
+    return response.data;
+});
+export const addOffre = createAsyncThunk("content/addOffre", async(formData) => {
+    const response = await axios.post("http://127.0.0.1:8000/api/offres", formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        }
+    });
+    return response.data;
+});
+export const editOffre = createAsyncThunk("content/editOffre", async ({ id, formData }) => {
+    formData.append("_method", "PUT"); 
+    const response = await axios.post(`http://127.0.0.1:8000/api/offres/${id}`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        }
+    });
     return response.data;
 });
 
@@ -37,18 +71,24 @@ export const fetchRealisationById =  createAsyncThunk("content/fetchRealisationB
     return response.data;
 });
 export const addReali = createAsyncThunk("content/addReali", async(formData) => {
-    const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
     const response = await axios.post("http://127.0.0.1:8000/api/realisations", formData, {
         headers: {
-            'X-CSRF-TOKEN': token,
             'Content-Type': 'multipart/form-data',
-            'Accept': 'application/json',
         }
     });
     return response.data;
 });
 export const deleteRealiById =  createAsyncThunk("content/deleteRealiById", async (id)=> {
     const response = await axios.delete(`http://127.0.0.1:8000/api/realisations/${id}`)
+    return response.data;
+});
+export const editReali = createAsyncThunk("content/editReali", async ({ id, formData }) => {
+    formData.append("_method", "PUT"); 
+    const response = await axios.post(`http://127.0.0.1:8000/api/realisations/${id}`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        }
+    });
     return response.data;
 });
 
@@ -100,13 +140,29 @@ const ContentSlice=createSlice({
         })
         .addCase(deleteServiceById.fulfilled,(state,action)=>{
             state.status='success';
-            state.service=state.service.filter(service => service.id !== action.payload.id);
+            state.services=state.services.filter(service => service.id != action.payload.id);
             state.error='';
         })
         .addCase(deleteServiceById.rejected,(state,action)=>{
             state.status='failed';
-            state.service=[];
+            state.services=[];
             state.error=action.error.message;
+        })
+        .addCase(addService.pending, (state) => {
+            state.status = 'loading';
+        })
+        .addCase(addService.fulfilled, (state, action) => {
+            state.status = 'success';
+            state.services=[...state.services, action.payload.data]; 
+            state.error="";
+        })
+        .addCase(editService.pending, (state) => {
+            state.status = 'loading';
+        })
+        .addCase(editService.fulfilled, (state, action) => {
+            state.status = 'success';
+            state.services=state.services.map(s=> s.id == action.payload.data.id ? action.payload.data : s);
+            state.error="";
         })
 
 
@@ -139,6 +195,22 @@ const ContentSlice=createSlice({
             state.status='failed';
             state.offre={};
             state.error=action.error.message;
+        })
+        .addCase(addOffre.pending, (state) => {
+            state.status = 'loading';
+        })
+        .addCase(addOffre.fulfilled, (state, action) => {
+            state.status = 'success';
+            state.offres=[...state.offres, action.payload.data]; 
+            state.error="";
+        })
+        .addCase(editOffre.pending, (state) => {
+            state.status = 'loading';
+        })
+        .addCase(editOffre.fulfilled, (state, action) => {
+            state.status = 'success';
+            state.offres=state.offres.map(o=> o.id == action.payload.data.id ? action.payload.data : o);
+            state.error="";
         })
 
 
@@ -175,6 +247,7 @@ const ContentSlice=createSlice({
         .addCase(addReali.fulfilled, (state, action) => {
             state.status = 'success';
             state.realisations=[...state.realisations, action.payload.data]; 
+            state.error="";
         })
         .addCase(deleteRealiById.pending,(state)=>{
             state.status='loading';
@@ -187,6 +260,14 @@ const ContentSlice=createSlice({
         .addCase(deleteRealiById.rejected,(state,action)=>{
             state.status='failed';
             state.error=action.error.message;
+        })
+        .addCase(editReali.pending, (state) => {
+            state.status = 'loading';
+        })
+        .addCase(editReali.fulfilled, (state, action) => {
+            state.status = 'success';
+            state.realisations=state.realisations.map(r=> r.id == action.payload.data.id ? action.payload.data : r);
+            state.error="";
         })
 
 

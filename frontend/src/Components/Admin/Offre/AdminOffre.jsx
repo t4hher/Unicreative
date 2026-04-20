@@ -35,7 +35,6 @@ export default function AdminOffre(){
                 <table className="table text-center">
                     <thead>
                         <tr>
-                            <th className="">#</th>
                             <th>Titre</th>
                             <th>Description</th>
                             <th>Type de Contrat</th>
@@ -47,12 +46,11 @@ export default function AdminOffre(){
                     <tbody>
                         {offres.map((offre)=>
                             <tr key={offre.id}>
-                                <td><b>{offre.id}</b></td>
                                 <td>{offre.titre}</td>
-                                <td>{offre.description.length>20 ? offre.description.substring(0, 20) + "..." : offre.description}</td>
+                                <td>{offre.description.length>30 ? offre.description.substring(0, 30) + "..." : offre.description}</td>
                                 <td>{offre.typeContrat}</td>
                                 <td>{offre.profil}</td>
-                                <td>{offre.image===null ? <img src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg" width={50}/> : <img src={`public/storage/photos/${offre.image}`} width={50}/>}</td>
+                                <td>{offre.image===null ? <img src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg" width={50}/> : <img src={`http://127.0.0.1:8000/storage/${offre.image}`} width={70}/>}</td>
                                 <td>
                                     <Link to={`edit/${offre.id}`} className="btn btn-sm btn-success m-1">Modifier</Link>
                                     <button onClick={()=>DeleteOffre(offre.id)} className="btn btn-sm btn-danger">Supprimer</button>
