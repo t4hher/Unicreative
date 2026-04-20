@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { fetchMessages } from "../../../Store/InteractionSlice";
+import { editMessage, fetchMessages } from "../../../Store/InteractionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
@@ -12,16 +12,28 @@ export default function AdminMessage(){
     const [recherche, setRecherche] = useState("");
     const [filter, setFilter] = useState("tous");
 
-    const messages = messagesData.filter(m =>{ 
-        let result=m.nomComplet.toUpperCase().includes(recherche.toUpperCase());
-        if(filter==="non-lues"){
-            return result && m.lue===0;
-        }else if(filter==="lues"){
-            return result && m.lue===1;
-        }
+    const messages = messagesData.filter(item => { 
+        let result = item.nomComplet.toUpperCase().includes(recherche.toUpperCase());
+        let lue = Number(item.lue);
+    
+        if (filter === "non-lues") return result && lue === 0;
+        if (filter === "lues") return result && lue === 1;
         return result;
+    });
+
+    function handleClick(e, id){
+        let valeurLue=e.target.value;
+        
+        const data = new FormData();
+        data.append('lue', valeurLue);
+        data.append("_method", "PUT"); 
+
+        try {
+            dispatch(editMessage({ id: id, data: data }));
+        } catch (error) {
+            alert('Error:', error);
+        }
     }
-    );
 
     useEffect(() => {
         dispatch(fetchMessages());
@@ -37,7 +49,7 @@ export default function AdminMessage(){
             <h1>Messages</h1>
             <div className="adminFilter">
                 <div className="">
-                    <input type="text" value={recherche} className="form-control" placeholder="Chercher" onChange={(e)=>setRecherche(e.target.value)}/>
+                    <input type="text" value={recherche} className="form-control" placeholder="Chercher par nom" onChange={(e)=>setRecherche(e.target.value)}/>
                 </div>
                 <span> | </span>
                 <div className="adminFilterBtn">
@@ -50,14 +62,14 @@ export default function AdminMessage(){
         <div className="dash-body">
             <div className="grid">
                 {
-                    messages.map(message=><div className={`box ${message.lue===0 ? "redShadow" : ""}`}>
+                    messages.map(message=><div className={`box ${message.lue==0 ? "redShadow" : ""}`}>
                         <h4>{message.nomComplet}</h4>
                         <p>{message.contactInfo}</p>
                         <span><b>Message: </b> {message.message.length>30 ? message.message.substring(0, 30) + "..." : message.message}</span>
                         <div className="mt-3">
-                            {message.lue===0 
-                                ? <button className="btn btn-sm btn-success m-2">Marquer comme lue</button>
-                                : <button className="btn btn-sm btn-secondary m-2">Marquer comme non-lue</button>
+                            {Number(message.lue) === 0 
+                                ? <button value={1} onClick={(e)=>handleClick(e, message.id)} className="btn btn-sm btn-success m-2">Marquer comme lue</button>
+                                : <button value={0} onClick={(e)=>handleClick(e, message.id)} className="btn btn-sm btn-secondary m-2">Marquer comme non-lue</button>
                             }
                             <Link to={`show/${message.id}`} className="btn btn-sm btn-primary">Afficher</Link>
                         </div>

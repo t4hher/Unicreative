@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchDemandes } from "../../../Store/InteractionSlice";
+import { editDemande, fetchDemandes } from "../../../Store/InteractionSlice";
 
 export default function AdminDemande(){
 
@@ -11,17 +11,30 @@ export default function AdminDemande(){
 
     const [recherche, setRecherche] = useState("");
     const [filter, setFilter] = useState("tous");
+    const [lue, setLue] = useState("");
 
-    const demandes = demandesData.filter(d =>{ 
-        let result=d.nomComplet.toUpperCase().includes(recherche.toUpperCase());
-        if(filter==="non-lues"){
-            return result && d.lue===0;
-        }else if(filter==="lues"){
-            return result && d.lue===1;
-        }
+    const demandes = demandesData.filter(item => { 
+        let result = item.nomComplet.toUpperCase().includes(recherche.toUpperCase());
+        let lue = Number(item.lue);
+    
+        if (filter === "non-lues") return result && lue === 0;
+        if (filter === "lues") return result && lue === 1;
         return result;
+    });
+
+    function handleClick(e, id){
+        let valeurLue=e.target.value;
+
+        const data = new FormData();
+        data.append('lue', valeurLue);
+        data.append("_method", "PUT"); 
+
+        try {
+            dispatch(editDemande({ id: id, data: data }));
+        } catch (error) {
+            alert('Error:', error);
+        }
     }
-    );
 
     useEffect(() => {
             dispatch(fetchDemandes());
@@ -33,10 +46,18 @@ export default function AdminDemande(){
     console.log(demandesData,demandes);
     return <div className="dash-container">
         <div className="dash-header">
-            <h1>Demandes des services</h1>
+            <h1>Demandes</h1>
             <div className="adminFilter">
                 <div className="">
-                    <input type="text" value={recherche} className="form-control" placeholder="Chercher" onChange={(e)=>setRecherche(e.target.value)}/>
+                    <select className="form-select round">
+                        <option value="">-- Filtrer par service --</option>
+                        <option value="">Service 1</option>
+                        <option value="">Service 2</option>
+                    </select>
+                </div>
+                <span> | </span>
+                <div className="">
+                    <input type="text" value={recherche} className="form-control round" placeholder="Chercher par nom" onChange={(e)=>setRecherche(e.target.value)}/>
                 </div>
                 <span> | </span>
                 <div className="adminFilterBtn">
@@ -49,15 +70,15 @@ export default function AdminDemande(){
         <div className="dash-body">
             <div className="grid">
                {
-                    demandes.map((demande)=><div className={`box ${demande.lue===0 ? "redShadow" : ""}`}>
+                    demandes.map((demande)=><div className={`box ${demande.lue==0 ? "redShadow" : ""}`}>
                         <h4>{demande.nomComplet}</h4>
                         <p><b>Service: </b>{demande.intitule}</p>
-                        <span><b>Description: </b>{demande.description}</span>
+                        <span><b>Description: </b>{demande.description.length>40 ? (<>{demande.description.substring(0, 40)}<b>...</b></>) : demande.description}</span>
                         <div className="mt-3">
-                            {demande.lue===0 
-                                ? <button className="btn btn-sm btn-success m-2">Marquer comme lue</button>
-                                : <button className="btn btn-sm btn-secondary m-2">Marquer comme non-lue</button>
-                            }
+                        {Number(demande.lue) === 0 
+                            ? <button value={1} onClick={(e)=>handleClick(e, demande.id)} className="btn btn-sm btn-success m-2">Marquer comme lue</button>
+                            : <button value={0} onClick={(e)=>handleClick(e, demande.id)} className="btn btn-sm btn-secondary m-2">Marquer comme non-lue</button>
+                        }
                             <Link to={`show/${demande.id}`} className="btn btn-sm btn-primary">Afficher</Link>
                         </div>
                     </div>)

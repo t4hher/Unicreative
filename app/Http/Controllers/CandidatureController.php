@@ -62,7 +62,15 @@ class CandidatureController extends Controller
      */
     public function update(Request $request, Candidature $candidature)
     {
-        //
+        if($request->has('lue')){
+            $candidature->lue=$request->lue;
+            $candidature->save();
+            return response()->json([
+                'message' => "La candidature de ".$candidature->nomcomplet." est lu avec succès",
+                'data'=>$candidature,
+            ], 200);
+        }
+        return response()->json(['message' => 'Aucune donnée fournie'], 400);
     }
 
     /**

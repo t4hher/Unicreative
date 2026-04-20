@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom"
-import { fetchMessageById } from "../../../Store/InteractionSlice";
+import { editMessage, fetchMessageById } from "../../../Store/InteractionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
@@ -8,6 +8,20 @@ export default function MessageShow(){
     const dispatch = useDispatch();
     
     const { message, status } = useSelector((state) => state.interaction);
+
+    function handleClick(e, id){
+        let valeurLue=e.target.value;
+        
+        const data = new FormData();
+        data.append('lue', Number(valeurLue));
+        data.append("_method", "PUT"); 
+
+        try {
+            dispatch(editMessage({ id: id, data: data }));
+        } catch (error) {
+            alert('Error:', error);
+        }
+    }
 
     useEffect(() => {
         if (id) {
@@ -34,15 +48,15 @@ export default function MessageShow(){
                     <p><b>Contact Info:</b> {leMessage?.contactInfo}</p>
                     <p><b>Message:</b> {leMessage?.message}</p>
                     <p><b>Etat: </b> 
-                        {leMessage?.lue === 0 
+                        {Number(leMessage?.lue) === 0 
                             ? <span className="badge text-bg-primary">Non-Lue</span> 
                             : <span className="badge text-bg-secondary">Lue</span>
                         }
                     </p>
                     <p>
-                       {leMessage?.lue === 0 
-                            ? <span className="btn btn-lg btn-primary">Marquer comme lue</span> 
-                            : <span className="btn btn-lg btn-secondary">Marquer comme non-lue</span>
+                        {Number(leMessage?.lue) === 0 
+                            ? <button value={1} onClick={(e)=>handleClick(e, leMessage.id)} className="btn btn-lg btn-primary m-2">Marquer comme lue</button>
+                            : <button value={0} onClick={(e)=>handleClick(e, leMessage.id)} className="btn btn-lg btn-secondary m-2">Marquer comme non-lue</button>
                         } 
                     </p>
                 </div>

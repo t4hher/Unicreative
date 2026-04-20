@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom"
-import { fetchCandiById } from "../../../Store/InteractionSlice";
+import { editCandi, fetchCandiById } from "../../../Store/InteractionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
@@ -8,6 +8,20 @@ export default function CandiShow(){
     const dispatch = useDispatch();
 
     const { candidature, status } = useSelector((state) => state.interaction);
+
+    function handleClick(e, id){
+        let valeurLue=e.target.value;
+        
+        const data = new FormData();
+        data.append('lue', Number(valeurLue));
+        data.append("_method", "PUT"); 
+
+        try {
+            dispatch(editCandi({ id: id, data: data }));
+        } catch (error) {
+            alert('Error:', error);
+        }
+    }
 
     useEffect(() => {
         if (id) {
@@ -35,16 +49,44 @@ export default function CandiShow(){
                     <p><b>Nom et Prénom:</b> {laCandi?.nomcomplet}</p>
                     <p><b>Email:</b> {laCandi?.email}</p>
                     <p><b>Tel:</b> {laCandi?.tel}</p>
+                    <p><b>CV: </b> 
+                        {laCandi?.CV ? (
+                            <a 
+                                href={`http://127.0.0.1:8000/storage/${laCandi.CV}`} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="btn btn-primary"
+                            >
+                                <i className="bi bi-file-earmark-pdf"></i> Voir le CV (PDF)
+                            </a>
+                        ) : (
+                            <span className="text-danger"> Aucun CV téléchargé</span>
+                        )}
+                    </p>
+                    <p><b>Lettre de motivation: </b> 
+                        {laCandi?.lettreMotivation ? (
+                            <a 
+                                href={`http://127.0.0.1:8000/storage/${laCandi.lettreMotivation}`} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="btn btn-primary"
+                            >
+                                <i className="bi bi-file-earmark-pdf"></i> Voir la lettre (PDF)
+                            </a>
+                        ) : (
+                            <span className="text-danger"> Aucun lettre de motivation téléchargée</span>
+                        )}
+                    </p>
                     <p><b>Etat: </b>
-                        {laCandi?.lue === 0
+                        {Number(laCandi?.lue) === 0
                             ? <span className="badge text-bg-primary">Non-Lue</span>
                             : <span className="badge text-bg-secondary">Lue</span>
                         }
                     </p>
                     <p>
-                       {laCandi?.lue === 0
-                            ? <span className="btn btn-lg btn-primary">Marquer comme lue</span>
-                            : <span className="btn btn-lg btn-secondary">Marquer comme non-lue</span>
+                        {Number(laCandi?.lue) === 0 
+                            ? <button value={1} onClick={(e)=>handleClick(e, laCandi.id)} className="btn btn-lg btn-primary m-2">Marquer comme lue</button>
+                            : <button value={0} onClick={(e)=>handleClick(e, laCandi.id)} className="btn btn-lg btn-secondary m-2">Marquer comme non-lue</button>
                         }
                     </p>
 

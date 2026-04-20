@@ -52,7 +52,15 @@ class MessageController extends Controller
      */
     public function update(Request $request, Message $message)
     {
-        //
+        if($request->has('lue')){
+            $message->lue=$request->lue;
+            $message->save();
+            return response()->json([
+                'message' => "Le message de ".$message->nomComplet." est lu avec succès",
+                'data'=>$message,
+            ], 200);
+        }
+        return response()->json(['message' => 'Aucune donnée fournie'], 400);
     }
 
     /**

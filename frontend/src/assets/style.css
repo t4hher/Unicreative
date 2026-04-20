@@ -1185,9 +1185,11 @@ details[open] summary {
 .dash-body .grid{
   display: flex;
   justify-content: flex-start;
+  align-items:flex-start;
+  gap: 0px;
   flex-wrap: wrap;
   margin-top: 10px;
-  height: 80vh;
+  height: 70vh;
   overflow-y: scroll;
 }
 .grid::-webkit-scrollbar{
@@ -1221,7 +1223,7 @@ details[open] summary {
   align-items: center;
   gap: 10px;
 }
-.adminFilter input{
+.adminFilter .round{
   border-radius: 25px;
 }
 .adminFilter span{

@@ -63,7 +63,15 @@ class DemandeController extends Controller
      */
     public function update(Request $request, Demande $demande)
     {
-        //
+        if($request->has('lue')){
+            $demande->lue=$request->lue;
+            $demande->save();
+            return response()->json([
+                'message' => "La demande de ".$demande->nomComplet." est lu avec succès",
+                'data'=>$demande,
+            ], 200);
+        }
+        return response()->json(['message' => 'Aucune donnée fournie'], 400);
     }
 
     /**

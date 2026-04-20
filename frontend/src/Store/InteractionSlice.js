@@ -10,6 +10,10 @@ export const fetchMessageById =  createAsyncThunk("interaction/fetchMessageById"
     const response = await axios.get(`http://127.0.0.1:8000/api/messages/${id}`)
     return response.data;
 });
+export const editMessage = createAsyncThunk("interaction/editMessage", async ({ id, data }) => {
+    const response = await axios.post(`http://127.0.0.1:8000/api/messages/${id}`, data);
+    return response.data;
+});
 
 
 
@@ -20,6 +24,10 @@ export const fetchDemandes = createAsyncThunk("interaction/fetchDemandes", async
 });
 export const fetchDemandeById =  createAsyncThunk("interaction/fetchDemandeById", async (id)=> {
     const response = await axios.get(`http://127.0.0.1:8000/api/demandes/${id}`)
+    return response.data;
+});
+export const editDemande = createAsyncThunk("interaction/editDemande", async ({ id, data }) => {
+    const response = await axios.post(`http://127.0.0.1:8000/api/demandes/${id}`, data);
     return response.data;
 });
 
@@ -33,6 +41,12 @@ export const fetchCandiById =  createAsyncThunk("interaction/fetchCandiById", as
     const response = await axios.get(`http://127.0.0.1:8000/api/candidatures/${id}`)
     return response.data;
 });
+export const editCandi = createAsyncThunk("interaction/editCandi", async ({ id, data }) => {
+    const response = await axios.post(`http://127.0.0.1:8000/api/candidatures/${id}`, data);
+    return response.data;
+});
+
+
 
 const InteractionSlice=createSlice({
     name:'interaction',
@@ -76,6 +90,17 @@ const InteractionSlice=createSlice({
             state.message = {}
             state.error = action.error.message
         })
+        .addCase(editMessage.pending, (state) => {
+            state.status = 'loading';
+        })
+        .addCase(editMessage.fulfilled, (state, action) => {
+            state.status = 'success';
+            state.messages = state.messages.map(m =>
+                (m.id == action.payload.data.id) ? { ...m, lue: action.payload.data.lue } : m
+            );
+            state.message.message.lue = action.payload.data.lue;
+            state.error = "";
+        })
 
 
 
@@ -105,6 +130,17 @@ const InteractionSlice=createSlice({
             state.demande = {}
             state.error = action.error.message
         })
+        .addCase(editDemande.pending, (state) => {
+            state.status = 'loading';
+        })
+        .addCase(editDemande.fulfilled, (state, action) => {
+            state.status = 'success';
+            state.demandes = state.demandes.map(d =>
+                (d.id == action.payload.data.id) ? { ...d, lue: action.payload.data.lue } : d
+            );
+            state.demande.demande.lue = action.payload.data.lue;
+            state.error = "";
+        })
 
 
 
@@ -133,6 +169,17 @@ const InteractionSlice=createSlice({
             state.status = 'failed';
             state.candidature = {}
             state.error = action.error.message
+        })
+        .addCase(editCandi.pending, (state) => {
+            state.status = 'loading';
+        })
+        .addCase(editCandi.fulfilled, (state, action) => {
+            state.status = 'success';
+            state.candidatures = state.candidatures.map(c =>
+                (c.id == action.payload.data.id) ? { ...c, lue: action.payload.data.lue } : c
+            );
+            state.candidature.candidature.lue = action.payload.data.lue;
+            state.error = "";
         })
     }
 })

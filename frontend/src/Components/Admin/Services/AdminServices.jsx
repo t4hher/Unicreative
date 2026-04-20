@@ -40,7 +40,6 @@ export default function AdminServices(){
                 <table className="table text-center">
                     <thead>
                         <tr>
-                            <th className="">#</th>
                             <th className="">Intitulé</th>
                             <th>Catégorie</th>
                             <th>Description </th>
@@ -51,7 +50,6 @@ export default function AdminServices(){
                     <tbody>
                         {services.map((service)=>
                             <tr key={service.id}>
-                                <td><b>{service.id}</b></td>
                                 <td>{service.intitule}</td>
                                 <td>{service.categorie}</td>
                                 <td>{service.description.length>20 ? service.description.substring(0, 20) + "..." : service.description}</td>

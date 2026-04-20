@@ -38,7 +38,6 @@ export default function AdminRealisation(){
                 <table className="table text-center">
                     <thead>
                         <tr>
-                            <th className="">#</th>
                             <th>Titre</th>
                             <th>Type</th>
                             <th>Image</th>
@@ -47,8 +46,7 @@ export default function AdminRealisation(){
                     </thead>
                     <tbody>
                         {
-                            realisations.map(reali=><tr>
-                                <td>{reali.id}</td>
+                            realisations.map(reali=><tr key={reali.id}>
                                 <td>{reali.titre}</td>
                                 <td>{reali.type}</td>
                                 <td>{reali.image===null ? <img src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg" width={50}/> : <img src={`http://127.0.0.1:8000/storage/${reali.image}`} width={50}/>}</td>
