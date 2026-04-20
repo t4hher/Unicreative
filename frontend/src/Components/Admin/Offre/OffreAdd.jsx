@@ -55,7 +55,7 @@ export default function OffreAdd(){
                 </div>
                 <div className="mb-2">
                     <label className="m-1">Description</label>
-                    <textarea onChange={(e)=>setDescription(e.target.value)} name="description" className="form-control"></textarea>
+                    <textarea rows={3} onChange={(e)=>setDescription(e.target.value)} name="description" className="form-control"></textarea>
                 </div>
                 <div className="mb-2">
                     <label className="m-1">Type de Contrat</label>

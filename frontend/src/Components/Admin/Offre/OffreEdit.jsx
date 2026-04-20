@@ -85,7 +85,7 @@ export default function OffreEdit(){
                 </div>
                 <div className="mb-2">
                     <label className="m-1">Description</label>
-                    <textarea name="description" value={description} onChange={(e)=>setDescription(e.target.value)} className="form-control"></textarea>
+                    <textarea rows={3} name="description" value={description} onChange={(e)=>setDescription(e.target.value)} className="form-control"></textarea>
                 </div>
                 <div className="mb-2">
                     <label className="m-1">Profile</label>

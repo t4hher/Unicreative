@@ -101,6 +101,13 @@ class OffreController extends Controller
      */
     public function destroy(Offre $offre)
     {
-        //
+        if($offre->image){
+            if (Storage::disk('public')->exists($offre->image)) {Storage::disk('public')->delete($offre->image);}
+        }
+        $offre->delete();
+        return response()->json([
+            "message"=>"offre supprimer !!",
+            "id"=>$offre->id,
+        ]);
     }
 }

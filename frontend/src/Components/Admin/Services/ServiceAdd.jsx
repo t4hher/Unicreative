@@ -60,7 +60,7 @@ export default function ServiceAdd(){
                 </div>
                 <div className="mb-2">
                     <label className="m-1">Description</label>
-                    <textarea name="description" onChange={(e)=>setDescription(e.target.value)} className="form-control"></textarea>
+                    <textarea name="description" rows={3} onChange={(e)=>setDescription(e.target.value)} className="form-control"></textarea>
                 </div>
                 <div className="mb-3">
                     <label className="m-1">Image</label>

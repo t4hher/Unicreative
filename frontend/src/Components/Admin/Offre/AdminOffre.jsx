@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { fetchOffres } from "../../../Store/ContentSlice";
+import { Link, useNavigate } from "react-router-dom";
+import { fetchOffres,deleteOffreById } from "../../../Store/ContentSlice";
 
 export default function AdminOffre(){
 
     const offres = useSelector((state) => state.content.offres || []);
     const status = useSelector((state) => state.content.status)
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(fetchOffres());
@@ -15,8 +16,11 @@ export default function AdminOffre(){
     console.log(offres);
 
     function DeleteOffre(id){
-        let off=offres.find((o)=>o.id==id);
-        window.confirm(`voulez vous supprimer l'offre ${off.titre}`)
+        let offre=offres.find((o)=>o.id==id);
+        if(window.confirm(`voulez vous supprimer la realisation ${offre.titre}`)){
+            dispatch(deleteOffreById(id));
+            navigate("/admin/offres");
+        }
     }
 
     if (status === 'loading') {

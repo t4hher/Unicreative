@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchCandi, fetchDemandes, fetchMessages } from "../../Store/InteractionSlice";
-import { fetchOffres, fetchReali } from "../../Store/ContentSlice";
+import { fetchOffres, fetchReali,deleteOffreById,deleteRealiById } from "../../Store/ContentSlice";
 
 export default function AdminDashboard(){
 
@@ -28,14 +28,20 @@ export default function AdminDashboard(){
     const countDemandes=demandes.filter(demande=>demande.lue===0).length;
     const countCandi=candidatures.filter(candi=>candi.lue===0).length;
 
-    function DeleteOffre(id){
-        let off=offres.find((o)=>o.id==id);
-        window.confirm(`voulez vous supprimer l'offre ${off.titre}`)
-    }
-    function DeleteReali(id){
-        let Rea=realisations.find((r)=>r.id==id);
-        window.confirm(`voulez vous supprimer la realisation ${Rea.titre}`)
-    }
+        function DeleteOffre(id){
+            let offre=offres.find((o)=>o.id==id);
+            if(window.confirm(`voulez vous supprimer la realisation ${offre.titre}`)){
+                dispatch(deleteOffreById(id));
+                navigate("/admin/offres");
+            }
+        }
+        function DeleteReali(id){
+            let Rea=realisations.find((r)=>r.id==id);
+            if(window.confirm(`voulez vous supprimer la realisation ${Rea.titre}`)){
+                dispatch(deleteRealiById(id));
+                navigate("/admin/realisations");
+            }
+        }
 
     return <div className="dash-container">
         <div className="dash-header">
