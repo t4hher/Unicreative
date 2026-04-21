@@ -16,6 +16,7 @@ export default function ServiceEdit(){
     const [categorie, setCategorie] = useState("");
     const [description, setDescription] = useState("");
     const [image, setImage] = useState('');
+    const [image2, setImage2] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
@@ -34,18 +35,19 @@ export default function ServiceEdit(){
 
     async function ServiceEdit(e) {
         e.preventDefault();
-        
+
         const formData = new FormData();
         formData.append('intitule', intitule);
         formData.append('categorie', categorie);
         formData.append('description', description);
-        if(image!=null) formData.append('image', image); 
-    
+        if(image!=null) formData.append('image', image);
+        if(image2!=null) formData.append('image2', image2);
+
         try {
             const response = await dispatch(editService({ id: leService?.id, formData }));
-    
+
             if (response.meta.requestStatus === "fulfilled") {
-                navigate('/admin/services'); 
+                navigate('/admin/services');
             } else {
                 setErrorMessage('Erreur lors de la modification');
             }
@@ -84,6 +86,10 @@ export default function ServiceEdit(){
                 <div className="mb-3">
                     <label className="m-1">Image</label>
                     <input type="file" onChange={handleImage} name="image" className="form-control"/>
+                </div>
+                <div className="mb-3">
+                    <label className="m-1">deuxiéme image</label>
+                    <input type="file" onChange={(e)=>{setImage2(e.target.files[0])}} name="image2" className="form-control"/>
                 </div>
                 <input type="submit" value="Modifier" className=" form-control btn btn-primary"/>
             </form>
