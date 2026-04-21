@@ -1,6 +1,19 @@
 import { Link } from "react-router-dom";
+import { fetchServices } from "../../Store/ContentSlice";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 export default function Services(){
+
+    const services = useSelector((state) => state.content.services || []);
+    const status = useSelector((state) => state.content.status)
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchServices());
+    }, [dispatch]);
+
     return <div className="service">
         <div className="sBanner">
             <div>
@@ -15,7 +28,10 @@ export default function Services(){
             <div className="horLine"></div>
         </div>
         <div className="titreCard"><h1>Créer l'Impact, du Digital au Papier</h1></div>
-        <div className="filter">
+        {
+            (status === 'loading')
+                ? <div className="cards text-center text-secondary"><h1>Chargement ...</h1></div>
+                :<><div className="filter">
                 <span>Filtrer Par Catégorie: </span>
                 <div className="filterBtn">
                     <a href="#" className="active">Tous</a>
@@ -24,180 +40,49 @@ export default function Services(){
                 </div> 
             </div>
         <div className="cards">
-            <div className="card">
-                <div id="site" class="carousel slide card-img" data-bs-ride="carousel" data-bs-interval="3000">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="/services/site1.jpg" alt="First slide"/>
+            {
+                services.map(s=><div className="card">
+                    <div id={s.id} class="carousel slide card-img" data-bs-ride="carousel" data-bs-interval="3000">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                {s.image===null ? <img src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg" className="d-block w-100"/> : <img src={`http://127.0.0.1:8000/storage/${s.image}`} className="d-block w-100"/>}
+                            </div>
+                            <div class="carousel-item">
+                                {s.image2===null ? <img src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg" className="d-block w-100"/> : <img src={`http://127.0.0.1:8000/storage/${s.image2}`} className="d-block w-100"/>}
+                            </div>
                         </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="/services/site2.jpg" alt="Second slide"/>
+                        <a class="carousel-control-prev" data-bs-target={`#${s.id}`} role="button" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </a>
+                        <a class="carousel-control-next" data-bs-target={`#${s.id}`} role="button" data-bs-slide="next">
+                            <span class="carousel-control-next-icon text-danger" aria-hidden="true"></span>
+    
+                        </a>
+                    </div>
+                    <div className="card-body">
+                        <h5 className="card-title">{s.intitule}</h5>
+                        <div className="card-text">
+                            <p>
+                                <strong>Description: </strong>
+                                {s.description.length>100 ? s.description.substring(0, 100) + "..." : s.description}
+                            </p>
+                             <p><strong>Catégorie: </strong>{s.categorie}</p>
                         </div>
+                        
+                        <Link to={
+                            s.intitule === "Création Site Web" ? "/services/site-web" : 
+                            s.intitule === "Conception Graphique" ? "/services/design" : 
+                            s.intitule === "Impression Numerique et Offset" ? "/services/print" : 
+                            s.intitule === "Création des Applications" ? "/services/application" : 
+                            s.intitule === "Modélisation 3D" ? "/services/3d" : 
+                            "/services/event"
+                        } 
+                        className="btn-postuler"
+                        >Consulter</Link>
                     </div>
-                    <a class="carousel-control-prev" data-bs-target="#site" role="button" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </a>
-                    <a class="carousel-control-next" data-bs-target="#site" role="button" data-bs-slide="next">
-                        <span class="carousel-control-next-icon text-danger" aria-hidden="true"></span>
-
-                    </a>
                 </div>
-                <div className="card-body">
-                    <h5 className="card-title">Création Site Web</h5>
-                    <div className="card-text">
-                        <p>
-                            <strong>Description: </strong>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia ea aliquid neque voluptas, culpa quos laborum iure nam repudiandae aspernatur?
-                        </p>
-                         <p><strong>Catégorie: </strong>Digital</p>
-                    </div>
-                    <Link to="/services/site-web" className="btn-postuler">Consulter</Link>
-                </div>
-            </div>
-            <div className="card">
-                <div id="design" class="carousel slide card-img" data-bs-ride="carousel" data-bs-interval="3000">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="/services/design1.jpg" alt="First slide"/>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="/services/design2.jpg" alt="Second slide"/>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" data-bs-target="#design" role="button" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </a>
-                    <a class="carousel-control-next" data-bs-target="#design" role="button" data-bs-slide="next">
-                        <span class="carousel-control-next-icon text-danger" aria-hidden="true"></span>
-
-                    </a>
-                </div>
-                <div className="card-body">
-                    <h5 className="card-title">Conception Graphique</h5>
-                    <div className="card-text">
-                        <p>
-                            <strong>Description: </strong>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia ea aliquid neque voluptas, culpa quos laborum iure nam repudiandae aspernatur?
-                        </p>
-                         <p><strong>Catégorie: </strong>Digital/Print</p>
-                    </div>
-                    <Link to="/services/design" className="btn-postuler">Consulter</Link>
-                </div>
-            </div>
-            <div className="card">
-                <div id="print" class="carousel slide card-img" data-bs-ride="carousel" data-bs-interval="3000">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="/services/print1.jpg" alt="First slide"/>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="/services/print2.jpg" alt="Second slide"/>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" data-bs-target="#print" role="button" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </a>
-                    <a class="carousel-control-next" data-bs-target="#print" role="button" data-bs-slide="next">
-                        <span class="carousel-control-next-icon text-danger" aria-hidden="true"></span>
-
-                    </a>
-                </div>
-                <div className="card-body">
-                    <h5 className="card-title">Impression Numerique et Offset</h5>
-                    <div className="card-text">
-                        <p>
-                            <strong>Description: </strong>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia ea aliquid neque voluptas, culpa quos laborum iure nam repudiandae aspernatur?
-                        </p>
-                         <p><strong>Catégorie: </strong>Print</p>
-                    </div>
-                    <Link to="/services/print" className="btn-postuler">Consulter</Link>
-                </div>
-            </div>
-            <div className="card">
-                <div id="app" class="carousel slide card-img" data-bs-ride="carousel" data-bs-interval="3000">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="/services/app1.png" alt="First slide"/>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="/services/app2.jpg" alt="Second slide"/>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" data-bs-target="#app" role="button" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </a>
-                    <a class="carousel-control-next" data-bs-target="#app" role="button" data-bs-slide="next">
-                        <span class="carousel-control-next-icon text-danger" aria-hidden="true"></span>
-
-                    </a>
-                </div>
-                <div className="card-body">
-                    <h5 className="card-title">Création des Applications</h5>
-                    <div className="card-text">
-                        <p>
-                            <strong>Description: </strong>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia ea aliquid neque voluptas, culpa quos laborum iure nam repudiandae aspernatur?
-                        </p>
-                         <p><strong>Catégorie: </strong>Digital</p>
-                    </div>
-                    <Link to="/services/application" className="btn-postuler">Consulter</Link>
-                </div>
-            </div>
-            <div className="card">
-                <div id="3d" class="carousel slide card-img" data-bs-ride="carousel" data-bs-interval="3000">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="/services/3d1.jpg" alt="First slide"/>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="/services/3d2.jpg" alt="Second slide"/>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" data-bs-target="#3d" role="button" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </a>
-                    <a class="carousel-control-next" data-bs-target="#3d" role="button" data-bs-slide="next">
-                        <span class="carousel-control-next-icon text-danger" aria-hidden="true"></span>
-
-                    </a>
-                </div>
-                <div className="card-body">
-                    <h5 className="card-title">Modélisation 3D</h5>
-                    <div className="card-text">
-                        <p>
-                            <strong>Description: </strong>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia ea aliquid neque voluptas, culpa quos laborum iure nam repudiandae aspernatur?
-                        </p>
-                         <p><strong>Catégorie: </strong>Digital</p>
-                    </div>
-                    <Link to="/services/3d" className="btn-postuler">Consulter</Link>
-                </div>
-            </div>
-            <div className="card">
-                <div id="event" class="carousel slide card-img" data-bs-ride="carousel" data-bs-interval="3000">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="/services/event1.jpg" alt="First slide"/>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="/services/event2.jpg" alt="Second slide"/>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" data-bs-target="#event" role="button" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </a>
-                    <a class="carousel-control-next" data-bs-target="#event" role="button" data-bs-slide="next">
-                        <span class="carousel-control-next-icon text-danger" aria-hidden="true"></span>
-
-                    </a>
-                </div>
-                <div className="card-body">
-                    <h5 className="card-title">Evénementielle</h5>
-                    <div className="card-text">
-                        <p>
-                            <strong>Description: </strong>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia ea aliquid neque voluptas, culpa quos laborum iure nam repudiandae aspernatur?
-                        </p>
-                         <p><strong>Catégorie: </strong>Print</p>
-                    </div>
-                    <Link to="/services/event" className="btn-postuler">Consulter</Link>
-                </div>
-            </div>
-        </div>
+            )}
+        </div></>
+        }
     </div>
 }

@@ -1,65 +1,56 @@
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { fetchOffres } from "../../Store/ContentSlice";
+import { useEffect } from "react";
 
-        export default function Candidature() {
-        return (
-            <div className="about">
-                <div className="sBanner">
-                <div>
-                <h1 className="titrerealisation">Candidature</h1>
-                <p>Votre talent est l'ingrédient qui manque à nos prochaines créations. <b>Rejoignez l'aventure Unicreative</b></p>
-                </div>
-                <img src="/interview.svg" alt="" />
-                </div>
-                <div>
-                    <div className="split">
-                        <div className="horLine"></div>
-                        <img src="/sLogo.png" alt="" />
-                        <div className="horLine"></div>
-                    </div>
-                    <div className="titreCard"><h1>Devenez le prochain visage de l'innovation chez Unicreative.</h1></div>
-                    
-                    <div className="cards">
-                        <div className="card">
-                            <img className="card-img" src="https://grupo-giga.com/wp-content/uploads/2024/10/business-coding-2.jpg" alt="Card image cap"/>
-                            <div className="card-body">
-                                <h5 className="card-title">Développeur front-end React</h5>
-                                <div className="card-text">
-                                    <p>
-                                        <strong>Description:</strong>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia ea aliquid neque voluptas, culpa quos laborum iure nam repudiandae aspernatur?
-                                    </p>
-                                     <p><strong>Type De Contrat:</strong>Stage(PFE)</p>
-                                </div>
-                                <Link to="/postuler/candidature" className="btn-postuler">Postuler</Link>
-                            </div>
-                        </div>
-                        <div className="card">
-                            <img className="card-img" src="https://media.istockphoto.com/id/1811709282/id/foto/editor-foto-menggunakan-pc-desktop-tp-melakukan-penyesuaian-pada-foto.jpg?s=170667a&w=0&k=20&c=hrDJy4LF9JW5LoBnfiOAALlXk23XMRRxPN5U3ClThsE=" alt="Card image cap"/>
-                            <div className="card-body">
-                                <h5 className="card-title">Illustrateur / Motion Designer</h5>
-                                <div className="card-text">
-                                    <p>
-                                        <strong>Description :</strong>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia ea aliquid neque voluptas, culpa quos laborum iure nam repudiandae aspernatur?
-                                    </p>
-                                    <p><strong>Type De Contrat :</strong> Freelance</p>
-                                </div>
-                                <Link to="/postuler/candidature" className="btn-postuler">Postuler</Link>
-                            </div>
-                        </div>
-                        <div className="card">
-                            <img className="card-img" src="https://img.baba-blog.com/2023/12/Graphic-designer-works-on-computer-laptop-with-digital-pen.jpg?x-oss-process=style%2Ffull" alt="Card image cap"/>
-                            <div className="card-body">
-                                <h5 className="card-title">Designer Graphique Senior</h5>
-                                <div className="card-text">
-                                    <p>
-                                        <strong>Description :</strong>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia ea aliquid neque voluptas, culpa quos laborum iure nam repudiandae aspernatur?
-                                    </p>
-                                    <p><strong>Type De Contrat :</strong>CDI</p>
-                                 </div>
-                                <Link to="/postuler/candidature" className="btn-postuler">Postuler</Link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+export default function Candidature() {
+    const offres = useSelector((state) => state.content.offres || []);
+    const status = useSelector((state) => state.content.status)
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchOffres());
+    }, [dispatch]);
+    return (
+        <div className="about">
+            <div className="sBanner">
+            <div>
+            <h1 className="titrerealisation">Candidature</h1>
+            <p>Votre talent est l'ingrédient qui manque à nos prochaines créations. <b>Rejoignez l'aventure Unicreative</b></p>
             </div>
-        )
-        }
+            <img src="/interview.svg" alt="" />
+            </div>
+            <div>
+                <div className="split">
+                    <div className="horLine"></div>
+                    <img src="/sLogo.png" alt="" />
+                    <div className="horLine"></div>
+                </div>
+                <div className="titreCard"><h1>Devenez le prochain visage de l'innovation chez Unicreative.</h1></div>
+                {
+                    (status==="loading")
+                    ? <div className="cards text-center text-secondary"><h1>Chargement ...</h1></div>
+                    :<>
+                        <div className="cards">
+                            {offres.map(o=><div className="card">
+                                {o.image===null ? <img src="https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg" className="d-block w-100"/> : <img src={`http://127.0.0.1:8000/storage/${o.image}`}/>}
+                                <div className="card-body">
+                                    <h5 className="card-title">{o.titre}</h5>
+                                    <div className="card-text">
+                                        <p>
+                                            <strong>Description:</strong>
+                                            {o.description.length>110 ? o.description.substring(0, 110) + "..." : o.description}
+                                        </p>
+                                        <p><strong>Type De Contrat: </strong> {o.typeContrat}</p>
+                                    </div>
+                                    <Link to="/postuler/candidature" className="btn-postuler">Postuler</Link>
+                                </div>
+                            </div>)}
+                        </div>
+                    </>
+                }
+            </div>
+        </div>
+    )
+}
