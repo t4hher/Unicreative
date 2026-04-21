@@ -2,21 +2,28 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { editDemande, fetchDemandes } from "../../../Store/InteractionSlice";
+import { fetchServices } from "../../../Store/ContentSlice";
 
 export default function AdminDemande(){
 
     const demandesData = useSelector((state) => state.interaction.demandes || []);
     const status = useSelector((state) => state.interaction.status)
+    const services = useSelector((state) => state.content.services)
     const dispatch = useDispatch();
 
     const [recherche, setRecherche] = useState("");
     const [filter, setFilter] = useState("tous");
-    const [lue, setLue] = useState("");
+    const [filterService, setFilterService] = useState("tous");
 
     const demandes = demandesData.filter(item => { 
         let result = item.nomComplet.toUpperCase().includes(recherche.toUpperCase());
         let lue = Number(item.lue);
     
+        if (filterService==="tous") {
+            return result
+        }else{
+            result = item.nomComplet.toUpperCase().includes(recherche.toUpperCase()) && item.serviceId==filterService;
+        }
         if (filter === "non-lues") return result && lue === 0;
         if (filter === "lues") return result && lue === 1;
         return result;
@@ -38,7 +45,9 @@ export default function AdminDemande(){
 
     useEffect(() => {
             dispatch(fetchDemandes());
+            dispatch(fetchServices());
     }, [dispatch]);
+    console.log(services);
 
     if (status === 'loading') {
         return <div className="dash-container"><h1>Chargement ...</h1></div>;
@@ -49,10 +58,11 @@ export default function AdminDemande(){
             <h1>Demandes</h1>
             <div className="adminFilter">
                 <div className="">
-                    <select className="form-select round">
-                        <option value="">-- Filtrer par service --</option>
-                        <option value="">Service 1</option>
-                        <option value="">Service 2</option>
+                    <select value={filterService} onChange={(e)=>(setFilterService(e.target.value))} className="form-select round">
+                        <option value="tous">-- Filtrer par service --</option>
+                        {
+                            services.map(s=><option value={s.id}>{s.intitule}</option>)
+                        }
                     </select>
                 </div>
                 <span> | </span>

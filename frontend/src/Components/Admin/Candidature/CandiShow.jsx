@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { editCandi, fetchCandiById } from "../../../Store/InteractionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -6,6 +6,7 @@ import { useEffect } from "react";
 export default function CandiShow(){
     const { id } = useParams();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const { candidature, status } = useSelector((state) => state.interaction);
 
@@ -18,6 +19,7 @@ export default function CandiShow(){
 
         try {
             dispatch(editCandi({ id: id, data: data }));
+
         } catch (error) {
             alert('Error:', error);
         }
@@ -26,6 +28,7 @@ export default function CandiShow(){
     useEffect(() => {
         if (id) {
             dispatch(fetchCandiById(id));
+            navigate("/admin/candidatures/show/"+id)
         }
     }, [dispatch, id]);
 

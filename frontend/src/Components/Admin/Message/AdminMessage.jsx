@@ -49,7 +49,7 @@ export default function AdminMessage(){
             <h1>Messages</h1>
             <div className="adminFilter">
                 <div className="">
-                    <input type="text" value={recherche} className="form-control" placeholder="Chercher par nom" onChange={(e)=>setRecherche(e.target.value)}/>
+                    <input type="text" value={recherche} className="form-control round" placeholder="Chercher par nom" onChange={(e)=>setRecherche(e.target.value)}/>
                 </div>
                 <span> | </span>
                 <div className="adminFilterBtn">

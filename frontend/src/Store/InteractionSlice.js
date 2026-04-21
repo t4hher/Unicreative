@@ -98,7 +98,7 @@ const InteractionSlice=createSlice({
             state.messages = state.messages.map(m =>
                 (m.id == action.payload.data.id) ? { ...m, lue: action.payload.data.lue } : m
             );
-            state.message.message.lue = action.payload.data.lue;
+            if (state.message.message) state.message.message.lue = action.payload.data.lue;
             state.error = "";
         })
 
@@ -138,7 +138,7 @@ const InteractionSlice=createSlice({
             state.demandes = state.demandes.map(d =>
                 (d.id == action.payload.data.id) ? { ...d, lue: action.payload.data.lue } : d
             );
-            state.demande.demande.lue = action.payload.data.lue;
+            if (state.demande.demande) state.demande.demande.lue = action.payload.data.lue;
             state.error = "";
         })
 
@@ -178,7 +178,7 @@ const InteractionSlice=createSlice({
             state.candidatures = state.candidatures.map(c =>
                 (c.id == action.payload.data.id) ? { ...c, lue: action.payload.data.lue } : c
             );
-            state.candidature.candidature.lue = action.payload.data.lue;
+            if (state.candidature.candidature) state.candidature.candidature.lue = action.payload.data.lue;
             state.error = "";
         })
     }

@@ -2,20 +2,28 @@ import { Link, useNavigate } from "react-router-dom";
 import { editCandi, fetchCandi } from "../../../Store/InteractionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { fetchOffres } from "../../../Store/ContentSlice";
 
 export default function AdminCandi(){
 
     const candidaturesData = useSelector((state) => state.interaction.candidatures || []);
     const status = useSelector((state) => state.interaction.status)
+    const offres = useSelector((state) => state.content.offres)
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const [recherche, setRecherche] = useState("");
     const [filter, setFilter] = useState("tous");
+    const [filterService, setFilterService] = useState("tous");
 
     const candidatures = candidaturesData.filter(item => { 
         let result = item.nomcomplet.toUpperCase().includes(recherche.toUpperCase());
         let lue = Number(item.lue);
+        if (filterService==="tous") {
+            return result
+        }else{
+            result = item.nomcomplet.toUpperCase().includes(recherche.toUpperCase()) && item.offreId==filterService;
+        }
     
         if (filter === "non-lues") return result && lue === 0;
         if (filter === "lues") return result && lue === 1;
@@ -39,6 +47,7 @@ export default function AdminCandi(){
 
     useEffect(() => {
         dispatch(fetchCandi());
+        dispatch(fetchOffres());
     }, [dispatch]);
 
     if (status === 'loading') {
@@ -49,10 +58,11 @@ export default function AdminCandi(){
             <h1>Candidatures</h1>
             <div className="adminFilter">
                 <div className="">
-                    <select className="form-select round">
-                        <option value="">-- Filtrer par Offre --</option>
-                        <option value="">Offre 1</option>
-                        <option value="">Offre 2</option>
+                    <select value={filterService} onChange={(e)=>setFilterService(e.target.value)} className="form-select round">
+                        <option value="tous">-- Filtrer par Offre --</option>
+                        {
+                            offres.map(o=><option value={o.id}>{o.titre}</option>)
+                        }
                     </select>
                 </div>
                 <span> | </span>
