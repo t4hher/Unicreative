@@ -12,24 +12,26 @@ export default function ServiceAdd(){
     const [categorie, setCategorie] = useState('Digital');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
+    const [image2, setImage2] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleImage = (e)=>{setImage(e.target.files[0]);}
 
     async function ServiceAdd(e) {
         e.preventDefault();
-        
+
         const formData = new FormData();
         formData.append('intitule', intitule);
         formData.append('categorie', categorie);
         formData.append('description', description);
-        formData.append('image', image); 
-    
+        formData.append('image', image);
+        formData.append('image2', image2);
+
         try {
             const response = await dispatch(addService(formData));
-    
+
             if (response.meta.requestStatus === "fulfilled") {
-                navigate('/admin/services'); 
+                navigate('/admin/services');
             } else {
                 setErrorMessage('Erreur lors de l\'ajout.');
             }
@@ -54,7 +56,7 @@ export default function ServiceAdd(){
                 <div className="mb-2">
                     <label className="m-1">Catégorie</label>
                     <select name="categorie" onChange={(e)=>setCategorie(e.target.value)} className="form-select">
-                        <option value="Digtal">Digtal</option>
+                        <option value="Digital">Digital</option>
                         <option value="Print">Print</option>
                     </select>
                 </div>
@@ -65,6 +67,10 @@ export default function ServiceAdd(){
                 <div className="mb-3">
                     <label className="m-1">Image</label>
                     <input type="file" onChange={handleImage} name="image" className="form-control"/>
+                </div>
+                <div className="mb-3">
+                    <label className="m-1">deuxiéme image</label>
+                    <input type="file" onChange={(e)=>{setImage2(e.target.files[0])}} name="image2" className="form-control"/>
                 </div>
                 <input type="submit" value="Ajouter" className=" form-control btn btn-primary"/>
             </form>

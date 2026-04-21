@@ -34,6 +34,7 @@ class ServiceController extends Controller
             'categorie'=>'required|in:Digital,Print',
             'description'=>'required|max:2048',
             'image'=>'max:2048',
+            'image2'=>'max:2048',
         ]);
 
         $data = $request->all();
@@ -41,6 +42,11 @@ class ServiceController extends Controller
             $request->image->store("services", "public");
             $chemin = $request->image->store("services", "public");
             $data["image"]=$chemin;
+        }
+        if(isset($request->image2)){
+            $request->image2->store("services", "public");
+            $chemin = $request->image2->store("services", "public");
+            $data["image2"]=$chemin;
         }
         Service::create($data);
         return response()->json([
@@ -75,6 +81,7 @@ class ServiceController extends Controller
             'categorie'=>'in:Digital,Print',
             'description'=>'max:2048',
             'image'=>'nullable|image|max:2048',
+            'image2'=>'nullable|image|max:2048',
         ]);
 
         $data = $request->all();
@@ -86,6 +93,15 @@ class ServiceController extends Controller
             $data["image"]=$chemin;
         } else {
             unset($data['image']);
+        }
+        if($request->hasFile('image2')){
+            if ($service->image2 &&Storage::disk('public')->exists($service->image2)) {
+                Storage::disk('public')->delete($service->image2);
+            }
+            $chemin = $request->image2->store("services", "public");
+            $data["image2"]=$chemin;
+        } else {
+            unset($data['image2']);
         }
         $service->update($data);
         return response()->json([
@@ -102,12 +118,15 @@ class ServiceController extends Controller
         if($service->image){
             if (Storage::disk('public')->exists($service->image)) {Storage::disk('public')->delete($service->image);}
         }
+        if($service->image2){
+            if (Storage::disk('public')->exists($service->image2)) {Storage::disk('public')->delete($service->image2);}
+        }
         $service->delete();
         return response()->json([
             "message"=>"service supprimer !!",
             "id"=>$service->id,
         ]);
-        
+
 
     }
 }
