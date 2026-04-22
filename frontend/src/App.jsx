@@ -58,7 +58,7 @@ function App() {
           <Route path='/services/application' element={<AppDetails/>}></Route>
           <Route path='/services/3d' element={<D3dDetails/>}></Route>
           <Route path='/services/event' element={<EventDetails/>}></Route>
-          <Route path='/postuler/candidature' element={<Poste/>}></Route>
+          <Route path='/postuler/candidature/:id' element={<Poste/>}></Route>
           <Route path='/demande/service' element={<Demande/>}></Route>
           <Route path='/contact' element={<Contact/>}></Route>
         </Route>

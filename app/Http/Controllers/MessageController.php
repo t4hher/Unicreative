@@ -28,7 +28,13 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['lue'] = 0;
+        Message::create($data);
+        return response()->json([
+            'message' => "Le Message ".$request->nomcomplet." est Envoyer avec succès",
+            'data'=>$data,
+        ], 200);
     }
 
     /**

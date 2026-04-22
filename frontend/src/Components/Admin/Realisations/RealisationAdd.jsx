@@ -14,20 +14,20 @@ export default function RealisationAdd(){
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleImage = (e)=>{setImage(e.target.files[0]);}
-    
+
     async function RealiAdd(e) {
         e.preventDefault();
-        
+
         const formData = new FormData();
         formData.append('titre', titre);
         formData.append('type', type);
-        formData.append('image', image); 
-    
+        formData.append('image', image);
+
         try {
             const response = await dispatch(addReali(formData));
-    
+
             if (response.meta.requestStatus === "fulfilled") {
-                navigate('/admin/realisations'); 
+                navigate('/admin/realisations');
             } else {
                 setErrorMessage('Erreur lors de l\'ajout.');
             }
