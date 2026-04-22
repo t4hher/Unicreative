@@ -33,7 +33,13 @@ class DemandeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['lue'] = 0;
+        Demande::create($data);
+        return response()->json([
+            'message' => "La Demande ".$request->nomcomplet." est Envoyer avec succès",
+            'data'=>$data,
+        ], 200);
     }
 
     /**

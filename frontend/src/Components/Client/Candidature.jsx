@@ -44,7 +44,7 @@ export default function Candidature() {
                                         </p>
                                         <p><strong>Type De Contrat: </strong> {o.typeContrat}</p>
                                     </div>
-                                    <Link to="/postuler/candidature" className="btn-postuler">Postuler</Link>
+                                    <Link to={`/postuler/candidature/${o.id}`} className="btn-postuler">Postuler</Link>
                                 </div>
                             </div>)}
                         </div>

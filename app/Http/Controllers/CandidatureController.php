@@ -33,7 +33,24 @@ class CandidatureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['lue'] = 0;
+        if(isset($request->lettreMotivation)){
+            $request->lettreMotivation->store("candidatures", "public");
+            $chemin = $request->lettreMotivation->store("candidatures", "public");
+            $data["lettreMotivation"]=$chemin;
+        }
+        if(isset($request->CV)){
+            $request->CV->store("candidatures", "public");
+            $chemin = $request->CV->store("candidatures", "public");
+            $data["CV"]=$chemin;
+        }
+
+        Candidature::create($data);
+        return response()->json([
+            'message' => "La Candidature ".$request->nomcomplet." est ajoutée avec succès",
+            'data'=>$data,
+        ], 200);
     }
 
     /**
