@@ -1,22 +1,37 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const token = localStorage.getItem('admin_token');
+
 export const fetchServices = createAsyncThunk("content/fetchServices", async () => {
-    const response = await axios.get('http://127.0.0.1:8000/api/services');
+    const response = await axios.get('http://127.0.0.1:8000/api/services', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
     return response.data;
 });
 export const fetchServiceById =  createAsyncThunk("content/fetchServiceById", async (id)=> {
-    const response = await axios.get(`http://127.0.0.1:8000/api/services/${id}`)
+    const response = await axios.get(`http://127.0.0.1:8000/api/services/${id}`, {
+    headers: {
+        Authorization: `Bearer ${token}`
+    }
+})
     return response.data;
 });
 export const deleteServiceById =  createAsyncThunk("content/deleteServiceById", async (id)=> {
-    const response = await axios.delete(`http://127.0.0.1:8000/api/services/${id}`)
+    const response = await axios.delete(`http://127.0.0.1:8000/api/services/${id}`, {
+    headers: {
+        Authorization: `Bearer ${token}`
+    }
+})
     return response.data;
 });
 export const addService = createAsyncThunk("content/addService", async(formData) => {
     const response = await axios.post("http://127.0.0.1:8000/api/services", formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`
         }
     });
     return response.data;
@@ -26,6 +41,7 @@ export const editService = createAsyncThunk("content/editService", async ({ id, 
     const response = await axios.post(`http://127.0.0.1:8000/api/services/${id}`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`
         }
     });
     return response.data;
@@ -35,17 +51,26 @@ export const editService = createAsyncThunk("content/editService", async ({ id, 
 
 
 export const fetchOffres = createAsyncThunk("content/fetchOffres", async () => {
-    const response = await axios.get('http://127.0.0.1:8000/api/offres');
+    const response = await axios.get('http://127.0.0.1:8000/api/offres', {
+    headers: {
+        Authorization: `Bearer ${token}`
+    }
+});
     return response.data;
 });
 export const fetchOffreById =  createAsyncThunk("content/fetchOffreById", async (id)=> {
-    const response = await axios.get(`http://127.0.0.1:8000/api/offres/${id}`)
+    const response = await axios.get(`http://127.0.0.1:8000/api/offres/${id}`, {
+    headers: {
+        Authorization: `Bearer ${token}`
+    }
+})
     return response.data;
 });
 export const addOffre = createAsyncThunk("content/addOffre", async(formData) => {
     const response = await axios.post("http://127.0.0.1:8000/api/offres", formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`
         }
     });
     return response.data;
@@ -55,35 +80,53 @@ export const editOffre = createAsyncThunk("content/editOffre", async ({ id, form
     const response = await axios.post(`http://127.0.0.1:8000/api/offres/${id}`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`
         }
     });
     return response.data;
 });
 export const deleteOffreById =  createAsyncThunk("content/deleteOffreById", async (id)=> {
-    const response = await axios.delete(`http://127.0.0.1:8000/api/offres/${id}`)
+    const response = await axios.delete(`http://127.0.0.1:8000/api/offres/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
     return response.data;
 });
 
 
 
 export const fetchReali = createAsyncThunk("content/fetchReali", async () => {
-    const response = await axios.get('http://127.0.0.1:8000/api/realisations');
+    const response = await axios.get('http://127.0.0.1:8000/api/realisations', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
     return response.data;
 });
 export const fetchRealisationById =  createAsyncThunk("content/fetchRealisationById", async (id)=> {
-    const response = await axios.get(`http://127.0.0.1:8000/api/realisations/${id}`)
+    const response = await axios.get(`http://127.0.0.1:8000/api/realisations/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
     return response.data;
 });
 export const addReali = createAsyncThunk("content/addReali", async(formData) => {
     const response = await axios.post("http://127.0.0.1:8000/api/realisations", formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`
         }
     });
     return response.data;
 });
 export const deleteRealiById =  createAsyncThunk("content/deleteRealiById", async (id)=> {
-    const response = await axios.delete(`http://127.0.0.1:8000/api/realisations/${id}`)
+    const response = await axios.delete(`http://127.0.0.1:8000/api/realisations/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
     return response.data;
 });
 export const editReali = createAsyncThunk("content/editReali", async ({ id, formData }) => {
@@ -91,6 +134,7 @@ export const editReali = createAsyncThunk("content/editReali", async ({ id, form
     const response = await axios.post(`http://127.0.0.1:8000/api/realisations/${id}`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`
         }
     });
     return response.data;

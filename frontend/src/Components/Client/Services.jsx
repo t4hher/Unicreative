@@ -1,14 +1,23 @@
 import { Link } from "react-router-dom";
 import { fetchServices } from "../../Store/ContentSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 export default function Services(){
 
-    const services = useSelector((state) => state.content.services || []);
+    const servicesData = useSelector((state) => state.content.services || []);
     const status = useSelector((state) => state.content.status)
     const dispatch = useDispatch();
+
+    const [filter, setFilter] = useState("tous");
+
+    const services = servicesData.filter(item => { 
+        let result= true;
+        if (filter === "Digital") return item.categorie === "Digital";
+        if (filter === "Print") return item.categorie === "Print";
+        return result;
+    });
 
     useEffect(() => {
         dispatch(fetchServices());
@@ -34,9 +43,9 @@ export default function Services(){
                 :<><div className="filter">
                 <span>Filtrer Par Catégorie: </span>
                 <div className="filterBtn">
-                    <a href="#" className="active">Tous</a>
-                    <a href="#">Digital</a>
-                    <a href="#">Print</a>
+                    <a href="#" className={filter==='tous' ? "active" : ""} onClick={(e=>{e.preventDefault(); setFilter("tous")})}>Tous</a>
+                    <a href="#" className={filter==='Digital' ? "active" : ""} onClick={(e=>{e.preventDefault(); setFilter("Digital")})}>Digital</a>
+                    <a href="#" className={filter==='Print' ? "active" : ""} onClick={(e=>{e.preventDefault(); setFilter("Print")})}>Print</a>
                 </div> 
             </div>
         <div className="cards">

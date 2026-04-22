@@ -1,8 +1,21 @@
-import { Link, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { logoutAdmin } from "../../Store/AdminSlice";
 
 export default function SideBar(){
   const location= useLocation();
   const isActive = (path) => location.pathname.includes(path);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    if(window.confirm("Voulez-vous déconnecter")){
+      localStorage.removeItem('admin_token');
+      dispatch(logoutAdmin()); 
+      navigate('/login');
+    }
+};
     return <aside className="sidebar">
       <div className="sidebar-header">
         <img src="/LOGO.png" alt="Oulmes Stock" className="logo" />
@@ -48,7 +61,7 @@ export default function SideBar(){
         </ul>
       </nav>
       <div className="sidebar-footer">
-        <button className="logout-btn">
+        <button onClick={handleLogout} className="logout-btn">
           <span className="icon">↩</span> Déconnexion
         </button>
       </div>

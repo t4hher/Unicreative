@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use App\Models\Admin;
 
 return [
 
@@ -42,6 +42,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'admin' => [
+            'driver' => 'sanctum',
+            'provider' => 'admins',
+        ],
     ],
 
     /*
@@ -62,16 +66,16 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', User::class),
-        ],
+    // 'users' => [
+    //     'driver' => 'eloquent',
+    //     'model' => App\Models\User::class, // Pour les utilisateurs normaux si besoin
+    // ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+    'admins' => [
+        'driver' => 'eloquent',
+        'model' => Admin::class, // C'est ici que la magie opère
     ],
+],
 
     /*
     |--------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { editDemande, fetchDemandes } from "../../../Store/InteractionSlice";
+import { clearMessage, editDemande, fetchDemandes } from "../../../Store/InteractionSlice";
 import { fetchServices } from "../../../Store/ContentSlice";
 
 export default function AdminDemande(){
@@ -9,6 +9,7 @@ export default function AdminDemande(){
     const demandesData = useSelector((state) => state.interaction.demandes || []);
     const status = useSelector((state) => state.interaction.status)
     const services = useSelector((state) => state.content.services)
+    const { msg } = useSelector((state) => state.interaction);
     const dispatch = useDispatch();
 
     const [recherche, setRecherche] = useState("");
@@ -20,7 +21,7 @@ export default function AdminDemande(){
         let lue = Number(item.lue);
     
         if (filterService==="tous") {
-            return result
+            result=item.nomComplet.toUpperCase().includes(recherche.toUpperCase());
         }else{
             result = item.nomComplet.toUpperCase().includes(recherche.toUpperCase()) && item.serviceId==filterService;
         }
@@ -46,7 +47,8 @@ export default function AdminDemande(){
     useEffect(() => {
             dispatch(fetchDemandes());
             dispatch(fetchServices());
-    }, [dispatch]);
+            ;
+    }, [msg,dispatch]);
     console.log(services);
 
     if (status === 'loading') {
@@ -61,7 +63,7 @@ export default function AdminDemande(){
                     <select value={filterService} onChange={(e)=>(setFilterService(e.target.value))} className="form-select round">
                         <option value="tous">-- Filtrer par service --</option>
                         {
-                            services.map(s=><option value={s.id}>{s.intitule}</option>)
+                            services.map(s=><option value={s.id}>{s.intitule.length>25 ? (<>{s.intitule.substring(0, 25)}<b>...</b></>) : s.intitule}</option>)
                         }
                     </select>
                 </div>
@@ -78,6 +80,10 @@ export default function AdminDemande(){
             </div>
         </div>
         <div className="dash-body">
+            {msg && <div className="alert alert-success alert-dismissible fade show" role="alert">
+                {msg}
+                <button type="button" className="btn-close btn-sm" onClick={() => dispatch(clearMessage())}></button>
+            </div>}
             <div className="grid">
                {
                     demandes.map((demande)=><div className={`box ${demande.lue==0 ? "redShadow" : ""}`}>

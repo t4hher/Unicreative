@@ -1086,6 +1086,7 @@ details[open] summary {
 .dash-header{
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .dash-header .btns .btn{
   margin: 5px 10px;
@@ -1220,7 +1221,7 @@ details[open] summary {
 .adminFilter{
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-end;
   gap: 10px;
 }
 .adminFilter .round{
@@ -1228,6 +1229,10 @@ details[open] summary {
 }
 .adminFilter span{
   font-weight: 200;
+}
+.adminFilter div{
+  width: fit-content;
+  height: fit-content;
 }
 .adminFilterBtn{
   display: flex;

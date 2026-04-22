@@ -1,17 +1,30 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const token = localStorage.getItem('admin_token');
 
 export const fetchMessages = createAsyncThunk("interaction/fetchMessages", async () => {
-    const response = await axios.get('http://127.0.0.1:8000/api/messages');
+    const response = await axios.get('http://127.0.0.1:8000/api/messages', {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
     return response.data;
 });
 export const fetchMessageById =  createAsyncThunk("interaction/fetchMessageById", async (id)=> {
-    const response = await axios.get(`http://127.0.0.1:8000/api/messages/${id}`)
+    const response = await axios.get(`http://127.0.0.1:8000/api/messages/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
     return response.data;
 });
 export const editMessage = createAsyncThunk("interaction/editMessage", async ({ id, data }) => {
-    const response = await axios.post(`http://127.0.0.1:8000/api/messages/${id}`, data);
+    const response = await axios.post(`http://127.0.0.1:8000/api/messages/${id}`, data, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
     return response.data;
 });
 
@@ -19,30 +32,54 @@ export const editMessage = createAsyncThunk("interaction/editMessage", async ({ 
 
 
 export const fetchDemandes = createAsyncThunk("interaction/fetchDemandes", async () => {
-    const response = await axios.get('http://127.0.0.1:8000/api/demandes');
+    const response = await axios.get('http://127.0.0.1:8000/api/demandes', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
     return response.data;
 });
 export const fetchDemandeById =  createAsyncThunk("interaction/fetchDemandeById", async (id)=> {
-    const response = await axios.get(`http://127.0.0.1:8000/api/demandes/${id}`)
+    const response = await axios.get(`http://127.0.0.1:8000/api/demandes/${id}`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
     return response.data;
 });
 export const editDemande = createAsyncThunk("interaction/editDemande", async ({ id, data }) => {
-    const response = await axios.post(`http://127.0.0.1:8000/api/demandes/${id}`, data);
+    const response = await axios.post(`http://127.0.0.1:8000/api/demandes/${id}`, data, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
     return response.data;
 });
 
 
 
 export const fetchCandi = createAsyncThunk("interaction/fetchCandi", async () => {
-    const response = await axios.get('http://127.0.0.1:8000/api/candidatures');
+    const response = await axios.get('http://127.0.0.1:8000/api/candidatures', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
     return response.data;
 });
 export const fetchCandiById =  createAsyncThunk("interaction/fetchCandiById", async (id)=> {
-    const response = await axios.get(`http://127.0.0.1:8000/api/candidatures/${id}`)
+    const response = await axios.get(`http://127.0.0.1:8000/api/candidatures/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
     return response.data;
 });
 export const editCandi = createAsyncThunk("interaction/editCandi", async ({ id, data }) => {
-    const response = await axios.post(`http://127.0.0.1:8000/api/candidatures/${id}`, data);
+    const response = await axios.post(`http://127.0.0.1:8000/api/candidatures/${id}`, data, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
     return response.data;
 });
 
@@ -58,9 +95,14 @@ const InteractionSlice=createSlice({
         demande:{},
         candidatures:[],
         candidature:{},
+        msg:'',
         error:'',
     },
-    reducers:{},
+    reducers:{
+        clearMessage: (state) => {
+            state.msg = null;
+        }
+    },
     extraReducers: (builder)=>{
         builder
         .addCase(fetchMessages.pending, (state) => {
@@ -140,6 +182,7 @@ const InteractionSlice=createSlice({
             );
             if (state.demande.demande) state.demande.demande.lue = action.payload.data.lue;
             state.error = "";
+            state.msg = action.payload.message;
         })
 
 
@@ -184,3 +227,4 @@ const InteractionSlice=createSlice({
     }
 })
 export default InteractionSlice.reducer;
+export const { clearMessage } = InteractionSlice.actions;

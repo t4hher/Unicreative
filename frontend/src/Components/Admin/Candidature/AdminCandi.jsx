@@ -20,7 +20,7 @@ export default function AdminCandi(){
         let result = item.nomcomplet.toUpperCase().includes(recherche.toUpperCase());
         let lue = Number(item.lue);
         if (filterService==="tous") {
-            return result
+            result = item.nomcomplet.toUpperCase().includes(recherche.toUpperCase());
         }else{
             result = item.nomcomplet.toUpperCase().includes(recherche.toUpperCase()) && item.offreId==filterService;
         }

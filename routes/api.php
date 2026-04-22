@@ -14,6 +14,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::resource('admin', AdminController::class);
 Route::resource('services', ServiceController::class);
 Route::resource('realisations', RealisationController::class);
 Route::resource('offres', OffreController::class);

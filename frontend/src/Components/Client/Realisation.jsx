@@ -1,13 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { fetchReali } from "../../Store/ContentSlice";
 
 export default function Realisation(){
 
-    const realisations = useSelector((state) => state.content.realisations || []);
+    const realisationsData = useSelector((state) => state.content.realisations || []);
     const status = useSelector((state) => state.content.status)
     const dispatch = useDispatch();
+
+    const [filter, setFilter] = useState("tous");
+
+    const realisations = realisationsData.filter(item => { 
+        let result= true;
+        if (filter === "Digital") return item.type === "Digital";
+        if (filter === "Print") return item.type === "Print";
+        return result;
+    });
 
     useEffect(() => {
         dispatch(fetchReali());
@@ -34,10 +43,9 @@ export default function Realisation(){
                 :<><div className="filter">
                     <span>Filtrer Par Type: </span>
                     <div className="filterBtn">
-                        <a href="#" className="active">Tous</a>
-                        <a href="#">Site Web</a>
-                        <a href="#">Logo</a>
-                        <a href="#">Print</a>
+                        <a href="#" className={filter==='tous' ? "active" : ""} onClick={(e=>{e.preventDefault(); setFilter("tous")})}>Tous</a>
+                        <a href="#" className={filter==='Digital' ? "active" : ""} onClick={(e=>{e.preventDefault(); setFilter("Digital")})}>Digital</a>
+                        <a href="#" className={filter==='Print' ? "active" : ""} onClick={(e=>{e.preventDefault(); setFilter("Print")})}>Print</a>
                     </div> 
                 </div>
                 <div class="imgrealisation">
