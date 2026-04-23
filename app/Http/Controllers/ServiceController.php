@@ -33,7 +33,7 @@ class ServiceController extends Controller
             'intitule'=>'required|min:5',
             'categorie'=>'required|in:Digital,Print',
             'description'=>'required|max:2048',
-            'image'=>'max:2048',
+            'image'=>'required|max:2048',
             'image2'=>'max:2048',
         ]);
 
@@ -77,9 +77,9 @@ class ServiceController extends Controller
     public function update(Request $request, Service $service)
     {
         $request->validate([
-            'intitule'=>'min:5',
-            'categorie'=>'in:Digital,Print',
-            'description'=>'max:2048',
+            'intitule'=>'required|min:5',
+            'categorie'=>'required|in:Digital,Print',
+            'description'=>'required|max:2048|min:5',
             'image'=>'nullable|image|max:2048',
             'image2'=>'nullable|image|max:2048',
         ]);

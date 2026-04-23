@@ -48,7 +48,7 @@ class CandidatureController extends Controller
 
         Candidature::create($data);
         return response()->json([
-            'message' => "La Candidature ".$request->nomcomplet." est ajoutée avec succès",
+            'message' => "La candidature de ".$request->nomcomplet." est ajoutée avec succès",
             'data'=>$data,
         ], 200);
     }
@@ -83,7 +83,7 @@ class CandidatureController extends Controller
             $candidature->lue=$request->lue;
             $candidature->save();
             return response()->json([
-                'message' => "La candidature de ".$candidature->nomcomplet." est lu avec succès",
+                'message' => "La candidature de ".$candidature->nomcomplet." est modifiée avec succès",
                 'data'=>$candidature,
             ], 200);
         }

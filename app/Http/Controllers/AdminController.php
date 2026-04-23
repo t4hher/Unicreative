@@ -39,10 +39,10 @@ class AdminController extends Controller
          ]);
      
          $admin = Admin::where('login', $request->login)->where('password', $request->password)->first();
-         if (!$admin) {
-             return response()->json([
-                 'message' => 'Identifiants invalides.'
-             ], 401);
+        if (!$admin) {
+            return response()->json([
+                'message' => 'Identifiants invalides.'
+            ], 401);
          }
      
          $token = $admin->createToken('admin-token')->plainTextToken;

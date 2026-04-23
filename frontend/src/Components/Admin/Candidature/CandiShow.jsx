@@ -58,7 +58,7 @@ export default function CandiShow(){
                                 href={`http://127.0.0.1:8000/storage/${laCandi.CV}`} 
                                 target="_blank" 
                                 rel="noopener noreferrer"
-                                className="btn btn-primary"
+                                className="btn btn-sm btn-warning"
                             >
                                 <i className="bi bi-file-earmark-pdf"></i> Voir le CV (PDF)
                             </a>
@@ -72,7 +72,7 @@ export default function CandiShow(){
                                 href={`http://127.0.0.1:8000/storage/${laCandi.lettreMotivation}`} 
                                 target="_blank" 
                                 rel="noopener noreferrer"
-                                className="btn btn-primary"
+                                className="btn btn-sm btn-warning"
                             >
                                 <i className="bi bi-file-earmark-pdf"></i> Voir la lettre (PDF)
                             </a>

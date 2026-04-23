@@ -19,32 +19,45 @@ export const fetchServiceById =  createAsyncThunk("content/fetchServiceById", as
 })
     return response.data;
 });
-export const deleteServiceById =  createAsyncThunk("content/deleteServiceById", async (id)=> {
-    const response = await axios.delete(`http://127.0.0.1:8000/api/services/${id}`, {
-    headers: {
-        Authorization: `Bearer ${token}`
+export const deleteServiceById =  createAsyncThunk("content/deleteServiceById", async (id, { rejectWithValue })=> {
+    try {
+        const response = await axios.delete(`http://127.0.0.1:8000/api/services/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error.response.data);
     }
-})
-    return response.data;
 });
-export const addService = createAsyncThunk("content/addService", async(formData) => {
-    const response = await axios.post("http://127.0.0.1:8000/api/services", formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`
-        }
-    });
-    return response.data;
+export const addService = createAsyncThunk("content/addService", async(formData, { rejectWithValue }) => {
+    try {
+        const response = await axios.post("http://127.0.0.1:8000/api/services", formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
 });
-export const editService = createAsyncThunk("content/editService", async ({ id, formData }) => {
+export const editService = createAsyncThunk("content/editService", async ({ id, formData }, { rejectWithValue }) => {
     formData.append("_method", "PUT"); 
-    const response = await axios.post(`http://127.0.0.1:8000/api/services/${id}`, formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`
-        }
-    });
-    return response.data;
+    try {
+        const response = await axios.post(`http://127.0.0.1:8000/api/services/${id}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+    
 });
 
 
@@ -66,32 +79,44 @@ export const fetchOffreById =  createAsyncThunk("content/fetchOffreById", async 
 })
     return response.data;
 });
-export const addOffre = createAsyncThunk("content/addOffre", async(formData) => {
-    const response = await axios.post("http://127.0.0.1:8000/api/offres", formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`
-        }
-    });
-    return response.data;
+export const addOffre = createAsyncThunk("content/addOffre", async(formData, { rejectWithValue }) => {
+    try {
+        const response = await axios.post("http://127.0.0.1:8000/api/offres", formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
 });
-export const editOffre = createAsyncThunk("content/editOffre", async ({ id, formData }) => {
+export const editOffre = createAsyncThunk("content/editOffre", async ({ id, formData }, { rejectWithValue }) => {
     formData.append("_method", "PUT"); 
-    const response = await axios.post(`http://127.0.0.1:8000/api/offres/${id}`, formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`
-        }
-    });
-    return response.data;
+    try {
+        const response = await axios.post(`http://127.0.0.1:8000/api/offres/${id}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
 });
-export const deleteOffreById =  createAsyncThunk("content/deleteOffreById", async (id)=> {
-    const response = await axios.delete(`http://127.0.0.1:8000/api/offres/${id}`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
-    return response.data;
+export const deleteOffreById =  createAsyncThunk("content/deleteOffreById", async (id, { rejectWithValue })=> {
+    try {
+        const response = await axios.delete(`http://127.0.0.1:8000/api/offres/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
 });
 
 
@@ -112,32 +137,47 @@ export const fetchRealisationById =  createAsyncThunk("content/fetchRealisationB
     })
     return response.data;
 });
-export const addReali = createAsyncThunk("content/addReali", async(formData) => {
-    const response = await axios.post("http://127.0.0.1:8000/api/realisations", formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`
-        }
-    });
-    return response.data;
+export const addReali = createAsyncThunk("content/addReali", async (formData, { rejectWithValue }) => {
+    try {
+        const response = await axios.post("http://127.0.0.1:8000/api/realisations", formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+    
 });
-export const deleteRealiById =  createAsyncThunk("content/deleteRealiById", async (id)=> {
-    const response = await axios.delete(`http://127.0.0.1:8000/api/realisations/${id}`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
-    return response.data;
+export const deleteRealiById =  createAsyncThunk("content/deleteRealiById", async (id, { rejectWithValue })=> {
+    try {
+        const response = await axios.delete(`http://127.0.0.1:8000/api/realisations/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+    
 });
-export const editReali = createAsyncThunk("content/editReali", async ({ id, formData }) => {
+export const editReali = createAsyncThunk("content/editReali", async ({ id, formData}, { rejectWithValue }) => {
     formData.append("_method", "PUT"); 
-    const response = await axios.post(`http://127.0.0.1:8000/api/realisations/${id}`, formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`
-        }
-    });
-    return response.data;
+    try {
+        const response = await axios.post(`http://127.0.0.1:8000/api/realisations/${id}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+    
 });
 
 
@@ -203,6 +243,10 @@ const ContentSlice=createSlice({
             state.services=[...state.services, action.payload.data]; 
             state.error="";
         })
+        .addCase(addService.rejected, (state, action) => {
+            state.status = 'rejected';
+            state.error=action.error.message;
+        })
         .addCase(editService.pending, (state) => {
             state.status = 'loading';
         })
@@ -210,6 +254,10 @@ const ContentSlice=createSlice({
             state.status = 'success';
             state.services=state.services.map(s=> s.id == action.payload.data.id ? action.payload.data : s);
             state.error="";
+        })
+        .addCase(editService.rejected, (state, action) => {
+            state.status = 'rejected';
+            state.error=action.error.message;
         })
 
 
@@ -251,6 +299,10 @@ const ContentSlice=createSlice({
             state.offres=[...state.offres, action.payload.data]; 
             state.error="";
         })
+        .addCase(addOffre.rejected, (state, action) => {
+            state.status = 'rejected';
+            state.error=action.error.message;
+        })
         .addCase(editOffre.pending, (state) => {
             state.status = 'loading';
         })
@@ -258,6 +310,10 @@ const ContentSlice=createSlice({
             state.status = 'success';
             state.offres=state.offres.map(o=> o.id == action.payload.data.id ? action.payload.data : o);
             state.error="";
+        })
+        .addCase(editOffre.rejected, (state, action) => {
+            state.status = 'rejected';
+            state.error=action.error.message;
         })
         .addCase(deleteOffreById.pending,(state)=>{
             state.status='loading';
@@ -309,6 +365,10 @@ const ContentSlice=createSlice({
             state.realisations=[...state.realisations, action.payload.data]; 
             state.error="";
         })
+        .addCase(addReali.rejected, (state, action) => {
+            state.status = 'rejected';
+            state.error=action.error.message;
+        })
         .addCase(deleteRealiById.pending,(state)=>{
             state.status='loading';
         })
@@ -328,6 +388,10 @@ const ContentSlice=createSlice({
             state.status = 'success';
             state.realisations=state.realisations.map(r=> r.id == action.payload.data.id ? action.payload.data : r);
             state.error="";
+        })
+        .addCase(editReali.rejected, (state, action) => {
+            state.status = 'rejected';
+            state.error=action.error.message;
         })
 
 

@@ -70,7 +70,7 @@ class RealisationController extends Controller
     public function update(Request $request, Realisation $realisation)
     {
         $request->validate([
-            'titre'=>'min:5',
+            'titre'=>'required|min:5',
             'type'=>'in:Digital,Print',
             'image'=>'nullable|image|max:2048',
         ]);

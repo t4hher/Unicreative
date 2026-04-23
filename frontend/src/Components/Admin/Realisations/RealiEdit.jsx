@@ -14,7 +14,7 @@ export default function RealiEdit(){
     const [titre, setTitre] = useState('');
     const [type, setType] = useState('');
     const [image, setImage] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errors, setErrors] = useState([]);
 
     useEffect(() => {
         if (id) {
@@ -38,15 +38,13 @@ export default function RealiEdit(){
         if(image!=null && image instanceof File) formData.append('image', image); 
     
         try {
-            const response = await dispatch(editReali({ id: leReali?.id, formData }));
-    
-            if (response.meta.requestStatus === "fulfilled") {
-                navigate('/admin/realisations'); 
-            } else {
-                setErrorMessage('Erreur lors de la modification.');
-            }
+            const response = await dispatch(editReali({ id: leReali?.id, formData })).unwrap();
+            navigate('/admin/realisations'); 
         } catch (error) {
-            alert('Error:', error);
+            if(error.errors){
+              setErrors(error.errors);
+              console.log(error.errors)
+            }
         }
     }
 
@@ -65,7 +63,8 @@ export default function RealiEdit(){
             <form className="container" onSubmit={RealiEdit} method="post" encType="multipart/form-data">
                 <div className="mb-2">
                     <label className="m-1">Titre</label>
-                    <input type="text" onChange={(e)=>setTitre(e.target.value)} name="titre" value={titre} className="form-control"/>
+                    <input type="text" onChange={(e)=>setTitre(e.target.value)} name="titre" value={titre} className={errors.titre ? "form-control is-invalid" : "form-control"}/>
+                    {errors.titre && <div className="invalid-feedback">{errors.titre[0]}</div>}
                 </div>
                 <div className="mb-2">
                     <label className="m-1" >Type</label>

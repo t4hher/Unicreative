@@ -257,15 +257,17 @@ const InteractionSlice=createSlice({
             );
             if (state.candidature.candidature) state.candidature.candidature.lue = action.payload.data.lue;
             state.error = "";
+            state.msg = action.payload.message;
         })
         .addCase(addCandi.pending, (state) => {
                     state.status = 'loading';
-                })
-                .addCase(addCandi.fulfilled, (state, action) => {
-                    state.status = 'success';
-                    state.candidatures=[...state.candidatures, action.payload.data]; 
-                    state.error="";
-                })
+        })
+        .addCase(addCandi.fulfilled, (state, action) => {
+            state.status = 'success';
+            state.candidatures=[...state.candidatures, action.payload.data]; 
+            state.error="";
+            state.msg = action.payload.message;
+        })
     }
 })
 export default InteractionSlice.reducer;

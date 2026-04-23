@@ -48,13 +48,12 @@ export default function AdminDemande(){
             dispatch(fetchDemandes());
             dispatch(fetchServices());
             ;
-    }, [msg,dispatch]);
-    console.log(services);
+    }, [dispatch]);
+    console.log(msg);
 
     if (status === 'loading') {
         return <div className="dash-container"><h1>Chargement ...</h1></div>;
     }
-    console.log(demandesData,demandes);
     return <div className="dash-container">
         <div className="dash-header">
             <h1>Demandes</h1>

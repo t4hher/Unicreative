@@ -17,7 +17,7 @@ export default function ServiceEdit(){
     const [description, setDescription] = useState("");
     const [image, setImage] = useState('');
     const [image2, setImage2] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errors, setErrors] = useState([]);
 
     useEffect(() => {
         if (id) {
@@ -27,7 +27,7 @@ export default function ServiceEdit(){
     useEffect(() => {
         if (leService) {
             setIntitule(leService.intitule || "");
-            setCategorie(leService.categorie || "");
+            setCategorie(leService?.categorie || "");
             setDescription(leService.description || "");
         }
     }, [leService]);
@@ -44,18 +44,15 @@ export default function ServiceEdit(){
         if(image2!=null) formData.append('image2', image2);
 
         try {
-            const response = await dispatch(editService({ id: leService?.id, formData }));
-
-            if (response.meta.requestStatus === "fulfilled") {
-                navigate('/admin/services');
-            } else {
-                setErrorMessage('Erreur lors de la modification');
-            }
+            const response = await dispatch(editService({ id: leService?.id, formData })).unwrap();
+            navigate('/admin/services');
         } catch (error) {
-            alert('Error:', error);
+            if(error.errors){
+                setErrors(error.errors);
+                console.log(error.errors)
+            }
         }
     }
-
     if (status === 'loading') {
         return <div className="dash-container">Chargement des détails...</div>;
     }
@@ -70,18 +67,22 @@ export default function ServiceEdit(){
             <form className="container" onSubmit={ServiceEdit} action="" method="post" encType="">
                 <div className="mb-2">
                     <label className="m-1">Intitulé</label>
-                    <input type="text" value={intitule} onChange={(e)=>setIntitule(e.target.value)} name="intitule" className="form-control"/>
+                    <input type="text" value={intitule} onChange={(e)=>setIntitule(e.target.value)} name="intitule" className={errors.intitule ? "form-control is-invalid" : "form-control"}/>
+                    {errors.intitule && <div className="invalid-feedback">{errors.intitule[0]}</div>}
                 </div>
                 <div className="mb-2">
                     <label className="m-1">Catégorie</label>
-                    <select name="categorie" value={categorie} onChange={(e)=>setCategorie(e.target.value)} className="form-select">
-                        <option value="Digtal">Digtal</option>
+                    <select name="categorie" value={categorie} onChange={(e)=>setCategorie(e.target.value)} className={errors.categorie ? "form-select is-invalid" : "form-select"}>
+                        <option value="">-- Séléctionner la catégorie --</option>
+                        <option value="Digital">Digtal</option>
                         <option value="Print">Print</option>
                     </select>
+                    {errors.categorie && <div className="invalid-feedback">{errors.categorie[0]}</div>}
                 </div>
                 <div className="mb-2">
                     <label className="m-1">Description</label>
-                    <textarea name="description" rows={3} value={description} onChange={(e)=>setDescription(e.target.value)} className="form-control"></textarea>
+                    <textarea name="description" rows={3} value={description} onChange={(e)=>setDescription(e.target.value)} className={errors.description ? "form-control is-invalid" : "form-control"}></textarea>
+                    {errors.description && <div className="invalid-feedback">{errors.description[0]}</div>}
                 </div>
                 <div className="mb-3">
                     <label className="m-1">Image</label>

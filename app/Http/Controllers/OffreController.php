@@ -33,7 +33,7 @@ class OffreController extends Controller
             'titre'=>'required|min:5',
             'description'=>'required|min:5',
             'typeContrat'=>'required|min:3',
-            'profil'=>'required|min:5',
+            'profil'=>'required|min:10',
             'image'=>'max:2048',
         ]);
 
@@ -72,10 +72,10 @@ class OffreController extends Controller
     public function update(Request $request, Offre $offre)
     {
         $request->validate([
-            'titre'=>'min:5',
-            'description'=>'min:5',
-            'typeContrat'=>'min:3',
-            'profil'=>'min:5',
+            'titre'=>'required|min:5',
+            'description'=>'required|min:5',
+            'typeContrat'=>'required|min:3',
+            'profil'=>'required|min:5',
             'image'=>'nullable|image|max:2048',
         ]);
 

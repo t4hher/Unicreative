@@ -9,11 +9,11 @@ export default function ServiceAdd(){
     const dispatch = useDispatch();
 
     const [intitule, setIntitule] = useState('');
-    const [categorie, setCategorie] = useState('Digital');
+    const [categorie, setCategorie] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
     const [image2, setImage2] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errors, setErrors] = useState([]);
 
     const handleImage = (e)=>{setImage(e.target.files[0]);}
 
@@ -28,15 +28,13 @@ export default function ServiceAdd(){
         formData.append('image2', image2);
 
         try {
-            const response = await dispatch(addService(formData));
-
-            if (response.meta.requestStatus === "fulfilled") {
-                navigate('/admin/services');
-            } else {
-                setErrorMessage('Erreur lors de l\'ajout.');
-            }
+            const response = await dispatch(addService(formData)).unwrap();
+            navigate('/admin/services');
         } catch (error) {
-            alert('Error:', error);
+            if(error.errors){
+                setErrors(error.errors);
+                console.log(error.errors)
+            }
         }
     }
 
@@ -51,22 +49,27 @@ export default function ServiceAdd(){
             <form className="container" onSubmit={ServiceAdd} action="" method="post" encType="">
                 <div className="mb-2">
                     <label className="m-1">Intitulé</label>
-                    <input type="text" onChange={(e)=>setIntitule(e.target.value)} name="intitule" className="form-control"/>
+                    <input type="text" onChange={(e)=>setIntitule(e.target.value)} name="intitule" value={intitule} className={errors.intitule ? "form-control is-invalid" : "form-control"}/>
+                    {errors.intitule && <div className="invalid-feedback">{errors.intitule[0]}</div>}
                 </div>
                 <div className="mb-2">
                     <label className="m-1">Catégorie</label>
-                    <select name="categorie" onChange={(e)=>setCategorie(e.target.value)} className="form-select">
+                    <select name="categorie" onChange={(e)=>setCategorie(e.target.value)} value={categorie} className={errors.categorie ? "form-select is-invalid" : "form-select"}>
+                        <option value="">-- Séléctionner la catégorie --</option>
                         <option value="Digital">Digital</option>
                         <option value="Print">Print</option>
                     </select>
+                    {errors.categorie && <div className="invalid-feedback">{errors.categorie[0]}</div>}
                 </div>
                 <div className="mb-2">
                     <label className="m-1">Description</label>
-                    <textarea name="description" rows={3} onChange={(e)=>setDescription(e.target.value)} className="form-control"></textarea>
+                    <textarea name="description" rows={3} value={description} onChange={(e)=>setDescription(e.target.value)} className={errors.description ? "form-control is-invalid" : "form-control"}></textarea>
+                    {errors.description && <div className="invalid-feedback">{errors.description[0]}</div>}
                 </div>
                 <div className="mb-3">
                     <label className="m-1">Image</label>
-                    <input type="file" onChange={handleImage} name="image" className="form-control"/>
+                    <input type="file" onChange={handleImage} name="image" className={errors.image ? "form-control is-invalid" : "form-control"}/>
+                    {errors.image && <div className="invalid-feedback">{errors.image[0]}</div>}
                 </div>
                 <div className="mb-3">
                     <label className="m-1">deuxiéme image</label>

@@ -11,7 +11,7 @@ export default function RealisationAdd(){
     const [titre, setTitre] = useState('');
     const [type, setType] = useState('Digital');
     const [image, setImage] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errors, setErrors] = useState([]);
 
     const handleImage = (e)=>{setImage(e.target.files[0]);}
 
@@ -24,15 +24,13 @@ export default function RealisationAdd(){
         formData.append('image', image);
 
         try {
-            const response = await dispatch(addReali(formData));
-
-            if (response.meta.requestStatus === "fulfilled") {
-                navigate('/admin/realisations');
-            } else {
-                setErrorMessage('Erreur lors de l\'ajout.');
-            }
+            const response = await dispatch(addReali(formData)).unwrap();
+            navigate('/admin/realisations');
         } catch (error) {
-            alert('Error:', error);
+            if(error.errors){
+              setErrors(error.errors);
+              console.log(errors)
+            }
         }
     }
 
@@ -47,7 +45,8 @@ export default function RealisationAdd(){
             <form className="container" onSubmit={RealiAdd} action="" method="post" encType="multipart/form-data">
                 <div className="mb-2">
                     <label className="m-1">Titre</label>
-                    <input type="text" onChange={(e)=>setTitre(e.target.value)} name="titre" className="form-control"/>
+                    <input type="text" onChange={(e)=>setTitre(e.target.value)} name="titre" className={errors.titre ? "form-control is-invalid" : "form-control"}/>
+                    {errors.titre && <div className="invalid-feedback">{errors.titre[0]}</div>}
                 </div>
                 <div className="mb-2">
                     <label className="m-1">Type</label>
@@ -58,7 +57,7 @@ export default function RealisationAdd(){
                 </div>
                 <div className="mb-3">
                     <label className="m-1">Image</label>
-                    <input type="file" onChange={handleImage} name="image" className="form-control"/>
+                    <input type="file" onChange={handleImage} name="image" className={"form-control"}/>
                 </div>
                 <input type="submit" value="Ajouter" className=" form-control btn btn-primary"/>
             </form>

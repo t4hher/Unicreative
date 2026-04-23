@@ -435,7 +435,7 @@ width: 30%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 75vh;
+    padding: 5% 0px;
     gap: 40px;
 }
 .loginBody img{
@@ -452,7 +452,6 @@ width: 30%;
     display: block;
     margin-top: 20px;
     margin-bottom: 5px;
-    font-weight: bold;
 }
 .inputlogin{
     width: 100%;
@@ -1087,6 +1086,7 @@ details[open] summary {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 10px;
 }
 .dash-header .btns .btn{
   margin: 5px 10px;
@@ -1189,7 +1189,6 @@ details[open] summary {
   align-items:flex-start;
   gap: 0px;
   flex-wrap: wrap;
-  margin-top: 10px;
   height: 70vh;
   overflow-y: scroll;
 }

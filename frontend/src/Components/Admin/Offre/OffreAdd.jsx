@@ -10,10 +10,10 @@ export default function OffreAdd(){
 
     const [titre, setTitre] = useState('');
     const [description, setDescription] = useState('');
-    const [type, setType] = useState('CDI');
+    const [type, setType] = useState();
     const [profil, setProfil] = useState('');
     const [image, setImage] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errors, setErrors] = useState([]);
 
     const handleImage = (e)=>{setImage(e.target.files[0]);}
     
@@ -28,15 +28,13 @@ export default function OffreAdd(){
         formData.append('image', image); 
     
         try {
-            const response = await dispatch(addOffre(formData));
-    
-            if (response.meta.requestStatus === "fulfilled") {
-                navigate('/admin/offres'); 
-            } else {
-                setErrorMessage('Erreur lors de l\'ajout.');
-            }
+            const response = await dispatch(addOffre(formData)).unwrap();
+            navigate('/admin/offres'); 
         } catch (error) {
-            alert('Error:', error);
+            if(error.errors){
+                setErrors(error.errors);
+                console.log(error.errors)
+            }
         }
     }
 
@@ -51,29 +49,35 @@ export default function OffreAdd(){
             <form className="container" onSubmit={OffreAdd} action="" method="post" encType="">
                 <div className="mb-2">
                     <label className="m-1">Titre</label>
-                    <input type="text" onChange={(e)=>setTitre(e.target.value)} name="titre" className="form-control"/>
+                    <input type="text" onChange={(e)=>setTitre(e.target.value)} name="titre" className={errors.titre ? "form-control is-invalid" : "form-control"}/>
+                    {errors.titre && <div className="invalid-feedback">{errors.titre[0]}</div>}
                 </div>
                 <div className="mb-2">
                     <label className="m-1">Description</label>
-                    <textarea rows={3} onChange={(e)=>setDescription(e.target.value)} name="description" className="form-control"></textarea>
+                    <textarea rows={3} onChange={(e)=>setDescription(e.target.value)} name="description" className={errors.description ? "form-control is-invalid" : "form-control"}></textarea>
+                    {errors.description && <div className="invalid-feedback">{errors.description[0]}</div>}
                 </div>
                 <div className="mb-2">
                     <label className="m-1">Type de Contrat</label>
-                    <select onChange={(e)=>setType(e.target.value)} name="typeContrat" className="form-select">
+                    <select onChange={(e)=>setType(e.target.value)} name="typeContrat" className={errors.typeContrat ? "form-select is-invalid" : "form-select"}>
+                        <option value="">-- Séléctionner le type --</option>
                         <option value="CDI">CDI</option>
                         <option value="CDD">CDD</option>
                         <option value="ANAPEC">ANAPEC</option>
                         <option value="Freelance">Freelance</option>
-                        <option value="Stage PFE">Stage PFE</option>
+                        <option value="Stage(PFE)">Stage(PFE)</option>
                     </select>
+                    {errors.typeContrat && <div className="invalid-feedback">{errors.typeContrat[0]}</div>}
                 </div>
                 <div className="mb-2">
                     <label className="m-1">Profile</label>
-                    <input type="text" onChange={(e)=>setProfil(e.target.value)} name="profil" className="form-control"/>
+                    <input type="text" onChange={(e)=>setProfil(e.target.value)} name="profil" className={errors.profil ? "form-control is-invalid" : "form-control"}/>
+                    {errors.profil && <div className="invalid-feedback">{errors.profil[0]}</div>}
                 </div>
                 <div className="mb-3">
                     <label className="m-1">Image</label>
-                    <input type="file" onChange={handleImage} name="image" className="form-control"/>
+                    <input type="file" onChange={handleImage} name="image" className={errors.image ? "form-control is-invalid" : "form-control"}/>
+                    {errors.image && <div className="invalid-feedback">{errors.image[0]}</div>}
                 </div>
                 <input type="submit" value="Ajouter" className=" form-control btn btn-primary"/>
             </form>
