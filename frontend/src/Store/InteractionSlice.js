@@ -27,10 +27,17 @@ export const editMessage = createAsyncThunk("interaction/editMessage", async ({ 
     });
     return response.data;
 });
-export const addMessage = createAsyncThunk("interaction/addMessage", async(formData) => {
-    const response = await axios.post("http://127.0.0.1:8000/api/messages", formData, {
-    });
-    return response.data;
+export const addMessage = createAsyncThunk("interaction/addMessage", async(formData, { rejectWithValue }) => {
+    try {
+        const response = await axios.post("http://127.0.0.1:8000/api/messages", formData, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
 });
 
 
@@ -60,10 +67,18 @@ export const editDemande = createAsyncThunk("interaction/editDemande", async ({ 
     });
     return response.data;
 });
-export const addDemande = createAsyncThunk("interaction/addDemande", async(formData) => {
-    const response = await axios.post("http://127.0.0.1:8000/api/demandes", formData, {
-    });
-    return response.data;
+
+export const addDemande = createAsyncThunk("interaction/addDemande", async(formData, { rejectWithValue }) => {
+    try {
+        const response = await axios.post("http://127.0.0.1:8000/api/demandes", formData, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
 });
 
 
@@ -92,13 +107,18 @@ export const editCandi = createAsyncThunk("interaction/editCandi", async ({ id, 
     });
     return response.data;
 });
-export const addCandi = createAsyncThunk("interaction/addCandi", async(formData) => {
-    const response = await axios.post("http://127.0.0.1:8000/api/candidatures", formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-        }
-    });
-    return response.data;
+export const addCandi = createAsyncThunk("interaction/addCandi", async(formData, { rejectWithValue }) => {
+    try {
+        const response = await axios.post("http://127.0.0.1:8000/api/candidatures", formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
 });
 
 
@@ -136,7 +156,7 @@ const InteractionSlice=createSlice({
             state.messages = []
             state.error = action.error.message
         })
-        
+
         .addCase(fetchMessageById.pending, (state) => {
             state.status = 'loading';
         })
@@ -166,8 +186,12 @@ const InteractionSlice=createSlice({
         })
         .addCase(addMessage.fulfilled, (state, action) => {
             state.status = 'success';
-            state.messages=[...state.messages, action.payload.data]; 
+            state.messages=[...state.messages, action.payload.data];
             state.error="";
+        })
+        .addCase(addMessage.rejected, (state, action) => {
+            state.status = 'rejected';
+            state.error=action.error.message;
         })
 
 
@@ -215,8 +239,12 @@ const InteractionSlice=createSlice({
         })
         .addCase(addDemande.fulfilled, (state, action) => {
             state.status = 'success';
-            state.demandes=[...state.demandes, action.payload.data]; 
+            state.demandes=[...state.demandes, action.payload.data];
             state.error="";
+        })
+        .addCase(addDemande.rejected, (state, action) => {
+            state.status = 'rejected';
+            state.error=action.error.message;
         })
 
 
@@ -264,9 +292,13 @@ const InteractionSlice=createSlice({
         })
         .addCase(addCandi.fulfilled, (state, action) => {
             state.status = 'success';
-            state.candidatures=[...state.candidatures, action.payload.data]; 
+            state.candidatures=[...state.candidatures, action.payload.data];
             state.error="";
             state.msg = action.payload.message;
+        })
+        .addCase(addCandi.rejected, (state, action) => {
+            state.status = 'rejected';
+            state.error=action.error.message;
         })
     }
 })

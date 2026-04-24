@@ -33,6 +33,17 @@ class CandidatureController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nomcomplet'=>'required',
+            'tel'=>'required',
+            'email'=>'required',
+            'offreId'=>'required',
+            'sexe'=>'required',
+            'lettreMotivation'=>'required|max:2048',
+            'CV'=>'max:2048',
+        ]);
+
+
         $data = $request->all();
         $data['lue'] = 0;
         if(isset($request->lettreMotivation)){

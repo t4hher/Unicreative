@@ -33,6 +33,15 @@ class DemandeController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nomComplet'=>'required',
+            'tel'=>'required',
+            'email'=>'required',
+            'serviceId'=>'required',
+            'description'=>'required',
+        ]);
+
+
         $data = $request->all();
         $data['lue'] = 0;
         Demande::create($data);
@@ -45,7 +54,7 @@ class DemandeController extends Controller
     /**
      * Display the specified resource.
      */
-    
+
     public function show(Demande $demande)
     {
         $demande = DB::table('demandes')

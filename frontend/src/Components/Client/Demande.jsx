@@ -13,10 +13,10 @@ export default function Demande(){
 
         const[nomComplet,setNomComplet]=useState("");
          const[email,setEmail]=useState("");
-         const[service,setService]=useState("");
+         const[serviceId,setServiceId]=useState("");
         const[tel,setTel]=useState("");
         const[description,setDescription]=useState("");
-        const[errorMessage,setErrorMessage]=useState("");
+        const[errors,setErrors]=useState("");
 
         async function DemandeAdd(e) {
              e.preventDefault();
@@ -24,20 +24,18 @@ export default function Demande(){
              const formData = new FormData();
              formData.append('nomComplet', nomComplet);
              formData.append('email', email);
-             formData.append('serviceId', service);
+             formData.append('serviceId', serviceId);
              formData.append('tel', tel);
              formData.append('description', description);
-         try {
-             const response = await dispatch(addDemande(formData));
-        
-                if (response.meta.requestStatus === "fulfilled") {
-                    // navigate('/admin/demandes');
-                } else {
-                    setErrorMessage('Erreur lors de l\'ajout.');
-                }
-                    } catch (error) {
-                        alert('Error:', error);
+          try {
+                const response = await dispatch(addDemande(formData)).unwrap();
+                // navigate('/admin/candidatures');
+                } catch (error) {
+                    if(error.errors){
+                        setErrors(error.errors);
+                        console.log(error.errors)
                     }
+                }
         }
     useEffect(()=>{
         dispatch(fetchServices());
@@ -49,28 +47,33 @@ export default function Demande(){
                 <h2> Demander</h2>
                 <div>
                     <label for="titre" className='form-labeld' >Nom et Prenom :</label>
-                    <input type="text" class="form-controld" id="titre"  name='titre' onChange={(e)=>setNomComplet(e.target.value)}/>
+                    <input type="text" value={nomComplet} className={errors.nomComplet ? "form-control is-invalid" : "form-control"} id="titre"  name='titre' onChange={(e)=>setNomComplet(e.target.value)}/>
+                    {errors.nomComplet && <div className="invalid-feedback">{errors.nomComplet[0]}</div>}
                 </div>
                 <div>
                     <label for="email" className='form-labeld'> Email :</label>
-                    <input type="email" class="form-controld" id="email" onChange={(e)=>setEmail(e.target.value)} name='email'/>
-                </div>
+                    <input type="email" value={email} className={errors.email ? "form-control is-invalid" : "form-control"} id="email" onChange={(e)=>setEmail(e.target.value)} name='email'/>
+                    {errors.email && <div className="invalid-feedback">{errors.email[0]}</div>}
+                    </div>
 
                 <div>
                     <label for="telephone" className='form-labeld'>Numéro de Télephone:</label>
-                    <input type="text" class="form-controld" onChange={(e)=>setTel(e.target.value)} id="telephone" name='telephone'/>
+                    <input type="text" value={tel} className={errors.tel ? "form-control is-invalid" : "form-control"} onChange={(e)=>setTel(e.target.value)} id="telephone" name='telephone'/>
+                    {errors.tel && <div className="invalid-feedback">{errors.tel[0]}</div>}
                 </div>
                 <div className="mb-3">
                     <label for="service" className='form-labeld' >Service:</label>
-                    <select name="service"  className="form-select" onChange={(e)=>setService(e.target.value)}>
+                    <select name="service" value={serviceId}  className={errors.serviceId ? "form-select is-invalid" : "form-select"} onChange={(e)=>setServiceId(e.target.value)}>
                         {
                             services.map(s=><option value={s.id}>{s.intitule}</option>)
-                        }                    
+                        }
                     </select>
+                    {errors.serviceId && <div className="invalid-feedback">{errors.serviceId[0]}</div>}
                 </div>
                 <div class="mb-3">
                     <label for="description" className="form-labeld" >Description</label>
-                    <textarea className="form-controld" onChange={(e)=>setDescription(e.target.value)} id="description" rows="2"></textarea>
+                    <textarea value={description} className={errors.description ? "form-control is-invalid" : "form-control"} onChange={(e)=>setDescription(e.target.value)} id="description" rows="2"></textarea>
+                    {errors.description && <div className="invalid-feedback">{errors.description[0]}</div>}
                 </div>
                     <button type="submit" class="buttondem">Demander</button>
             </form>
