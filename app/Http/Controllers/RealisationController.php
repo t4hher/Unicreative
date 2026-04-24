@@ -87,7 +87,7 @@ class RealisationController extends Controller
         }
         $realisation->update($data);
         return response()->json([
-            'message' => "La réalisation ".$request->titre." est modifié avec succès",
+            'message' => "La réalisation ".$request->titre." est modifiée avec succès",
             'data'=>$realisation,
         ], 200);
     }
@@ -102,7 +102,7 @@ class RealisationController extends Controller
         }
         $realisation->delete();
         return response()->json([
-            "message"=>"Réalisation supprimer !!",
+            "message"=>"La réalisation ".$realisation->titre." est supprimée avec succès",
             "id"=>$realisation->id,
         ]);
     }

@@ -1,12 +1,11 @@
 import { Link, useNavigate} from "react-router-dom";
-import { deleteRealiById, fetchReali } from "../../../Store/ContentSlice";
+import { clearMessage, deleteRealiById, fetchReali } from "../../../Store/ContentSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 export default function AdminRealisation(){
 
-    const realisations = useSelector((state) => state.content.realisations || []);
-    const status = useSelector((state) => state.content.status)
+    const { realisations, status, AdminMsg } = useSelector((state) => state.content);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -34,6 +33,10 @@ export default function AdminRealisation(){
             </div>
         </div>
         <div className="dash-body">
+            {AdminMsg.reali && <div className="alert alert-success alert-dismissible fade show mb-1" role="alert">
+                {AdminMsg.reali}
+                <button type="button" className="btn-close btn-sm" onClick={() => dispatch(clearMessage())}></button>
+            </div>}
             <div className="tableSer">
                 <table className="table text-center">
                     <thead>

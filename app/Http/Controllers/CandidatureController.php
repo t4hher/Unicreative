@@ -36,19 +36,15 @@ class CandidatureController extends Controller
         $data = $request->all();
         $data['lue'] = 0;
         if(isset($request->lettreMotivation)){
-            $request->lettreMotivation->store("candidatures", "public");
-            $chemin = $request->lettreMotivation->store("candidatures", "public");
-            $data["lettreMotivation"]=$chemin;
+            $data["lettreMotivation"] = $request->file('lettreMotivation')->store("candidatures", "public");
         }
         if(isset($request->CV)){
-            $request->CV->store("candidatures", "public");
-            $chemin = $request->CV->store("candidatures", "public");
-            $data["CV"]=$chemin;
+            $data["CV"] = $request->file('CV')->store("candidatures", "public");
         }
 
         Candidature::create($data);
         return response()->json([
-            'message' => "La candidature de ".$request->nomcomplet." est ajoutée avec succès",
+            'message' => "Votre candidature est envoyé avec succés.",
             'data'=>$data,
         ], 200);
     }
@@ -83,7 +79,7 @@ class CandidatureController extends Controller
             $candidature->lue=$request->lue;
             $candidature->save();
             return response()->json([
-                'message' => "La candidature de ".$candidature->nomcomplet." est modifiée avec succès",
+                'message' => "L'état du candidature de ".$candidature->nomComplet." est modifiée avec succès.",
                 'data'=>$candidature,
             ], 200);
         }

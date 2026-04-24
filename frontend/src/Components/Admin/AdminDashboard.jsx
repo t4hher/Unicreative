@@ -6,14 +6,9 @@ import { fetchOffres, fetchReali,deleteOffreById,deleteRealiById } from "../../S
 
 export default function AdminDashboard(){
 
-    const realisations = useSelector((state) => state.content.realisations || []);
-    const offres = useSelector((state) => state.content.offres || []);
+    const { realisations, offres, status, AdminMsg } = useSelector((state) => state.content);
+    const { messages, demandes, candidatures } = useSelector((state) => state.interaction);
 
-    const messages = useSelector((state) => state.interaction.messages || []);
-    const demandes = useSelector((state) => state.interaction.demandes || []);
-    const candidatures = useSelector((state) => state.interaction.candidatures || []);
-    const interactionStatus = useSelector((state) => state.interaction.status)
-    const contentStatus = useSelector((state) => state.content.status)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -32,14 +27,12 @@ export default function AdminDashboard(){
             let offre=offres.find((o)=>o.id==id);
             if(window.confirm(`voulez vous supprimer la realisation ${offre.titre}`)){
                 dispatch(deleteOffreById(id));
-                navigate("/admin/offres");
             }
         }
         function DeleteReali(id){
             let Rea=realisations.find((r)=>r.id==id);
             if(window.confirm(`voulez vous supprimer la realisation ${Rea.titre}`)){
                 dispatch(deleteRealiById(id));
-                navigate("/admin/realisations");
             }
         }
     return <div className="dash-container">
@@ -74,6 +67,14 @@ export default function AdminDashboard(){
                     <span>{!countCandi ? "-" : countCandi}</span>
                 </div>
             </div>
+            {AdminMsg.reali && <div className="alert alert-success alert-dismissible fade show mb-1" role="alert">
+                {AdminMsg.reali}
+                <button type="button" className="btn-close btn-sm" onClick={() => dispatch(clearMessage())}></button>
+            </div>}
+            {AdminMsg.offre && <div className="alert alert-success alert-dismissible fade show mb-1" role="alert">
+                {AdminMsg.offre}
+                <button type="button" className="btn-close btn-sm" onClick={() => dispatch(clearMessage())}></button>
+            </div>}
             <h3>Réalisations</h3>
             <div className="tableDash">
             <table className="table text-center">
@@ -86,7 +87,7 @@ export default function AdminDashboard(){
                         </tr>
                     </thead>
                     <tbody>
-                        {contentStatus==="success" ?
+                        {status==="success" ?
                             realisations.map(reali=><tr key={reali.id}>
                                 <td>{reali.titre}</td>
                                 <td>{reali.type}</td>
@@ -112,7 +113,7 @@ export default function AdminDashboard(){
                         </tr>
                     </thead>
                     <tbody>
-                        {contentStatus==="success" ?
+                        {status==="success" ?
                             offres.map((offre)=>
                                 <tr key={offre.id}>
                                     <td>{offre.titre}</td>

@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { editMessage, fetchMessages } from "../../../Store/InteractionSlice";
+import { clearMessage, editMessage, fetchMessages } from "../../../Store/InteractionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 export default function AdminMessage(){
 
     const messagesData = useSelector((state) => state.interaction.messages || []);
-    const status = useSelector((state) => state.interaction.status)
+    const { status, AdminMsg } = useSelector((state) => state.interaction);
     const dispatch = useDispatch();
 
     const [recherche, setRecherche] = useState("");
@@ -38,7 +38,6 @@ export default function AdminMessage(){
     useEffect(() => {
         dispatch(fetchMessages());
     }, [dispatch]);
-    console.log(messagesData)
 
     if (status === 'loading') {
         return <div className="dash-container"><h1>Chargement ...</h1></div>;
@@ -60,6 +59,10 @@ export default function AdminMessage(){
             </div>
         </div>
         <div className="dash-body">
+            {AdminMsg.message && <div className="alert alert-success alert-dismissible fade show mb-1" role="alert">
+                {AdminMsg.message}
+                <button type="button" className="btn-close btn-sm" onClick={() => dispatch(clearMessage())}></button>
+            </div>}
             <div className="grid">
                 {
                     messages.map(message=><div className={`box ${message.lue==0 ? "redShadow" : ""}`}>

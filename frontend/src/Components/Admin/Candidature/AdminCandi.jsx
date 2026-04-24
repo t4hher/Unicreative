@@ -7,9 +7,8 @@ import { fetchOffres } from "../../../Store/ContentSlice";
 export default function AdminCandi(){
 
     const candidaturesData = useSelector((state) => state.interaction.candidatures || []);
-    const status = useSelector((state) => state.interaction.status)
     const offres = useSelector((state) => state.content.offres)
-    const { msg } = useSelector((state) => state.interaction);
+    const { AdminMsg, status } = useSelector((state) => state.interaction);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -79,8 +78,8 @@ export default function AdminCandi(){
             </div>
         </div>
         <div className="dash-body">
-            {msg && <div className="alert alert-warning alert-dismissible fade show mb-1" role="alert">
-                {msg}
+            {AdminMsg.candi && <div className="alert alert-success alert-dismissible fade show mb-1" role="alert">
+                {AdminMsg.candi}
                 <button type="button" className="btn-close btn-sm" onClick={() => dispatch(clearMessage())}></button>
             </div>}
             <div className="grid">

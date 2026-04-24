@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addDemande } from "../../Store/InteractionSlice";
+import { addDemande, clearMessage } from "../../Store/InteractionSlice";
 import { fetchServices } from "../../Store/ContentSlice";
 
 export default function Demande(){
@@ -10,6 +10,7 @@ export default function Demande(){
         const navigate=useNavigate();
 
         const services=useSelector((state) => state.content.services)
+        const { ClientMsg } = useSelector((state) => state.interaction);
 
         const[nomComplet,setNomComplet]=useState("");
          const[email,setEmail]=useState("");
@@ -45,6 +46,10 @@ export default function Demande(){
 
     return <div>
         <div  className='formdem'>
+            {ClientMsg.demande && <div className="alert alert-success alert-dismissible fade show" role="alert">
+                {ClientMsg.demande}
+                <button type="button" className="btn-close btn-sm" onClick={() => dispatch(clearMessage())}></button>
+            </div>}
             <form  className='formd' method="post" onSubmit={DemandeAdd}>
                 <h2> Demander</h2>
                 <div>

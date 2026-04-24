@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom"
-import { editMessage, fetchMessageById } from "../../../Store/InteractionSlice";
+import { clearMessage, editMessage, fetchMessageById } from "../../../Store/InteractionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
@@ -7,7 +7,7 @@ export default function MessageShow(){
     const { id } = useParams();
     const dispatch = useDispatch();
     
-    const { message, status } = useSelector((state) => state.interaction);
+    const { message, status, AdminMsg } = useSelector((state) => state.interaction);
 
     function handleClick(e, id){
         let valeurLue=e.target.value;
@@ -43,6 +43,10 @@ export default function MessageShow(){
                 </div>
             </div>
             <div className="dash-body container">
+                {AdminMsg.message && <div className="alert alert-success alert-dismissible fade show mb-3" role="alert">
+                    {AdminMsg.message}
+                    <button type="button" className="btn-close btn-sm" onClick={() => dispatch(clearMessage())}></button>
+                </div>}
                 <div className="container">
                     <p><b>Nom et Prénom:</b> {leMessage?.nomComplet}</p>
                     <p><b>Contact Info:</b> {leMessage?.contactInfo}</p>

@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addMessage } from "../../Store/InteractionSlice";
+import { addMessage, clearMessage } from "../../Store/InteractionSlice";
 
 export default function Contact(){
+
         const dispatch=useDispatch();
         const navigate=useNavigate();
-
+        const { ClientMsg } = useSelector((state) => state.interaction);
 
         const[nomComplet,setNomComplet]=useState("");
         const[infocontact,setInfocontact]=useState("");
@@ -47,6 +48,10 @@ export default function Contact(){
         </div>
         <h2 className="titlecon">Échangeons ensemble sur votre futur succès.</h2>
         <div className="formcon">
+            {ClientMsg.message && <div className="alert alert-success alert-dismissible fade show" role="alert">
+                {ClientMsg.message}
+                <button type="button" className="btn-close btn-sm" onClick={() => dispatch(clearMessage())}></button>
+            </div>}
             <form action="" className="formc" method="post" onSubmit={MessageAdd}>
                 <div>
                     <label for="titre" className='form-labeld'>Nom et Prenom :</label>

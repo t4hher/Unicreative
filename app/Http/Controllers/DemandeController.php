@@ -37,7 +37,7 @@ class DemandeController extends Controller
         $data['lue'] = 0;
         Demande::create($data);
         return response()->json([
-            'message' => "La Demande ".$request->nomcomplet." est Envoyer avec succès",
+            'message' => "Votre demande est envoyé avec succés.",
             'data'=>$data,
         ], 200);
     }
@@ -73,7 +73,7 @@ class DemandeController extends Controller
             $demande->lue=$request->lue;
             $demande->save();
             return response()->json([
-                'message' => "La demande de ".$demande->nomComplet." est lu avec succès",
+                'message' => "L'état du demande de ".$demande->nomComplet." est modifiée avec succès.",
                 'data'=>$demande,
             ], 200);
         }

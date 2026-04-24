@@ -1,12 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { deleteServiceById, fetchServices } from "../../../Store/ContentSlice";
+import { clearMessage, deleteServiceById, fetchServices } from "../../../Store/ContentSlice";
 import { useEffect } from "react";
 
 export default function AdminServices(){
-
-    const services = useSelector((state) => state.content.services || []);
-    const status = useSelector((state) => state.content.status)
+    const { services, status, AdminMsg } = useSelector((state) => state.content);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -36,6 +34,10 @@ export default function AdminServices(){
             </div>
         </div>
         <div className="dash-body">
+            {AdminMsg.service && <div className="alert alert-success alert-dismissible fade show mb-1" role="alert">
+                {AdminMsg.service}
+                <button type="button" className="btn-close btn-sm" onClick={() => dispatch(clearMessage())}></button>
+            </div>}
             <div className="tableSer">
                 <table className="table text-center">
                     <thead>

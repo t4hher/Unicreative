@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom"
-import { editDemande, fetchDemandeById } from "../../../Store/InteractionSlice";
+import { clearMessage, editDemande, fetchDemandeById } from "../../../Store/InteractionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
@@ -7,7 +7,7 @@ export default function DemandeShow(){
     const { id } = useParams();
     const dispatch = useDispatch();
     
-    const { demande, status } = useSelector((state) => state.interaction);
+    const { demande, AdminMsg, status } = useSelector((state) => state.interaction);
 
     function handleClick(e, id){
         let valeurLue=e.target.value;
@@ -34,7 +34,6 @@ export default function DemandeShow(){
     }
 
     const laDemande=demande.demande;
-    console.log(laDemande, demande)
     return (
         <div className="dash-container">
             <div className="dash-header">
@@ -44,6 +43,10 @@ export default function DemandeShow(){
                 </div>
             </div>
             <div className="dash-body container">
+                {AdminMsg.demande && <div className="alert alert-success alert-dismissible mb-3 fade show" role="alert">
+                    {AdminMsg.demande}
+                    <button type="button" className="btn-close btn-sm" onClick={() => dispatch(clearMessage())}></button>
+                </div>}
                 <div className="container">
                     <p><b>Nom de service:</b> {laDemande?.serviceNom}</p>
                     <p><b>Nom et Prénom:</b> {laDemande?.nomComplet}</p>

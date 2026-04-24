@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { fetchOffres,deleteOffreById } from "../../../Store/ContentSlice";
+import { fetchOffres,deleteOffreById, clearMessage } from "../../../Store/ContentSlice";
 
 export default function AdminOffre(){
 
-    const offres = useSelector((state) => state.content.offres || []);
-    const status = useSelector((state) => state.content.status)
+    const { offres, status, AdminMsg } = useSelector((state) => state.content);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -35,6 +34,10 @@ export default function AdminOffre(){
             </div>
         </div>
         <div className="dash-body">
+            {AdminMsg.offre && <div className="alert alert-success alert-dismissible fade show mb-1" role="alert">
+                {AdminMsg.offre}
+                <button type="button" className="btn-close btn-sm" onClick={() => dispatch(clearMessage())}></button>
+            </div>}
             <div className="tableSer">
                 <table className="table text-center">
                     <thead>

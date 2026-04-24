@@ -123,7 +123,7 @@ class ServiceController extends Controller
         }
         $service->delete();
         return response()->json([
-            "message"=>"service supprimer !!",
+            "message"=>"Le service ".$service->titre."est supprimé avec succés",
             "id"=>$service->id,
         ]);
 

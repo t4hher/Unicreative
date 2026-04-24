@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { editCandi, fetchCandiById } from "../../../Store/InteractionSlice";
+import { clearMessage, editCandi, fetchCandiById } from "../../../Store/InteractionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
@@ -8,7 +8,7 @@ export default function CandiShow(){
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { candidature, status } = useSelector((state) => state.interaction);
+    const { candidature, AdminMsg, status } = useSelector((state) => state.interaction);
 
     function handleClick(e, id){
         let valeurLue=e.target.value;
@@ -47,6 +47,10 @@ export default function CandiShow(){
                 </div>
             </div>
             <div className="dash-body container">
+                {AdminMsg.candi && <div className="alert alert-success alert-dismissible fade show mb-3" role="alert">
+                    {AdminMsg.candi}
+                    <button type="button" className="btn-close btn-sm" onClick={() => dispatch(clearMessage())}></button>
+                </div>}
                 <div className="container">
                     <p><b>Nom de l'offre:</b> {laCandi?.titre}</p>
                     <p><b>Nom et Prénom:</b> {laCandi?.nomcomplet}</p>

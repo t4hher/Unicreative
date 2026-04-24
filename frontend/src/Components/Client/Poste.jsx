@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import {  fetchOffreById, fetchOffres } from '../../Store/ContentSlice';
-import { addCandi } from '../../Store/InteractionSlice';
+import { addCandi, clearMessage } from '../../Store/InteractionSlice';
 export default function Poste() {
         const { id } = useParams();
         const dispatch=useDispatch();
@@ -10,6 +10,7 @@ export default function Poste() {
 
         const offres = useSelector((state) => state.content.offres)
         const offre = useSelector((state) => state.content.offre)
+        const { ClientMsg } = useSelector((state) => state.interaction);
         
         const [nomComplet,setNomComplet]=useState("");
         const [telephone,setTelephone]=useState("");
@@ -61,10 +62,13 @@ export default function Poste() {
     }
 
     const leoffre=offre.offre;
-    console.log(leoffre)
 
   return (
     <div>
+        {ClientMsg.candi && <div className="alert alert-success alert-dismissible fade show w-50 mx-auto mt-2" role="alert">
+            {ClientMsg.candi}
+            <button type="button" className="btn-close btn-sm" onClick={() => dispatch(clearMessage())}></button>
+        </div>}
         <div className='postefor'>
             <div className='Pposte'>
                 <ul>

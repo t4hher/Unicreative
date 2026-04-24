@@ -32,7 +32,7 @@ class MessageController extends Controller
         $data['lue'] = 0;
         Message::create($data);
         return response()->json([
-            'message' => "Le Message ".$request->nomcomplet." est Envoyer avec succès",
+            'message' => "Votre message est envoyé avec succés.",
             'data'=>$data,
         ], 200);
     }
@@ -62,7 +62,7 @@ class MessageController extends Controller
             $message->lue=$request->lue;
             $message->save();
             return response()->json([
-                'message' => "Le message de ".$message->nomComplet." est lu avec succès",
+                'message' => "L'état du message de ".$message->nomComplet." est modifiée avec succès.",
                 'data'=>$message,
             ], 200);
         }

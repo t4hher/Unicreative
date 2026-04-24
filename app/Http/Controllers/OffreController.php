@@ -45,7 +45,7 @@ class OffreController extends Controller
             Offre::create($data);
         }
         return response()->json([
-            'message' => "L'offre ".$request->titre." est ajoutée avec succès",
+            'message' => "L'offre ".$request->titre." est ajouté avec succès",
             'data'=>$data,
         ], 200);
     }
@@ -106,7 +106,7 @@ class OffreController extends Controller
         }
         $offre->delete();
         return response()->json([
-            "message"=>"offre supprimer !!",
+            "message"=>"L'offre ".$offre->titre." est supprimé avec succès",
             "id"=>$offre->id,
         ]);
     }

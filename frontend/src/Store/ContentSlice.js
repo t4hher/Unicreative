@@ -193,8 +193,17 @@ const ContentSlice=createSlice({
         offres:[],
         offre:{},
         error:'',
+        AdminMsg:{
+            service:'',
+            offre:'',
+            reali:'',
+        },
     },
-    reducers:{},
+    reducers:{
+        clearMessage: (state) => {
+            state.AdminMsg = {};
+        }
+    },
     extraReducers: (builder)=>{
         builder
         .addCase(fetchServices.pending, (state) => {
@@ -230,6 +239,7 @@ const ContentSlice=createSlice({
             state.status='success';
             state.services=state.services.filter(service => service.id != action.payload.id);
             state.error='';
+            state.AdminMsg.service=action.payload.message
         })
         .addCase(deleteServiceById.rejected,(state,action)=>{
             state.status='failed';
@@ -242,6 +252,7 @@ const ContentSlice=createSlice({
             state.status = 'success';
             state.services=[...state.services, action.payload.data]; 
             state.error="";
+            state.AdminMsg.service=action.payload.message
         })
         .addCase(addService.rejected, (state, action) => {
             state.status = 'rejected';
@@ -254,6 +265,7 @@ const ContentSlice=createSlice({
             state.status = 'success';
             state.services=state.services.map(s=> s.id == action.payload.data.id ? action.payload.data : s);
             state.error="";
+            state.AdminMsg.service=action.payload.message
         })
         .addCase(editService.rejected, (state, action) => {
             state.status = 'rejected';
@@ -298,6 +310,7 @@ const ContentSlice=createSlice({
             state.status = 'success';
             state.offres=[...state.offres, action.payload.data]; 
             state.error="";
+            state.AdminMsg.offre=action.payload.message
         })
         .addCase(addOffre.rejected, (state, action) => {
             state.status = 'rejected';
@@ -310,6 +323,7 @@ const ContentSlice=createSlice({
             state.status = 'success';
             state.offres=state.offres.map(o=> o.id == action.payload.data.id ? action.payload.data : o);
             state.error="";
+            state.AdminMsg.offre=action.payload.message
         })
         .addCase(editOffre.rejected, (state, action) => {
             state.status = 'rejected';
@@ -322,6 +336,7 @@ const ContentSlice=createSlice({
             state.status='success';
             state.offres=state.offres.filter(service => service.id != action.payload.id);
             state.error='';
+            state.AdminMsg.offre=action.payload.message
         })
         .addCase(deleteOffreById.rejected,(state,action)=>{
             state.status='failed';
@@ -364,6 +379,7 @@ const ContentSlice=createSlice({
             state.status = 'success';
             state.realisations=[...state.realisations, action.payload.data]; 
             state.error="";
+            state.AdminMsg.reali=action.payload.message
         })
         .addCase(addReali.rejected, (state, action) => {
             state.status = 'rejected';
@@ -376,6 +392,7 @@ const ContentSlice=createSlice({
             state.status='success';
             state.realisations=state.realisations.filter(service => service.id != action.payload.id);
             state.error='';
+            state.AdminMsg.reali=action.payload.message
         })
         .addCase(deleteRealiById.rejected,(state,action)=>{
             state.status='failed';
@@ -388,6 +405,7 @@ const ContentSlice=createSlice({
             state.status = 'success';
             state.realisations=state.realisations.map(r=> r.id == action.payload.data.id ? action.payload.data : r);
             state.error="";
+            state.AdminMsg.reali=action.payload.message
         })
         .addCase(editReali.rejected, (state, action) => {
             state.status = 'rejected';
@@ -399,3 +417,4 @@ const ContentSlice=createSlice({
     }
 })
 export default ContentSlice.reducer;
+export const { clearMessage } = ContentSlice.actions;

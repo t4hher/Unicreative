@@ -113,12 +113,22 @@ const InteractionSlice=createSlice({
         demande:{},
         candidatures:[],
         candidature:{},
-        msg:'',
+        AdminMsg:{
+            demande:'',
+            message:'',
+            candi:'',
+        },
+        ClientMsg:{
+            demande:'',
+            message:'',
+            candi:'',
+        },
         error:'',
     },
     reducers:{
         clearMessage: (state) => {
-            state.msg = null;
+            state.AdminMsg = {};
+            state.ClientMsg = {};
         }
     },
     extraReducers: (builder)=>{
@@ -160,6 +170,7 @@ const InteractionSlice=createSlice({
             );
             if (state.message.message) state.message.message.lue = action.payload.data.lue;
             state.error = "";
+            state.AdminMsg.message=action.payload.message;
         })
         .addCase(addMessage.pending, (state) => {
             state.status = 'loading';
@@ -168,6 +179,7 @@ const InteractionSlice=createSlice({
             state.status = 'success';
             state.messages=[...state.messages, action.payload.data]; 
             state.error="";
+            state.ClientMsg.message=action.payload.message
         })
 
 
@@ -209,6 +221,7 @@ const InteractionSlice=createSlice({
             if (state.demande.demande) state.demande.demande.lue = action.payload.data.lue;
             state.error = "";
             state.msg = action.payload.message;
+            state.AdminMsg.demande=action.payload.message;
         })
         .addCase(addDemande.pending, (state) => {
             state.status = 'loading';
@@ -217,6 +230,7 @@ const InteractionSlice=createSlice({
             state.status = 'success';
             state.demandes=[...state.demandes, action.payload.data]; 
             state.error="";
+            state.ClientMsg.demande=action.payload.message
         })
 
 
@@ -258,6 +272,7 @@ const InteractionSlice=createSlice({
             if (state.candidature.candidature) state.candidature.candidature.lue = action.payload.data.lue;
             state.error = "";
             state.msg = action.payload.message;
+            state.AdminMsg.candi=action.payload.message
         })
         .addCase(addCandi.pending, (state) => {
                     state.status = 'loading';
@@ -267,6 +282,7 @@ const InteractionSlice=createSlice({
             state.candidatures=[...state.candidatures, action.payload.data]; 
             state.error="";
             state.msg = action.payload.message;
+            state.ClientMsg.candi=action.payload.message
         })
     }
 })

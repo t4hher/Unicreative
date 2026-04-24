@@ -7,9 +7,8 @@ import { fetchServices } from "../../../Store/ContentSlice";
 export default function AdminDemande(){
 
     const demandesData = useSelector((state) => state.interaction.demandes || []);
-    const status = useSelector((state) => state.interaction.status)
     const services = useSelector((state) => state.content.services)
-    const { msg } = useSelector((state) => state.interaction);
+    const { AdminMsg, status } = useSelector((state) => state.interaction);
     const dispatch = useDispatch();
 
     const [recherche, setRecherche] = useState("");
@@ -49,7 +48,6 @@ export default function AdminDemande(){
             dispatch(fetchServices());
             ;
     }, [dispatch]);
-    console.log(msg);
 
     if (status === 'loading') {
         return <div className="dash-container"><h1>Chargement ...</h1></div>;
@@ -79,8 +77,8 @@ export default function AdminDemande(){
             </div>
         </div>
         <div className="dash-body">
-            {msg && <div className="alert alert-success alert-dismissible fade show" role="alert">
-                {msg}
+            {AdminMsg.demande && <div className="alert alert-success alert-dismissible fade show" role="alert">
+                {AdminMsg.demande}
                 <button type="button" className="btn-close btn-sm" onClick={() => dispatch(clearMessage())}></button>
             </div>}
             <div className="grid">
