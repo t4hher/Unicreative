@@ -34,11 +34,11 @@ class DemandeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nomComplet'=>'required',
-            'tel'=>'required',
-            'email'=>'required',
+            'nomComplet'=>'required|min:5',
+            'tel'=>'required|min:10',
+            'email'=>'required|min:10',
             'serviceId'=>'required',
-            'description'=>'required',
+            'description'=>'required|min:10',
         ]);
 
 

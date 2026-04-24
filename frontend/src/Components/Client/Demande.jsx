@@ -57,7 +57,7 @@ export default function Demande(){
                 </div>
                 <div>
                     <label for="email" className='form-labeld'> Email :</label>
-                    <input type="email" value={email} className={errors.email ? "form-control is-invalid" : "form-control"} id="email" onChange={(e)=>setEmail(e.target.value)} name='email'/>
+                    <input type="text" value={email} className={errors.email ? "form-control is-invalid" : "form-control"} id="email" onChange={(e)=>setEmail(e.target.value)} name='email'/>
                     {errors.email && <div className="invalid-feedback">{errors.email[0]}</div>}
                     </div>
 
@@ -69,6 +69,7 @@ export default function Demande(){
                 <div className="mb-3">
                     <label for="service" className='form-labeld' >Service:</label>
                     <select name="service" value={serviceId}  className={errors.serviceId ? "form-select is-invalid" : "form-select"} onChange={(e)=>setServiceId(e.target.value)}>
+                        <option value="">-- Séléctioner un service --</option>
                         {
                             services.map(s=><option value={s.id}>{s.intitule}</option>)
                         }

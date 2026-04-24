@@ -38,9 +38,9 @@ class CandidatureController extends Controller
             'tel'=>'required',
             'email'=>'required',
             'offreId'=>'required',
-            'sexe'=>'required',
-            'lettreMotivation'=>'required|max:2048',
-            'CV'=>'max:2048',
+            'sexe'=>'required|in:F,H',
+            'lettreMotivation' =>'required|file|mimes:pdf,doc,docx|max:2048',
+            'CV'=>'required|file|mimes:pdf,doc,docx|max:2048',
         ]);
 
 

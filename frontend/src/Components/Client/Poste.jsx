@@ -11,6 +11,7 @@ export default function Poste() {
         const offres = useSelector((state) => state.content.offres)
         const offre = useSelector((state) => state.content.offre)
         const { ClientMsg } = useSelector((state) => state.interaction);
+        const leoffre=offre.offre;
 
         const [nomcomplet,setNomcomplet]=useState("");
         const [tel,setTel]=useState("");
@@ -54,13 +55,16 @@ export default function Poste() {
             dispatch(fetchOffreById(id));
         }
             dispatch(fetchOffres());
-        }, [dispatch,id]);
+    }, [dispatch,id]);
+
+    useEffect(() => {
+        setOffreId(leoffre?.id);
+    }, [leoffre]);
     if (status === 'loading') {
         return <div className="dash-container"><h1>Chargement des détails...</h1></div>;
     }
 
-    const leoffre=offre.offre;
-
+    console.log(errors)
   return (
     <div>
         {ClientMsg.candi && <div className="alert alert-success alert-dismissible fade show w-50 mx-auto mt-2" role="alert">
@@ -91,55 +95,57 @@ export default function Poste() {
                     <div class="form-group mb-2">
                         <label htmlFor="nom" className='form-label'>Nom et prenom :</label>
                         <input type="text" value={nomcomplet} className={errors.nomcomplet ? "form-control is-invalid" : "form-control"} onChange={(e)=>setNomcomplet(e.target.value)} id="nom"   name='nom'/>
-                        {errors.nomcomplet && <div className="invalid-feedback">{errors.nomcomplet[0]}</div>}
+                        {errors.nomcomplet && <div className="invalid-feedback " style={{color:'#ffffff'}}>{errors.nomcomplet[0]}</div>}
                     </div>
                     <div class="form-group ">
                         <label htmlFor="telephone" className='form-label'>Numéro de Télephone:</label>
                         <input type="text" value={tel} className={errors.tel ? "form-control is-invalid" : "form-control"} onChange={(e)=>setTel(e.target.value)}  id="telephone" name='telephone'/>
-                        {errors.tel && <div className="invalid-feedback">{errors.tel[0]}</div>}
+                        {errors.tel && <div className="invalid-feedback" style={{color:'#ffffff'}}>{errors.tel[0]}</div>}
                     </div>
                     <div class="form-group mb-2">
                         <label htmlFor="email" className='form-label'>Email:</label>
                         <input type="email" value={email} className={errors.email ? "form-control is-invalid" : "form-control"} onChange={(e)=>setEmail(e.target.value)}  id="email" name='email'/>
-                        {errors.email && <div className="invalid-feedback">{errors.email[0]}</div>}
+                        {errors.email && <div className="invalid-feedback" style={{color:'#ffffff'}}>{errors.email[0]}</div>}
                     </div>
                         <label htmlFor="select" className='form-label'>Choisir un Poste</label>
                     <div  className='mb-2'>
-                        <select value={leoffre?.id} onChange={(e)=>setOffreId(e.target.value)} className={errors.offreId ? "form-select is-invalid" : "form-select"}>
+                        <select value={offreId} onChange={(e)=>setOffreId(e.target.value)} className={errors.offreId ? "form-select is-invalid" : "form-select"}>
                             {
                                 offres.map(o=><option value={o.id}>{o.titre}</option>)
                             }
                         </select>
-                        {errors.offreId && <div className="invalid-feedback">{errors.offreId[0]}</div>}
+                        {errors.offreId && <div className="invalid-feedback" style={{color:'#ffffff'}}>{errors.offreId[0]}</div>}
                     </div>
 
-                    <div className='sexecheck mb-2'>
-                        <label htmlFor="" className='form-label'>Sexe :</label>
+                    <div className='mb-2'>
+                        <div className="sexecheck">
+                        <label htmlFor="" className='form-label'>Sexe:</label>
                         <div class="form-check">
                             <input className={errors.sexe ? "form-check-input is-invalid" : "form-check-input"} type="radio" name="sexe" id="sexe" value="F"
                             onChange={(e) => setSexe(e.target.value)} checked={sexe === "F"}/>
-                            <label class="form-labele" for="sexe">
+                            <span class="form-labele me-2" for="sexe">
                                 Femme
-                            </label>
+                            </span>
                         </div>
                         <div class="form-check">
                             <input className={errors.sexe ? "form-check-input is-invalid" : "form-check-input"} type="radio" name="sexe" id="sexe" value="H"
                             onChange={(e) => setSexe(e.target.value)} checked={sexe === "H"}/>
-                            <label class="form-labele" for="sexe">
+                            <span class="form-labele" for="sexe">
                                 Homme
-                            </label>
-                            {errors.sexe && <div className="invalid-feedback">{errors.sexe[0]}</div>}
+                            </span>
                         </div>
+                        </div>
+                        {errors.sexe && <div className="invalid-feedback d-block mt-0" style={{color:'#ffffff'}}>{errors.sexe[0]}</div>}
                     </div>
                     <div class="form-group mb-2">
                         <label for="lettre" className='form-label'>Lettre de Motivation:</label>
                         <input type="file"  name="lettreMotivation" onChange={handlelettre} id="lettre" className={errors.lettreMotivation ? "form-control is-invalid" : "form-control"}/>
-                        {errors.lettreMotivation && <div className="invalid-feedback">{errors.lettreMotivation[0]}</div>}
+                        {errors.lettreMotivation && <div className="invalid-feedback" style={{color:'#ffffff'}}>{errors.lettreMotivation[0]}</div>}
                     </div>
                     <div class="form-group mb-2">
                         <label for="cv" className='form-label'>Entrer le CV :</label>
                         <input type="file" name="CV" onChange={handlecv} id="cv"  className={errors.CV ? "form-control is-invalid" : "form-control"}  />
-                        {errors.CV && <div className="invalid-feedback">{errors.CV[0]}</div>}
+                        {errors.CV && <div className="invalid-feedback" style={{color:'#ffffff'}}>{errors.CV[0]}</div>}
                     </div>
                     <button type="submit">Postuler</button>
                 </form>

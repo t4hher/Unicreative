@@ -29,9 +29,9 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nomComplet'=>'required',
-            'contactInfo'=>'required',
-            'message'=>'required|max:2048',
+            'nomComplet'=>'required|min:5',
+            'contactInfo'=>'required|min:5',
+            'message'=>'required|max:2048|min:5',
         ]);
         $data = $request->all();
         $data['lue'] = 0;

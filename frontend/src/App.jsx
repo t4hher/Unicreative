@@ -38,12 +38,14 @@ import MessageShow from './Components/Admin/Message/MessageShow';
 import CandiShow from './Components/Admin/Candidature/CandiShow';
 import RealiEdit from './Components/Admin/Realisations/RealiEdit';
 import OffreEdit from './Components/Admin/Offre/OffreEdit';
+import ScrollToTop from './ScrollToTop';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (<Provider store={store}>
     <BrowserRouter>
+    <ScrollToTop/>
       <Routes>
         <Route element={<ClientLayout/>}>
           <Route path='/' element={<Accueil/>}></Route>
