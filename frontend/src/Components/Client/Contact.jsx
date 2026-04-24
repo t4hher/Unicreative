@@ -10,29 +10,27 @@ export default function Contact(){
         const { ClientMsg } = useSelector((state) => state.interaction);
 
         const[nomComplet,setNomComplet]=useState("");
-        const[infocontact,setInfocontact]=useState("");
+        const[contactInfo,setContactInfo]=useState("");
         const[message,setmessage]=useState("");
-        const[errorMessage,setErrorMessage]=useState("");
+        const[errors,setErrors]=useState("");
 
         async function MessageAdd(e) {
             e.preventDefault();
 
             const formData = new FormData();
             formData.append('nomComplet', nomComplet);
-            formData.append('contactInfo', infocontact);
+            formData.append('contactInfo', contactInfo);
             formData.append('message', message);
         try {
-            const response = await dispatch(addMessage(formData));
-        
-                if (response.meta.requestStatus === "fulfilled") {
-                    // navigate('/admin/messages');
-                } else {
-                    setErrorMessage('Erreur lors de l\'ajout.');
-                }
-                    } catch (error) {
-                        alert('Error:', error);
+            const response = await dispatch(addMessage(formData)).unwrap();
+            // navigate('/admin/candidatures');
+            } catch (error) {
+                if(error.errors){
+                    setErrors(error.errors);
+                    console.log(error.errors)
                     }
         }
+    }
 
 
     return <div>
@@ -40,7 +38,7 @@ export default function Contact(){
             <div>
                 <h1 className="titrerealisation">Contacter Nous</h1>
                 <p>
-                Vous avez un projet en tête ou une question sur nos services ? Notre équipe est à votre écoute pour transformer vos 
+                Vous avez un projet en tête ou une question sur nos services ? Notre équipe est à votre écoute pour transformer vos
                 idées en réalité.
                 </p>
             </div>
@@ -55,15 +53,19 @@ export default function Contact(){
             <form action="" className="formc" method="post" onSubmit={MessageAdd}>
                 <div>
                     <label for="titre" className='form-labeld'>Nom et Prenom :</label>
-                    <input type="text"  onChange={(e)=>setNomComplet(e.target.value)} class="form-controld" id="titre"  name='titre'/>
+                    <input type="text" value={nomComplet} className={errors.nomComplet? "form-control is-invalid" : "form-control"}  onChange={(e)=>setNomComplet(e.target.value)}  id="nom"  name='nom'/>
+                    {errors.nomComplet && <div className="invalid-feedback">{errors.nomComplet[0]}</div>}
                 </div>
+
                 <div>
                     <label for="titre" className='form-labeld'>Entrer Email/Telephone :</label>
-                    <input type="text" onChange={(e)=>setInfocontact(e.target.value)} class="form-controld" id="titre"  name='titre'/>
+                    <input type="text"value={contactInfo} className={errors.contactInfo? "form-control is-invalid" : "form-control"}  onChange={(e)=>setContactInfo(e.target.value)}  id="info"  name='info'/>
+                    {errors.contactInfo && <div className="invalid-feedback">{errors.contactInfo[0]}</div>}
                 </div>
                 <div class="mb-3">
                     <label for="description" className="form-labeld">Message :</label>
-                    <textarea onChange={(e)=>setmessage(e.target.value)} className="form-controld" id="description" rows="2"></textarea>
+                    <textarea onChange={(e)=>setmessage(e.target.value)} value={message} className={errors.message ? "form-control is-invalid" : "form-control"} id="description" rows="2"></textarea>
+                    {errors.message && <div className="invalid-feedback">{errors.message[0]}</div>}
                 </div>
                 <button type="submit" class="buttondem">Envoyer</button>
             </form>
