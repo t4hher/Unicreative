@@ -1,10 +1,11 @@
+import { Link} from "react-router-dom";
 export default function Accueil(){
     return <div>
         <div className="banner">
             <img src="https://www.creative-elements.ca/wp-content/uploads/2025/08/What-is-Custom-web-design-and-web-development-scaled-1.jpg" alt="" className="bannerImg"/>
             <div className="content">
                 <p className="bannerPara">De la stratégie au design, <span style={{color:'#d21d16'}}>Unicreative</span> propulse votre marque avec des outils digitaux innovants. Un accompagnement créatif complet pour maximiser votre impact et votre visibilité.</p>
-                <button className="bannerButton">Voir plus</button>
+                <Link to="/aPropos" className="bannerButton">Voir plus</Link>
             </div>
         </div>
         <div className="Apropos">
@@ -20,7 +21,7 @@ export default function Accueil(){
                 sapiente assumenda, optio totam vel eos veniam laboriosam temporibus
                 consectetur.
                 </p>
-                <button className="btnplus">Voire Plus</button>
+                <Link  to="/aPropos" className="btnplus">Voire Plus</Link>
             </div>
                 <img src="/nous.png" alt="publicite" className="imagePub"/>
         </div>
@@ -77,7 +78,7 @@ export default function Accueil(){
                 <img src="/Clients/Client_19.png" alt="Client19" />
             </div>
         </div>
-        
+
         <div className="services">
             <div class="header">
                 <div class="titre">
@@ -85,28 +86,28 @@ export default function Accueil(){
                 </div>
                 <div class="description">
                     <p>
-                    De la création de votre identité visuelle au développement de vos plateformes web et mobiles, 
+                    De la création de votre identité visuelle au développement de vos plateformes web et mobiles,
                     nous transformons vos idées en solutions numériques concrètes.
                     </p>
-                    <a href="#" class="button">Consulter</a>
+                    <Link to="/services" class="button">Consulter</Link>
                 </div>
             </div>
             <div class="body">
-        
+
                 <div class="bigImg">
                     <div class="title-overlay">
                         <h4>Création Site Web</h4>
-                        <a href=""><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></a>
+                        <Link to="/services/site-web"><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></Link>
                     </div>
                     <img src="/services/web.jpg" alt="Web Design"/>
                 </div>
 
                 <div class="smallImg">
-                    
+
                     <div class="sImg">
                         <div class="title-overlay">
                             <h4>Conception Graphique</h4>
-                            <a href=""><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></a>
+                            <Link to="/services/design"><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></Link>
                         </div>
                         <img src="/services/card.jpg" alt="Design"/>
                     </div>
@@ -114,7 +115,7 @@ export default function Accueil(){
                     <div class="sImg">
                         <div class="title-overlay">
                             <h4>Impression Numérique / Offset</h4>
-                            <a href=""><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></a>
+                            <Link to="/services/print"><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></Link>
                         </div>
                         <img src="/services/voiture.png" alt="Mobile App"/>
                     </div>
@@ -122,7 +123,7 @@ export default function Accueil(){
                     <div class="sImg">
                         <div class="title-overlay">
                             <h4>Création des Applications</h4>
-                            <a href=""><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></a>
+                            <Link to="/services/application"><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></Link>
                         </div>
                         <img src="/services/app.jpg" alt="Shop"/>
                     </div>
@@ -130,7 +131,7 @@ export default function Accueil(){
                     <div class="sImg">
                         <div class="title-overlay">
                             <h4>Conception 3D</h4>
-                            <a href=""><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></a>
+                            <Link to="/services/3d"><img src="https://img.icons8.com/?size=100&id=83168&format=png&color=ffffff" alt="" /></Link>
                         </div>
                         <img src="/services/3ddesign.jpg" alt="Ads"/>
                     </div>
