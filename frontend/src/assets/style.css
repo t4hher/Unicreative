@@ -105,9 +105,10 @@ body{
 
 .bannerButton {
     background-color: #d21d16;
+    text-decoration: none;
     color: white;
     border: none;
-    padding: 12px 30px;
+    padding: 15px 30px;
     font-size: 1rem;
     border-radius: 50px;
     cursor: pointer;
@@ -290,8 +291,9 @@ body{
 }
 .btnplus{
     background-color: #d21d16;
+    text-decoration: none;
     color: white;
-    padding: 12px 28px;
+    padding: 15px 28px;
     border-radius: 50px;
     font-weight: 600;
     font-size: 0.95rem;

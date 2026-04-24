@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Apropos(){
     return <div className="about">
         <div className="banner">
@@ -57,7 +59,7 @@ export default function Apropos(){
                     </p>
                 </div>
                 <div class="description">
-                    <a href="#" class="button">Consulter</a>
+                    <Link to="/realisations" class="button">Consulter</Link>
                 </div>
             </div>
             <div class="body">
