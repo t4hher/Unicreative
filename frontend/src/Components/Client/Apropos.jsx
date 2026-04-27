@@ -1,6 +1,68 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Apropos(){
+
+    const Counter = ({ endValue, duration = 2000, label }) => {
+        const countRef = useRef(null);
+        const [hasStarted, setHasStarted] = useState(false);
+      
+        useEffect(() => {
+            const observer = new IntersectionObserver(
+                ([entry]) => {
+                if (entry.isIntersecting && !hasStarted) {
+                    setHasStarted(true);
+                }
+                },
+                { threshold: 0.3 }
+            );
+        
+            if (countRef.current) {
+                observer.observe(countRef.current);
+            }
+        
+            return () => observer.disconnect();
+        }, [hasStarted]);
+        
+        useEffect(() => {
+            if (!hasStarted) return;
+        
+            let startTime = null;
+            const startValue = 0;
+        
+            const step = (timestamp) => {
+                if (!startTime) startTime = timestamp;
+                const progress = Math.min((timestamp - startTime) / duration, 1);
+                    
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const current = Math.floor(easeOut * (endValue - startValue) + startValue);
+                if (countRef.current) {
+                    countRef.current.innerText = current.toLocaleString();
+                }
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }, [hasStarted, endValue, duration]);
+        return (<span ref={countRef}>0</span>);
+    };
+
+    useEffect(() => {
+        const img = document.querySelector('.aprp'); 
+    
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+            entries[0].target.classList.add('active'); 
+            observer.disconnect(); 
+            }
+        }, { threshold: 0.2 });
+    
+        if (img) observer.observe(img);
+    
+        return () => observer.disconnect();
+    }, []);
+
     return <div className="about">
         <div className="banner">
             <img src="/apropos/banner.png" alt="" className="bannerImg"/>
@@ -17,30 +79,29 @@ export default function Apropos(){
         <div className="history">
             <div>
                 <h1>Notre Histoire :</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae incidunt perferendis amet eos ut itaque voluptas
-                    laborum molestiae expedita voluptate repellat, nemo, accusantium consequatur? Eos veritatis et fugit enim. Sed commodi
-                    cupiditate at facere sequi perferendis numquam, necessitatibus possimus quibusdam consequatur, totam deleniti, repellendus 
-                    nulla assumenda alias laudantium voluptas aspernatur. Temporibus dolor facere illo beatae molestiae necessitatibus hic ullam 
-                    reprehenderit porro consectetur repudiandae distinctio perspiciatis nulla qui ducimus id eius delectus odio, itaque, 
-                    dolorum autem quos nostrum ea neque. Aspernatur distinctio, repellat iure rerum quaerat voluptatum esse ab corrupti commodi 
-                    laudantium eius quae sit laborum praesentium harum cupiditate iste optio?</p>
+                <p><b>L’Unicreative</b> est une agence de communication globale et de solutions digitales qui se distingue par son approche pluridisciplinaire. 
+                    Fruit d'une évolution de plus de 12 ans sous différentes dénominations, l’agence a su affiner sa vision pour devenir aujourd'hui un 
+                    acteur clé de l’accompagnement numérique au Maroc. Le nom même de l’entreprise, fusion des concepts <b>« Unique »</b> et <b>« Creative »</b>, 
+                    reflète son ambition : offrir des solutions sur mesure qui allient originalité esthétique et performance technologique. <br />
+                    <b>L’Unicreative</b> s'efforce d'améliorer la visibilité et l'image de marque de ses partenaires à travers une présence omnicanale, 
+                    garantissant ainsi une cohérence parfaite entre l'image réelle et l'identité numérique.</p>
             </div>
-            <img src="https://images.pexels.com/photos/7315755/pexels-photo-7315755.jpeg?_gl=1*5n1ce4*_ga*MjA2NjYwMzkwNi4xNzQwNjU5Nzc4*_ga_8JE65Q40S6*czE3NzUzMzk2MzEkbzE4JGcxJHQxNzc1MzQwMDA3JGo2MCRsMCRoMA.." alt="" />
+            <img src="https://images.pexels.com/photos/7315755/pexels-photo-7315755.jpeg?_gl=1*5n1ce4*_ga*MjA2NjYwMzkwNi4xNzQwNjU5Nzc4*_ga_8JE65Q40S6*czE3NzUzMzk2MzEkbzE4JGcxJHQxNzc1MzQwMDA3JGo2MCRsMCRoMA.." className="aprp"/>
         </div>
         <div className="stats">
             <p className="stats-header">Notre Expertise en Chiffres</p>
             <h1 className="stats-titre">Nous propulsons votre présence digitale avec des solutions créatives qui transforment vos idées en succès commerciaux.</h1>
             <div className="stats-content">
                 <div className="stat">
-                    <h1 className="stat-number">+7000</h1>
+                    <h1 className="stat-number">+<Counter endValue={7000}/></h1>
                     <span className="stat-label">Projets Réalisés</span>
                 </div>
                 <div className="stat">
-                    <h1 className="stat-number">+300</h1>
+                    <h1 className="stat-number">+<Counter endValue={300}/></h1>
                     <span className="stat-label">Clients Heureux</span>
                 </div>
                 <div className="stat">
-                    <h1 className="stat-number">+12</h1>
+                    <h1 className="stat-number">+<Counter endValue={12}/></h1>
                     <span className="stat-label">Ans d'Experience</span>
                 </div>
             </div>
@@ -183,7 +244,7 @@ export default function Apropos(){
             <div className="info">
                 <img src="https://img.icons8.com/?size=100&id=63&format=png&color=d21d16" alt="" />
                 <h3>E-mail</h3>
-                <div>unicreative@example.com</div>
+                <div>lunicreative.maroc@gmail.com</div>
             </div>
             <div className="info">
                 <img src="https://img.icons8.com/?size=100&id=9659&format=png&color=d21d16" alt="" />

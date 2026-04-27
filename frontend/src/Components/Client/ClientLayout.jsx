@@ -6,7 +6,9 @@ export default function ClientLayout() {
   return (
     <>
       <Navbar />
+      <div className="home">
         <Outlet />
+      </div>
       <Footer />
     </>
   );

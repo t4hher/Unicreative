@@ -50,14 +50,14 @@ export default function Contact(){
                 {ClientMsg.message}
                 <button type="button" className="btn-close btn-sm" onClick={() => dispatch(clearMessage())}></button>
             </div>}
-            <form action="" className="formc" method="post" onSubmit={MessageAdd}>
-                <div>
+            <form action="" className="formc row g-3" method="post" onSubmit={MessageAdd}>
+                <div className="col-md-6">
                     <label for="titre" className='form-labeld'>Nom et Prenom :</label>
                     <input type="text" value={nomComplet} className={errors.nomComplet? "form-control is-invalid" : "form-control"}  onChange={(e)=>setNomComplet(e.target.value)}  id="nom"  name='nom'/>
                     {errors.nomComplet && <div className="invalid-feedback">{errors.nomComplet[0]}</div>}
                 </div>
 
-                <div>
+                <div className="col-md-6">
                     <label for="titre" className='form-labeld'>Entrer Email/Telephone :</label>
                     <input type="text"value={contactInfo} className={errors.contactInfo? "form-control is-invalid" : "form-control"}  onChange={(e)=>setContactInfo(e.target.value)}  id="info"  name='info'/>
                     {errors.contactInfo && <div className="invalid-feedback">{errors.contactInfo[0]}</div>}

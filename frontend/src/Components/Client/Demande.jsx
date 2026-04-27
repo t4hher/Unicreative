@@ -77,7 +77,7 @@ export default function Demande(){
                     {errors.serviceId && <div className="invalid-feedback">{errors.serviceId[0]}</div>}
                 </div>
                 <div class="mb-3">
-                    <label for="description" className="form-labeld" >Description</label>
+                    <label for="description" className="form-labeld" >Décrivez votre Idée: </label>
                     <textarea value={description} className={errors.description ? "form-control is-invalid" : "form-control"} onChange={(e)=>setDescription(e.target.value)} id="description" rows="2"></textarea>
                     {errors.description && <div className="invalid-feedback">{errors.description[0]}</div>}
                 </div>
